@@ -42,11 +42,14 @@ before changing components. With all power removed:
 - Leave U7 (secondary flash/PSRAM) and its optional R13/C23 unpopulated; remove
   R14 (0 ohm), if fitted, to isolate GPIO0 from the FLASH2_SS branch. UART TX
   must not toggle a secondary memory chip select or inherit its pull-up.
+- Remove on-module U2 (the vendor's unidentified VBUS-to-5V power-path device).
+  Carrier D1/D2 provide explicit slot/USB diode OR-ing through the module's
+  exposed VBUS and 5V contacts. Do not confuse on-module U2 with carrier U2.
 - Check for opens across the removed resistor pads and shorts to neighboring
   pads before installation. Pressing KEY must no longer connect GPIO23 to GND;
   GPIO25 must no longer connect to U8 through R19.
 
-BOOTSEL, RUN/reset, primary flash, USB, and SWD remain usable. The firmware must
+BOOTSEL, RUN/reset, primary flash, USB (with carrier D2), and SWD remain usable. The firmware must
 not initialize GPIO25 as an LED or GPIO23 as a button. Never fit an unprepared
 module: KEY could otherwise pull an Apple II data line low.
 

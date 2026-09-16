@@ -9,7 +9,8 @@ automated, and physical validation.
 - Steps 1-5 complete (documentary/automated checks).
 - Step 6 resource allocation and passive/video assembly checks complete;
   active-response implementation/timing proof deferred to step 14.
-- Steps 7-21 pending.
+- Step 7 schematic draft complete; step 8 physical acceptance gate pending.
+- Steps 9-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -90,3 +91,18 @@ automated, and physical validation.
 - User approved power-off bus isolation where required; updated PLAN/PRD.
 - Blockers: none for daughterboard schematics; carrier isolation circuit still
   needs detailed electrical review in steps 7-8.
+
+### Step 7 — carrier schematic draft
+
+- Created a self-contained KiCad carrier project, local symbols, BOM, PDF,
+  net contract, generator, and assembly/power documentation.
+- Added five CB3T3245 bidirectional isolation/translation switches, dual rail
+  supervisors, default-off OE control, separate RUN and Apple reset, optional
+  slot-7 SYNC jumper, and explicit fused slot/USB power paths.
+- Extended module preparation to remove the unidentified on-module U2 power
+  path; carrier D2 restores USB power with a known diode connection.
+- Validation: KiCad 10 ERC has zero violations; exported netlist verifies all
+  48 module GPIO contacts, 33 switched bus paths, IDC pins, and chain links.
+  Visually inspected the schematic PDF. No physical measurements performed.
+- Blockers: module regulator rating, brownout timing, and host signal loading
+  remain unqualified; this is a schematic prototype, not a fabrication release.
