@@ -71,8 +71,6 @@ bool a2ext_has_cycle(void) { return has_cycle; }
 uint16_t a2ext_getaddr(void) { return latched_cycle.address; }
 uint8_t a2ext_getdata(void) { return latched_cycle.data; }
 
-/* Active response remains disabled until step 14 supplies a bounded path. */
-bool a2ext_try_putdata(uint8_t data) { (void)data; return false; }
 void a2ext_putdata(uint8_t data) { (void)a2ext_try_putdata(data); }
 
 static void open_drain(unsigned pin, bool asserted) {

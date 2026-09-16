@@ -19,6 +19,7 @@ if(NOT PICO_SDK_VERSION_STRING VERSION_EQUAL "2.2.0")
 endif()
 
 add_subdirectory(fw/a2ext-lib)
+option(A2EXT_DEMO_ACTIVE "Enable experimental active demo (requires qualified hardware)" OFF)
 foreach(app demo vga dvi)
     add_executable(a2ext-${app} fw/a2ext-${app}/main.c)
     target_link_libraries(a2ext-${app} PRIVATE a2ext-lib pico_multicore)
@@ -30,3 +31,19 @@ foreach(app demo vga dvi)
     pico_enable_stdio_usb(a2ext-${app} 0)
     pico_add_extra_outputs(a2ext-${app})
 endforeach()
+
+if(A2EXT_DEMO_ACTIVE)
+    find_program(CA65 ca65 REQUIRED)
+    find_program(LD65 ld65 REQUIRED)
+    find_package(Python3 REQUIRED COMPONENTS Interpreter)
+    add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/firmware_rom.h
+        COMMAND ${CA65} ${CMAKE_CURRENT_SOURCE_DIR}/fw/a2ext-demo/firmware.S -o firmware.o
+        COMMAND ${LD65} -C ${CMAKE_CURRENT_SOURCE_DIR}/fw/a2ext-demo/firmware.cfg firmware.o -o firmware.rom
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/embed_rom.py firmware.rom firmware_rom.h
+        DEPENDS fw/a2ext-demo/firmware.S fw/a2ext-demo/firmware.cfg tools/embed_rom.py
+        VERBATIM)
+    target_sources(a2ext-demo PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/firmware_rom.h)
+    target_include_directories(a2ext-demo PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+    target_compile_definitions(a2ext-demo PRIVATE A2EXT_DEMO_ACTIVE=1)
+    pico_set_binary_type(a2ext-demo copy_to_ram)
+endif()

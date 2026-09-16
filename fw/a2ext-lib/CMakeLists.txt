@@ -1,5 +1,6 @@
 add_library(a2ext-lib INTERFACE)
-target_sources(a2ext-lib INTERFACE ${CMAKE_CURRENT_LIST_DIR}/a2ext.c ${CMAKE_CURRENT_LIST_DIR}/capture.c)
+target_sources(a2ext-lib INTERFACE ${CMAKE_CURRENT_LIST_DIR}/a2ext.c ${CMAKE_CURRENT_LIST_DIR}/capture.c ${CMAKE_CURRENT_LIST_DIR}/response.c)
 target_include_directories(a2ext-lib INTERFACE ${CMAKE_CURRENT_LIST_DIR}/include)
 target_link_libraries(a2ext-lib INTERFACE pico_stdlib hardware_pio hardware_dma hardware_uart)
 pico_generate_pio_header(a2ext-lib ${CMAKE_CURRENT_LIST_DIR}/a2ext.pio)
+pico_generate_pio_header(a2ext-lib ${CMAKE_CURRENT_LIST_DIR}/response.pio)

@@ -11,11 +11,12 @@ to check the generated firmware header. Use Pico SDK 2.2.0 (commit
 | Passive bus capture | PIO0 / 0 | SM0 | 3 of 32 | 2 reserved for alternating blocks |
 | VGA (exclusive with DVI) | PIO1 / 16 | SM0-2 | 28 of 32 from reference | 1 |
 | DVI (exclusive with VGA) | PIO1 / 16 | SM0-2 | 2 shared words at origin 0 | 6 (3 data, 3 control) |
-| Active slot responder | PIO2 / 0 | SM0-3 reserved | entire 32-word store reserved | CPU FIFO service |
+| Active slot responder | PIO2 / 0 | SM0 | 27 of 32 | CPU FIFO service |
+| Active delayed write sample | PIO0 / 0 | SM1 | 3 additional words | CPU FIFO service |
 
 The passive and video programs can coexist without shared instruction memory,
-state machines, or pins. The active responder remains to be implemented and
-assembled in step 14: its 32-word budget is a reservation, not a proven design.
+state machines, or pins. The active responder assembles to 27 words; its instruction-level regression
+checks cycle tags and release logic, but physical response timing is unproven.
 The RP2350 has 16 DMA channels; reserve at most 8 for capture plus DVI. Claim
 channels through the SDK, not hard-coded channel numbers. Use DMA IRQ0 for
 video and IRQ1 for capture; the bundled video implementations use exclusive

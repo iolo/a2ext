@@ -1,0 +1,41 @@
+; Experimental bounded slot response. No blocking FIFO instructions.
+; RX: 24-bit descending cycle tag, then GPIO2..29 snapshot.
+; TX: [data:8 | matching cycle tag:24]. Zero tag means no response.
+; IN base=2; OUT base=18/count=8; JMP pin=PHI0 (30).
+; Run at 126 MHz; never stop between tagging a cycle and its falling edge.
+.pio_version 1
+.program a2ext_response
+initialize:
+    mov y, ~null
+    mov osr, y
+    out null, 8
+    mov y, osr
+public cycle_start:
+    wait 0 gpio 30
+    mov pindirs, null
+    wait 1 gpio 30
+    mov isr, y
+    push noblock
+    in pins, 28
+    push noblock
+poll:
+    jmp pin high
+    jmp next_cycle
+high:
+    set x, 0
+    pull noblock
+    out x, 24
+    jmp x!=y poll
+    jmp pin drive
+    jmp next_cycle
+drive:
+    out pins, 8
+    mov pindirs, ~null
+    wait 0 gpio 30
+    mov pindirs, null
+next_cycle:
+    jmp y-- check_zero
+    jmp initialize
+check_zero:
+    jmp !y initialize
+    jmp cycle_start

@@ -35,6 +35,26 @@ on release. UART receive passes a byte zero-extended to the requested uint32_t
 callback argument. `send` blocks until UART TX accepts a byte; do not call it
 from the capture/response core.
 
-At API-definition stage `try_putdata` rejects all writes and `putdata` wraps it.
-The bounded active-slot transaction path is step 14 work; this deliberately
-does not expose an unrestricted GPIO data-bus write.
+Enable the experimental responder with `a2ext_slot_enable(handler)` on the
+bus core, then call `a2ext_slot_poll()` continuously there. It owns PIO2 SM0
+(27 words) and PIO0 SM1 (a separate 3-word delayed sample). The handler sees
+selected reads early and writes after the delayed sample. Return true with
+`*reply` set to answer a read; false leaves the data bus released. The default
+remains passive. Disable releases the data pads before stopping either SM.
+
+`try_putdata` accepts requests only inside an eligible read callback, with
+PHI0 and reset high. Acceptance means queued, not acknowledged by the 6502.
+PIO matches a 24-bit cycle tag and rejects stale replies. C800 requires prior
+local Cnxx selection; CFFF or another slot's Cnxx access releases ownership.
+FIFO overflow or early/late address mismatch disables responses and latches
+`slot_faulted`; re-enable explicitly to recover. Do not stop a core or PIO with
+a debugger while connected to a running host.
+
+This is an experimental response implementation: software tests do not prove
+6502 setup/hold timing. Falling PHI0 can race the final enable instructions;
+logical release takes up to four PIO cycles after the internally observed
+edge, plus input synchronization and board propagation. Reset prevents new
+CPU requests but does not asynchronously cancel an already queued reply.
+Callbacks may have side effects even when their reply misses the deadline;
+protocols needing acknowledged reads need a completion mechanism. Qualify
+these limitations with a bus fixture before enabling active mode on a host.

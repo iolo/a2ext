@@ -13,7 +13,8 @@ automated, and physical validation.
   acceptance blocked on hardware and a measurement fixture.
 - Steps 9-10 daughterboard schematics complete (automated checks).
 - Steps 11-13 build setup, passive capture, and API definition complete (software checks).
-- Steps 14-21 pending.
+- Step 14 implemented and software-checked; physical active-response timing open.
+- Steps 15-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -184,3 +185,18 @@ automated, and physical validation.
   capture decoding/queue regression tests still pass. GPIO/UART behavior has
   not been tested on hardware.
 - Blockers: active response implementation and physical timing proof remain.
+
+### Step 14 — experimental slot responder and a2pico demo
+
+- Added an opt-in 27-word PIO responder with per-cycle tags, C800 ownership,
+  CFFF release, delayed write sampling, and fail-closed FIFO/mismatch faults.
+  Ported the MIT a2pico 6502 ROM and UART/register/IRQ/NMI demo. Default remains
+  passive; active builds explicitly use experimental 252 MHz and SRAM code.
+- Validation: active and passive firmware builds, host slot-policy regression,
+  and an instruction-level PIO test pass. The latter sweeps reply enqueue
+  phases, rejects stale/zero tags, checks wrap, and checks bounded release;
+  it does not model synchronizers, CPU latency, or electrical timing.
+- Limitations: no physical response deadline proof. Final enable can race a
+  falling edge (up to four PIO cycles to release, plus synchronization), reset
+  does not cancel an already queued PIO reply, and callback side effects are
+  not acknowledged by successful CPU sampling. Active mode is experimental.
