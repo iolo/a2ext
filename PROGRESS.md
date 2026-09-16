@@ -6,7 +6,7 @@ automated, and physical validation.
 
 ## Status
 
-- Steps 1-4 complete (documentary/automated checks); steps 5-21 pending.
+- Steps 1-5 complete (documentary/automated checks); steps 6-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -60,3 +60,14 @@ automated, and physical validation.
 - Validation: generator and subsequent read-only check pass; 33 bus + 2 UART +
   13 daughterboard GPIOs cover GPIO0-47 exactly; `git diff --check` passes.
 - Blockers: electrical qualification remains pending; this is a logical map.
+
+### Step 5 — daughterboard connector contract
+
+- Assigned all IDC20 contacts, both video mappings, a second ground, 3.3 V,
+  protected 5 V, and RUN. Distinguished module reset from Apple II reset.
+- Extended the source pin map and generated header with VGA/DVI pins. Validate
+  all 20 IDC contacts and adjacent TMDS pairs; the clock uses an even/odd pair
+  to share a PWM slice with the reference serializer.
+- Validation: regeneration, pin-contract check, and whitespace check pass.
+- Blockers: protected power implementation and physical interface validation
+  remain for hardware steps; no daughterboard has been tested.

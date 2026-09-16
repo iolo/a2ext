@@ -218,5 +218,125 @@
     45,
     46,
     47
-  ]
+  ],
+  "idc": [
+    {
+      "pin": 1,
+      "signal": "UART_TX",
+      "gpio": 0
+    },
+    {
+      "pin": 2,
+      "signal": "UART_RX",
+      "gpio": 1
+    },
+    {
+      "pin": 3,
+      "signal": "GPIO35",
+      "gpio": 35
+    },
+    {
+      "pin": 4,
+      "signal": "GPIO36",
+      "gpio": 36
+    },
+    {
+      "pin": 5,
+      "signal": "GPIO37",
+      "gpio": 37
+    },
+    {
+      "pin": 6,
+      "signal": "GPIO38",
+      "gpio": 38
+    },
+    {
+      "pin": 7,
+      "signal": "GPIO39",
+      "gpio": 39
+    },
+    {
+      "pin": 8,
+      "signal": "GPIO40",
+      "gpio": 40
+    },
+    {
+      "pin": 9,
+      "signal": "GPIO41",
+      "gpio": 41
+    },
+    {
+      "pin": 10,
+      "signal": "GPIO42",
+      "gpio": 42
+    },
+    {
+      "pin": 11,
+      "signal": "GPIO43",
+      "gpio": 43
+    },
+    {
+      "pin": 12,
+      "signal": "GPIO44",
+      "gpio": 44
+    },
+    {
+      "pin": 13,
+      "signal": "GPIO45",
+      "gpio": 45
+    },
+    {
+      "pin": 14,
+      "signal": "GPIO46",
+      "gpio": 46
+    },
+    {
+      "pin": 15,
+      "signal": "GPIO47",
+      "gpio": 47
+    },
+    {
+      "pin": 16,
+      "signal": "GND"
+    },
+    {
+      "pin": 17,
+      "signal": "+3V3"
+    },
+    {
+      "pin": 18,
+      "signal": "RUN_N"
+    },
+    {
+      "pin": 19,
+      "signal": "+5V_DB"
+    },
+    {
+      "pin": 20,
+      "signal": "GND"
+    }
+  ],
+  "vga": {
+    "R0": 35,
+    "R1": 36,
+    "R2": 37,
+    "G0": 38,
+    "G1": 39,
+    "G2": 40,
+    "B0": 41,
+    "B1": 42,
+    "B2": 43,
+    "HSYNC": 44,
+    "VSYNC": 45
+  },
+  "dvi": {
+    "D0_P": 36,
+    "D0_N": 37,
+    "D1_P": 38,
+    "D1_N": 39,
+    "D2_P": 40,
+    "D2_N": 41,
+    "CLK_P": 42,
+    "CLK_N": 43
+  }
 }

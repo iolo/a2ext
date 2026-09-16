@@ -27,6 +27,18 @@ def validate(pins):
                ("RWB", "DEVSEL_N", "IOSEL_N", "IOSTRB_N", "PHI0", "RES_N"))
     assert by_name["IRQ_N"]["direction"] == "open_drain"
     assert by_name["NMI_N"]["direction"] == "open_drain"
+    idc = pins["idc"]
+    assert [p["pin"] for p in idc] == list(range(1, 21))
+    assert [p["gpio"] for p in idc if "gpio" in p] == [0, 1] + list(range(35, 48))
+    assert {p["pin"]: p["signal"] for p in idc if "gpio" not in p} == {
+        16: "GND", 17: "+3V3", 18: "RUN_N", 19: "+5V_DB", 20: "GND"}
+    for mode in ("vga", "dvi"):
+        signals = pins[mode]
+        assert len(set(signals.values())) == len(signals), f"duplicate {mode} GPIO"
+        assert set(signals.values()) <= set(pins["daughter_gpios"])
+    for name in ("D0", "D1", "D2", "CLK"):
+        assert pins["dvi"][name + "_P"] % 2 == 0
+        assert pins["dvi"][name + "_N"] == pins["dvi"][name + "_P"] + 1
 
 
 def header(pins):
@@ -35,6 +47,9 @@ def header(pins):
         lines.append(f'#define A2EXT_GPIO_{pin["signal"]} {pin["gpio"]}u')
     for name, gpio in pins["uart"].items():
         lines.append(f"#define A2EXT_GPIO_UART_{name} {gpio}u")
+    for mode in ("vga", "dvi"):
+        for name, gpio in pins[mode].items():
+            lines.append(f"#define A2EXT_GPIO_{mode.upper()}_{name} {gpio}u")
     lines += ["#define A2EXT_GPIO_ADDR_BASE A2EXT_GPIO_A0",
               "#define A2EXT_GPIO_DATA_BASE A2EXT_GPIO_D0", ""]
     return "\n".join(lines)

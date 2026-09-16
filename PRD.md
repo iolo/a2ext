@@ -163,13 +163,37 @@ TX | 1   2 | RX
    +-------+
 ```
 
-- 1 TX <--> GPIO 0
-- 2 RX <--> GPIO 1
-- **TBD** Gn <--> GPIO n ; up to 14 free GPIOs for daughterboard
-- **TBD** 3.3V <--(diode **TBD**)-- 3V3
-- **TBD** /RESET --(pullup **TBD**--> RUN
-- 19 5V <--(diode **TBD**)-- VSYS
-- 20 GND --- GND
+The UART signals are named from the carrier's perspective (3.3 V logic).
+Pin 18 resets the module through RUN and is separate from Apple II /RES.
+Daughterboards may assert RUN low with an open-drain output; never drive it high.
+
+| IDC pin | Carrier signal | GPIO |
+|---|---|---|
+| 1 | TX | 0 |
+| 2 | RX | 1 |
+| 3 | GPIO35 | 35 |
+| 4 | GPIO36 | 36 |
+| 5 | GPIO37 | 37 |
+| 6 | GPIO38 | 38 |
+| 7 | GPIO39 | 39 |
+| 8 | GPIO40 | 40 |
+| 9 | GPIO41 | 41 |
+| 10 | GPIO42 | 42 |
+| 11 | GPIO43 | 43 |
+| 12 | GPIO44 | 44 |
+| 13 | GPIO45 | 45 |
+| 14 | GPIO46 | 46 |
+| 15 | GPIO47 | 47 |
+| 16 | GND | — |
+| 17 | +3V3 output | — |
+| 18 | RUN (active low) | — |
+| 19 | protected +5V_DB output | — |
+| 20 | GND | — |
+
+There are 13 general-purpose daughterboard GPIOs in addition to TX/RX. GPIO46/47
+are spare for VGA, and GPIO35/44..47 are spare for DVI. All daughterboard signal
+pins use 3.3 V logic; in particular, GPIO40..47 are not 5 V-tolerant pads.
+Use direct mating initially; ribbon-cable operation requires separate validation.
 
 ## a2ext-vga
 
@@ -186,15 +210,15 @@ a2ext-carrier daughterboard for VGA video output.
 
 ### VGA (DE-15HD female) <--> a2ext-carrier 20pin IDC Connector
 
-- 1 R <--(500 Ohm resistor, red bit 2)-- **TBD** R2
-- 1 R <--(1K Ohm resistor, red bit 1)-- **TBD** R1
-- 1 R <--(2K Ohm resistor, red bit 0)-- **TBD** R0
-- 2 G <--(500 Ohm resistor, green bit 2)-- **TBD** G2
-- 2 G <--(1K Ohm resistor, green bit 1)-- **TBD** G1
-- 2 G <--(2K Ohm resistor, green bit 0)-- **TBD** G0
-- 3 B <--(500 Ohm resistor, blue bit 2)-- **TBD** B2
-- 3 B <--(1K Ohm resistor, blue bit 1)-- **TBD** B1
-- 3 B <--(2K Ohm resistor, blue bit 0)-- **TBD** B0
+- 1 R <--(500 Ohm resistor, red bit 2)-- IDC 5 / GPIO37 R2
+- 1 R <--(1K Ohm resistor, red bit 1)-- IDC 4 / GPIO36 R1
+- 1 R <--(2K Ohm resistor, red bit 0)-- IDC 3 / GPIO35 R0
+- 2 G <--(500 Ohm resistor, green bit 2)-- IDC 8 / GPIO40 G2
+- 2 G <--(1K Ohm resistor, green bit 1)-- IDC 7 / GPIO39 G1
+- 2 G <--(2K Ohm resistor, green bit 0)-- IDC 6 / GPIO38 G0
+- 3 B <--(500 Ohm resistor, blue bit 2)-- IDC 11 / GPIO43 B2
+- 3 B <--(1K Ohm resistor, blue bit 1)-- IDC 10 / GPIO42 B1
+- 3 B <--(2K Ohm resistor, blue bit 0)-- IDC 9 / GPIO41 B0
 - 4 N/C
 - 5 GND -- 20 GND
 - 6 GND -- 20 GND
@@ -204,8 +228,8 @@ a2ext-carrier daughterboard for VGA video output.
 - 10 GND - 20 GND
 - 11 N/C
 - 12 N/C
-- 13 HSYNC <--(47 Ohm resistor)- **TBD** HSYNC
-- 14 VSYNC <--(47 Ohm resistor)- **TBD** VSYNC
+- 13 HSYNC <--(47 Ohm resistor)- IDC 12 / GPIO44 HSYNC
+- 14 VSYNC <--(47 Ohm resistor)- IDC 13 / GPIO45 VSYNC
 - 15 N/C
 - Connector shell -- 20 GND
 
@@ -221,18 +245,18 @@ a2ext-carrier daughterboard for DVI video over an HDMI Type A connector.
 
 ### HDMI-SWM-19 <--> a2ext-carrier 20pin IDC Connector
 
-- 1 D2+ --(270 Ohm resistor)-- **TBD** D2P
+- 1 D2+ --(270 Ohm resistor)-- IDC 8 / GPIO40 D2_P
 - 2 GND -- 20 GND
-- 3 D2- --(270 Ohm resistor)-- **TBD** D2_N
-- 4 D1+ --(270 Ohm resistor)-- **TBD** D1_P
+- 3 D2- --(270 Ohm resistor)-- IDC 9 / GPIO41 D2_N
+- 4 D1+ --(270 Ohm resistor)-- IDC 6 / GPIO38 D1_P
 - 5 GND -- 20 GND
-- 6 D1- --(270 Ohm resistor)-- **TBD** D1_N
-- 7 D0+ --(270 Ohm resistor)-- **TBD** D0_P
+- 6 D1- --(270 Ohm resistor)-- IDC 7 / GPIO39 D1_N
+- 7 D0+ --(270 Ohm resistor)-- IDC 4 / GPIO36 D0_P
 - 8 GND -- 20 GND
-- 9 D0- --(270 Ohm resistor)-- **TBD** D0_N
-- 10 CLK+ -- (270 Ohm resistor)-- **TBD** CLK_P
+- 9 D0- --(270 Ohm resistor)-- IDC 5 / GPIO37 D0_N
+- 10 CLK+ -- (270 Ohm resistor)-- IDC 10 / GPIO42 CLK_P
 - 11 GND -- 20 GND
-- 12 CLK- --(270 Ohm resistor)-- **TBD** CLK_N
+- 12 CLK- --(270 Ohm resistor)-- IDC 11 / GPIO43 CLK_N
 - 13 N/C
 - 14 N/C
 - 15 N/C
