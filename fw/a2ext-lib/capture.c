@@ -6,6 +6,7 @@
 #include "hardware/irq.h"
 #include "hardware/sync.h"
 #include "capture_queue.h"
+#include "a2ext_internal.h"
 
 #define CAPTURE_SM 0u
 #define BLOCK_WORDS A2EXT_CAPTURE_BLOCK_WORDS
@@ -138,6 +139,7 @@ bool __not_in_flash_func(a2ext_next_cycle)(a2ext_cycle_t *cycle) {
     a2ext_capture_advance(&queue);
     restore_interrupts(saved);
     *cycle = a2ext_decode_cycle(word);
+    a2ext_latch_cycle(cycle);
     return true;
 }
 

@@ -12,8 +12,8 @@ automated, and physical validation.
 - Step 7 schematic draft complete; step 8 procedure/review complete, physical
   acceptance blocked on hardware and a measurement fixture.
 - Steps 9-10 daughterboard schematics complete (automated checks).
-- Steps 11-12 build setup and passive capture complete (software checks).
-- Steps 13-21 pending.
+- Steps 11-13 build setup, passive capture, and API definition complete (software checks).
+- Steps 14-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -171,3 +171,16 @@ automated, and physical validation.
   created `build/resumed`. The SDK now has TinyUSB, still disabled for stdio.
 - Blockers: physical PIO sampling, DMA throughput, and electrical qualification
   remain untested; host queue tests do not emulate the RP2350 DMA engine.
+
+### Step 13 — common library API
+
+- Added latched address/data getters, open-drain IRQ/NMI helpers, UART0 byte
+  transport, and deferred reset/receive/composite-SYNC callbacks. Reset releases
+  interrupt outputs; callback queue overflow is observable.
+- Documented core ownership, callback dispatch limits, SYNC counting, capture
+  epochs, and read-data limitations. `try_putdata` still rejects all output
+  until the bounded active response path is implemented in step 14.
+- Validation: all three targets compile/link with warnings treated as errors;
+  capture decoding/queue regression tests still pass. GPIO/UART behavior has
+  not been tested on hardware.
+- Blockers: active response implementation and physical timing proof remain.

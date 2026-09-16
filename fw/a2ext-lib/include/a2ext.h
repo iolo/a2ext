@@ -34,3 +34,23 @@ bool a2ext_capture_start(void);
 void a2ext_capture_stop(void);
 bool a2ext_next_cycle(a2ext_cycle_t *cycle);
 a2ext_capture_stats_t a2ext_capture_stats(void);
+
+/* Getters refer to the last cycle returned by a2ext_next_cycle on its core. */
+bool a2ext_has_cycle(void);
+uint16_t a2ext_getaddr(void);
+uint8_t a2ext_getdata(void);
+void a2ext_putdata(uint8_t data);
+bool a2ext_try_putdata(uint8_t data);
+void a2ext_irq(bool on);
+void a2ext_nmi(bool on);
+
+/* Register and poll callbacks on the core which called init (normally core 0).
+ * Handlers run from poll, not IRQ context. NULL unregisters. SYNC counter=0
+ * disables counting; otherwise one callback per counter falling edges.
+ */
+void a2ext_on_reset(void (*handler)(bool on));
+void a2ext_on_sync(void (*handler)(void), uint32_t counter);
+void a2ext_on_receive(void (*handler)(uint32_t data));
+void a2ext_send(uint8_t data); /* blocking UART0 byte, 115200 8N1 */
+void a2ext_poll(void);
+uint32_t a2ext_callback_drops(void);
