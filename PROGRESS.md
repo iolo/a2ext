@@ -6,7 +6,7 @@ automated, and physical validation.
 
 ## Status
 
-- Step 1 complete; steps 2-21 pending.
+- Steps 1-2 complete; steps 3-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -31,3 +31,10 @@ automated, and physical validation.
 - Validation: compared the supplied schematic, pinout image, and dimension PDF;
   confirmed both headers number 1-30. No hardware measurements performed.
 - Blockers: none for this step; physical module revision must match the reference.
+
+### Step 2 — PRD corrections and complete deliverable list
+
+- Corrected IDC RX, TMDS spelling, the data return type, UART description, and
+  DVI rendering description. Numbered all seven outputs and included the demo.
+- Validation: inspected the PRD diff; `git diff --check` passes.
+- Blockers: none.

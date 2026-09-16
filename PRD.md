@@ -12,9 +12,10 @@ EXPECTED OUTPUT:
 1. a2ext-carrier kicad schematic and docs in hw/a2ext-carrier
 2. a2ext-vga kicad schematic and docs in hw/a2ext-vga
 3. a2ext-dvi kicad schematic and docs in hw/a2ext-dvi
-3. a2ext-lib common library for a2ext-carrier daughter boards firmwares
-3. a2ext-vga firmware in fw/a2ext-vga
-3. a2ext-dvi firmware in fw/a2ext-dvi
+4. a2ext-lib common library for a2ext-carrier daughter board firmware in fw/a2ext-lib
+5. a2ext-vga firmware in fw/a2ext-vga
+6. a2ext-dvi firmware in fw/a2ext-dvi
+7. a2ext-demo firmware in fw/a2ext-demo
 
 ## a2ext-carrier
 
@@ -139,7 +140,7 @@ TX | 1   2 | RX
 ```
 
 - 1 TX <--> GPIO 0
-- 2 TX <--> GPIO 1
+- 2 RX <--> GPIO 1
 - **TBD** Gn <--> GPIO n ; up to 14 free GPIOs for daughterboard
 - **TBD** 3.3V <--(diode **TBD**)-- 3V3
 - **TBD** /RESET --(pullup **TBD**--> RUN
@@ -191,7 +192,7 @@ a2ext-carrier daughterboard for DVI video over an HDMI Type A connector.
 - used with a2ext-dvi firmware.
 - based on [A2DVI v5.x](https://github.com/rallepalaveev/a2dvi/tree/main/v5.x).
 
-1. Read TDMS bit stream(encoded by a2ext-dvi firmware) from a2ext-carrier IDC20 connector.
+1. Read TMDS bit stream(encoded by a2ext-dvi firmware) from a2ext-carrier IDC20 connector.
 2. Write to HDMI Type A connector.
 
 ### HDMI-SWM-19 <--> a2ext-carrier 20pin IDC Connector
@@ -236,14 +237,13 @@ common library for a2ext-carrier daughter boards firmwares
 
 - void a2ext_init()
 - uint16_t a2ext_getaddr() : read A0..A15(GPIO **TBD**)
-- uint8 a2ext_getdata() : read D0..D7(GPIO **TBD**)
+- uint8_t a2ext_getdata() : read D0..D7(GPIO **TBD**)
 - void a2ext_putdata(uint8_t data) : write D0..D7(GPIO **TBD**)
 - void a2ext_irq(bool on) : on/off /IRQ(GPIO **TBD**)
 - void a2ext_nmi(bool on) : on/off /NMI(GPIO **TBD**)
 - void a2ext_on_reset(void(*reset_handler)(bool on)) : register reset_handler for /RES (GPIO **TBD**)
 - void a2ext_on_sync(void(*sync_handler)(void), uint32_t counter) : register sync_handler for SYNC(GPIO **TBD**)
-- void a2ext_send(uint8_t data) : write to TX(GPIO 0; IDC20 pin1) : write lowest 8bits of uint32_t data into TX(GPIO 0;
-  IDC20 pin1)
+- void a2ext_send(uint8_t data) : transmit one byte on TX (GPIO 0; IDC20 pin 1)
 - void a2ext_on_receive(void(*receive_handler)(uint32_t data)) : register receive_handler for RX(GPIO 1; IDC20 pin2)
 
 ## a2ext-vga firmware
@@ -267,7 +267,7 @@ firmware for a2ext-carrier with a2ext-dvi daughter board
 - physical snooping of Apple II bus signals is done by a2ext-carrier with a2ext-lib.
 
 1. Read shadowed video framebuffer and I/O space(Apple II soft-switches)
-2. Update VGA framebuffer
+2. Render the DVI output scanlines and encode TMDS data
 3. Write TMDS signals to IDC20 connector.
 
 ## a2ext-demo firmware
