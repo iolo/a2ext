@@ -1,0 +1,33 @@
+[submodule "AppleII-VGA"]
+	path = ref/AppleII-VGA
+	url = https://github.com/markadev/AppleII-VGA
+[submodule "A2DVI"]
+	path = ref/A2DVI
+	url = git@github.com:rallepalaveev/A2DVI.git
+[submodule "A2DVI-Firmware"]
+	path = ref/A2DVI-Firmware
+	url = git@github.com:ThorstenBr/A2DVI-Firmware.git
+[submodule "AppleII-VGA-rallepalaveev"]
+	path = ref/AppleII-VGA-rallepalaveev
+	url = git@github.com:rallepalaveev/AppleII-VGA.git
+[submodule "A2C_DVI_Prototype"]
+	path = ref/A2C_DVI_Prototype
+	url = git@github.com:FarLeftLane/A2C_DVI_Prototype.git
+[submodule "ref/A2C_DVI_Prototype"]
+	path = ref/A2C_DVI_Prototype
+	url = git@github.com:FarLeftLane/A2C_DVI_Prototype.git
+[submodule "ref/AppleII-VGA-rallepalaveev"]
+	path = ref/AppleII-VGA-rallepalaveev
+	url = git@github.com:rallepalaveev/AppleII-VGA.git
+[submodule "ref/A2DVI-Firmware"]
+	path = ref/A2DVI-Firmware
+	url = git@github.com:ThorstenBr/A2DVI-Firmware.git
+[submodule "ref/A2DVI"]
+	path = ref/A2DVI
+	url = git@github.com:rallepalaveev/A2DVI.git
+[submodule "ref/AppleII-VGA"]
+	path = ref/AppleII-VGA
+	url = git@github.com:markadev/AppleII-VGA.git
+[submodule "ref/a2pico"]
+	path = ref/a2pico
+	url = git@github.com:oliverschmidt/a2pico.git
