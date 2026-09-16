@@ -6,7 +6,7 @@ automated, and physical validation.
 
 ## Status
 
-- Steps 1-2 complete; steps 3-21 pending.
+- Steps 1-3 complete (documentary checks); steps 4-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -38,3 +38,14 @@ automated, and physical validation.
   DVI rendering description. Numbered all seven outputs and included the demo.
 - Validation: inspected the PRD diff; `git diff --check` passes.
 - Blockers: none.
+
+### Step 3 — WeAct module preparation
+
+- Added powered-off preparation and continuity checks for R16 (KEY/D5), R19
+  (LED/D7), and the optional secondary-memory branch on GPIO0.
+- Also require R14 removal when fitted, avoiding the unused FLASH2_SS branch
+  and its optional pull-up on UART TX. Keep U7/R13/C23 unpopulated.
+- Validation: visually inspected the rendered vendor schematic, not only text
+  extraction; R16/R19/R14 connections match the documented preparation.
+- Physical module revision and resistor removal are not verified in this
+  session; these are assembly prerequisites, not claimed physical work.

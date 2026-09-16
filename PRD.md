@@ -30,6 +30,26 @@ Initial compatibility: Apple II/II+ and IIe, including IIe auxiliary-memory
 video modes. Deliver schematics, BOMs, documentation, and firmware; PCB layout
 and fabrication files are outside this release.
 
+### Required WeAct module preparation
+
+Use the V1.0 schematic as the reference and check the populated module revision
+before changing components. With all power removed:
+
+- Remove R16 (0 ohm) to disconnect GPIO23 from SW3 (KEY), its 5.1 kohm pull-up
+  R18, and its associated protection/capacitor network. GPIO23 will carry D5.
+- Remove R19 (5.1 kohm) to disconnect the U8 user LED from GPIO25. GPIO25 will
+  carry D7. The separate power LED is unaffected.
+- Leave U7 (secondary flash/PSRAM) and its optional R13/C23 unpopulated; remove
+  R14 (0 ohm), if fitted, to isolate GPIO0 from the FLASH2_SS branch. UART TX
+  must not toggle a secondary memory chip select or inherit its pull-up.
+- Check for opens across the removed resistor pads and shorts to neighboring
+  pads before installation. Pressing KEY must no longer connect GPIO23 to GND;
+  GPIO25 must no longer connect to U8 through R19.
+
+BOOTSEL, RUN/reset, primary flash, USB, and SWD remain usable. The firmware must
+not initialize GPIO25 as an LED or GPIO23 as a button. Never fit an unprepared
+module: KEY could otherwise pull an Apple II data line low.
+
 ```
 Apple II Peripheral Slot <--(50pin Edge Connector)--> RP2350B <--(20pin IDC Connector)--> daughter board
 ```
