@@ -1,0 +1,222 @@
+{
+  "board": "WeAct RP2350B Core Board V1.0",
+  "bus": [
+    {
+      "signal": "A0",
+      "slot": 2,
+      "gpio": 2,
+      "direction": "input"
+    },
+    {
+      "signal": "A1",
+      "slot": 3,
+      "gpio": 3,
+      "direction": "input"
+    },
+    {
+      "signal": "A2",
+      "slot": 4,
+      "gpio": 4,
+      "direction": "input"
+    },
+    {
+      "signal": "A3",
+      "slot": 5,
+      "gpio": 5,
+      "direction": "input"
+    },
+    {
+      "signal": "A4",
+      "slot": 6,
+      "gpio": 6,
+      "direction": "input"
+    },
+    {
+      "signal": "A5",
+      "slot": 7,
+      "gpio": 7,
+      "direction": "input"
+    },
+    {
+      "signal": "A6",
+      "slot": 8,
+      "gpio": 8,
+      "direction": "input"
+    },
+    {
+      "signal": "A7",
+      "slot": 9,
+      "gpio": 9,
+      "direction": "input"
+    },
+    {
+      "signal": "A8",
+      "slot": 10,
+      "gpio": 10,
+      "direction": "input"
+    },
+    {
+      "signal": "A9",
+      "slot": 11,
+      "gpio": 11,
+      "direction": "input"
+    },
+    {
+      "signal": "A10",
+      "slot": 12,
+      "gpio": 12,
+      "direction": "input"
+    },
+    {
+      "signal": "A11",
+      "slot": 13,
+      "gpio": 13,
+      "direction": "input"
+    },
+    {
+      "signal": "A12",
+      "slot": 14,
+      "gpio": 14,
+      "direction": "input"
+    },
+    {
+      "signal": "A13",
+      "slot": 15,
+      "gpio": 15,
+      "direction": "input"
+    },
+    {
+      "signal": "A14",
+      "slot": 16,
+      "gpio": 16,
+      "direction": "input"
+    },
+    {
+      "signal": "A15",
+      "slot": 17,
+      "gpio": 17,
+      "direction": "input"
+    },
+    {
+      "signal": "D0",
+      "slot": 49,
+      "gpio": 18,
+      "direction": "bidirectional"
+    },
+    {
+      "signal": "D1",
+      "slot": 48,
+      "gpio": 19,
+      "direction": "bidirectional"
+    },
+    {
+      "signal": "D2",
+      "slot": 47,
+      "gpio": 20,
+      "direction": "bidirectional"
+    },
+    {
+      "signal": "D3",
+      "slot": 46,
+      "gpio": 21,
+      "direction": "bidirectional"
+    },
+    {
+      "signal": "D4",
+      "slot": 45,
+      "gpio": 22,
+      "direction": "bidirectional"
+    },
+    {
+      "signal": "D5",
+      "slot": 44,
+      "gpio": 23,
+      "direction": "bidirectional"
+    },
+    {
+      "signal": "D6",
+      "slot": 43,
+      "gpio": 24,
+      "direction": "bidirectional"
+    },
+    {
+      "signal": "D7",
+      "slot": 42,
+      "gpio": 25,
+      "direction": "bidirectional"
+    },
+    {
+      "signal": "RWB",
+      "slot": 18,
+      "gpio": 26,
+      "direction": "input"
+    },
+    {
+      "signal": "DEVSEL_N",
+      "slot": 41,
+      "gpio": 27,
+      "direction": "input"
+    },
+    {
+      "signal": "IOSEL_N",
+      "slot": 1,
+      "gpio": 28,
+      "direction": "input"
+    },
+    {
+      "signal": "IOSTRB_N",
+      "slot": 20,
+      "gpio": 29,
+      "direction": "input"
+    },
+    {
+      "signal": "PHI0",
+      "slot": 40,
+      "gpio": 30,
+      "direction": "input"
+    },
+    {
+      "signal": "RES_N",
+      "slot": 31,
+      "gpio": 31,
+      "direction": "input"
+    },
+    {
+      "signal": "IRQ_N",
+      "slot": 30,
+      "gpio": 32,
+      "direction": "open_drain"
+    },
+    {
+      "signal": "NMI_N",
+      "slot": 29,
+      "gpio": 33,
+      "direction": "open_drain"
+    },
+    {
+      "signal": "SYNC",
+      "slot": 19,
+      "gpio": 34,
+      "direction": "input"
+    }
+  ],
+  "uart": {
+    "TX": 0,
+    "RX": 1
+  },
+  "daughter_gpios": [
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+  ]
+}

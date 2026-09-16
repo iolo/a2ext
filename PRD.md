@@ -71,6 +71,7 @@ Required Apple II bus signals required by RP2350B:
 - /RES : read only
 - /IRQ : write only
 - /NMI : write only
+- PHI0 : read only, bus-cycle timing (slot pin 40)
 - SYNC : read only, composite video sync (slot 7 pin 19; motherboard-dependent)
 
 ## wiring
@@ -91,28 +92,31 @@ Opposing contacts are 1/50, 2/49, through 25/26, matching the
 25 +5V     └─────────┘  26 GND
 ```
 
-* IMPORTANT: GPIO should be assigned carefully for PIO block.
+* Pin assignments are defined in [hw/pinout.json](hw/pinout.json).
+  Address/data/control inputs GPIO2..31 fit PIO GPIO base 0.
+  All 33 Apple II bus connections use GPIO2..34; GPIO40..47 are reserved
+  for the 3.3 V daughterboard interface, not 5 V Apple II signals.
 
-- 1 /IOSEL --> GPIO **TBD**
-- 2 A0 --> GPIO **TBD**
-- 3 A1 --> GPIO **TBD**
-- 4 A2 --> GPIO **TBD**
-- 5 A3 --> GPIO **TBD**
-- 6 A4 --> GPIO **TBD**
-- 7 A5 --> GPIO **TBD**
-- 8 A6 --> GPIO **TBD**
-- 9 A7 --> GPIO **TBD**
-- 10 A8 --> GPIO **TBD**
-- 11 A9 --> GPIO **TBD**
-- 12 A10 --> GPIO **TBD**
-- 13 A11 --> GPIO **TBD**
-- 14 A12 --> GPIO **TBD**
-- 15 A13 --> GPIO **TBD**
-- 16 A14 --> GPIO **TBD**
-- 17 A15 --> GPIO **TBD**
-- 18 RWB --> GPIO **TBD**
-- 19 SYNC --> GPIO **TBD** (slot 7 only; motherboard-dependent)
-- 20 /IOSTRB - GPIO **TBD**
+- 1 /IOSEL --> GPIO 28
+- 2 A0 --> GPIO 2
+- 3 A1 --> GPIO 3
+- 4 A2 --> GPIO 4
+- 5 A3 --> GPIO 5
+- 6 A4 --> GPIO 6
+- 7 A5 --> GPIO 7
+- 8 A6 --> GPIO 8
+- 9 A7 --> GPIO 9
+- 10 A8 --> GPIO 10
+- 11 A9 --> GPIO 11
+- 12 A10 --> GPIO 12
+- 13 A11 --> GPIO 13
+- 14 A12 --> GPIO 14
+- 15 A13 --> GPIO 15
+- 16 A14 --> GPIO 16
+- 17 A15 --> GPIO 17
+- 18 RWB --> GPIO 26
+- 19 SYNC --> GPIO 34 (slot 7 only; motherboard-dependent)
+- 20 /IOSTRB - GPIO 29
 - 21 /RDY - N/C
 - 22 /DMA - N/C
 - 23 /INTOUT - 28 /INTIN
@@ -121,9 +125,9 @@ Opposing contacts are 1/50, 2/49, through 25/26, matching the
 - 26 GND --- GND; 26 GND --(100n cap.)-- 25 +5V
 - 27 /DMAIN - 24 /DMAOUT
 - 28 /INTIN - 23 /INTOUT
-- 29 /NMI <--(pullup **TBD**)-- GPIO **TBD**
-- 30 /IRQ <--(pullup **TBD**)-- GPIO **TBD**
-- 31 /RES <--(pullup **TBD**)-- GPIO **TBD**
+- 29 /NMI <--(pullup **TBD**)-- GPIO 33
+- 30 /IRQ <--(pullup **TBD**)-- GPIO 32
+- 31 /RES <--(pullup **TBD**)-- GPIO 31
 - 32 /INH - N/C
 - 33 -12V - N/C
 - 34 -5V - N/C
@@ -132,16 +136,16 @@ Opposing contacts are 1/50, 2/49, through 25/26, matching the
 - 37 Q3 - N/C
 - 38 PH1 - N/C
 - 39 USER1 - N/C
-- 40 PHI0 --> GPIO **TBD**
-- 41 /DEVSEL --> GPIO **TBD**
-- 42 D7 <--> GPIO **TBD**
-- 43 D6 <--> GPIO **TBD**
-- 44 D5 <--> GPIO **TBD**
-- 45 D4 <--> GPIO **TBD**
-- 46 D3 <--> GPIO **TBD**
-- 47 D2 <--> GPIO **TBD**
-- 48 D1 <--> GPIO **TBD**
-- 49 D0 <--> GPIO **TBD**
+- 40 PHI0 --> GPIO 30
+- 41 /DEVSEL --> GPIO 27
+- 42 D7 <--> GPIO 25
+- 43 D6 <--> GPIO 24
+- 44 D5 <--> GPIO 23
+- 45 D4 <--> GPIO 22
+- 46 D3 <--> GPIO 21
+- 47 D2 <--> GPIO 20
+- 48 D1 <--> GPIO 19
+- 49 D0 <--> GPIO 18
 - 50 +12V - N/C
 
 ### 20pin IDC Connector <-> RP2350B
@@ -256,13 +260,13 @@ common library for a2ext-carrier daughter boards firmwares
 ### functions(apis)
 
 - void a2ext_init()
-- uint16_t a2ext_getaddr() : read A0..A15(GPIO **TBD**)
-- uint8_t a2ext_getdata() : read D0..D7(GPIO **TBD**)
-- void a2ext_putdata(uint8_t data) : write D0..D7(GPIO **TBD**)
-- void a2ext_irq(bool on) : on/off /IRQ(GPIO **TBD**)
-- void a2ext_nmi(bool on) : on/off /NMI(GPIO **TBD**)
-- void a2ext_on_reset(void(*reset_handler)(bool on)) : register reset_handler for /RES (GPIO **TBD**)
-- void a2ext_on_sync(void(*sync_handler)(void), uint32_t counter) : register sync_handler for SYNC(GPIO **TBD**)
+- uint16_t a2ext_getaddr() : read A0..A15(GPIO2..17)
+- uint8_t a2ext_getdata() : read D0..D7(GPIO18..25)
+- void a2ext_putdata(uint8_t data) : write D0..D7(GPIO18..25)
+- void a2ext_irq(bool on) : on/off /IRQ(GPIO32)
+- void a2ext_nmi(bool on) : on/off /NMI(GPIO33)
+- void a2ext_on_reset(void(*reset_handler)(bool on)) : register reset_handler for /RES (GPIO31)
+- void a2ext_on_sync(void(*sync_handler)(void), uint32_t counter) : register sync_handler for SYNC(GPIO34)
 - void a2ext_send(uint8_t data) : transmit one byte on TX (GPIO 0; IDC20 pin 1)
 - void a2ext_on_receive(void(*receive_handler)(uint32_t data)) : register receive_handler for RX(GPIO 1; IDC20 pin2)
 

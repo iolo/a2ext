@@ -6,7 +6,7 @@ automated, and physical validation.
 
 ## Status
 
-- Steps 1-3 complete (documentary checks); steps 4-21 pending.
+- Steps 1-4 complete (documentary/automated checks); steps 5-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -49,3 +49,14 @@ automated, and physical validation.
   extraction; R16/R19/R14 connections match the documented preparation.
 - Physical module revision and resistor removal are not verified in this
   session; these are assembly prerequisites, not claimed physical work.
+
+### Step 4 — GPIO contract
+
+- Filled all Apple II GPIO assignments and added PHI0 to the required signals.
+- Added `hw/pinout.json` as the pin-allocation source and a generated firmware
+  header. `tools/pinout.py` checks uniqueness, slot/address/data ordering,
+  PIO range, open-drain interrupt declarations, and exclusion of ADC pads
+  from the 5 V bus.
+- Validation: generator and subsequent read-only check pass; 33 bus + 2 UART +
+  13 daughterboard GPIOs cover GPIO0-47 exactly; `git diff --check` passes.
+- Blockers: electrical qualification remains pending; this is a logical map.
