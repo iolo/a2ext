@@ -1,6 +1,6 @@
 # a2ext
 
-GOAL: General purpose Apple II Extension Card using RP2350B and daugher boards.
+GOAL: General purpose Apple II Extension Card using the WeAct Studio RP2350B Core Board and daughter boards.
 
 - Adapt a2pico's general hardware concept to RP2350B.
 - Snoop all address range(A0..A15) like AppleII-VGA and A2DVI.
@@ -17,6 +17,17 @@ EXPECTED OUTPUT:
 3. a2ext-dvi firmware in fw/a2ext-dvi
 
 ## a2ext-carrier
+
+The carrier accepts the WeAct Studio RP2350B Core Board V1.0 documented in
+`ref/WeActStudio.RP2350BCoreBoard/HDK/`. Use its two 2x15, 2.54 mm pitch
+headers (60 contacts total), not Pico/Pico 2 headers. These expose GPIO0..47
+alongside power, reference, enable, and RUN contacts. The module schematic
+specifies a 41.4 mm x 41.1 mm board; use the supplied dimension drawing and
+STEP model for header placement and USB/button access.
+
+Initial compatibility: Apple II/II+ and IIe, including IIe auxiliary-memory
+video modes. Deliver schematics, BOMs, documentation, and firmware; PCB layout
+and fabrication files are outside this release.
 
 ```
 Apple II Peripheral Slot <--(50pin Edge Connector)--> RP2350B <--(20pin IDC Connector)--> daughter board
@@ -43,7 +54,7 @@ Required Apple II bus signals required by RP2350B:
 
 ## wiring
 
-### Apple II slot(50pins edge connector) <-> RP2350B(Dual 2x12 pins = 48 GPIO)
+### Apple II slot (50-pin edge connector) <-> WeAct RP2350B module (two 2x15 headers)
 
 The slot symbol uses counter-clockwise numbering, with pin 1 at the upper
 left: 1–25 run down the left side and 26–50 run back up the right side.
@@ -268,6 +279,10 @@ firmware for a2ext-carrier without daughter board
 - physical snooping of Apple II bus signals is done by a2ext-carrier with a2ext-lib.
 
 ## References
+
+- [WeAct Studio RP2350B Core Board](ref/WeActStudio.RP2350BCoreBoard/README.md)
+- [Module schematic](ref/WeActStudio.RP2350BCoreBoard/HDK/RP2350B_SCH.pdf)
+- [Module dimensions](ref/WeActStudio.RP2350BCoreBoard/HDK/尺寸图.pdf)
 
 - [AppleII-VGA](https://github.com/markadev/AppleII-VGA) original by markadev
 - [AppleII-VGA-rallepalaveev](https://github.com/rallepalaveev/AppleII-VGA) for RP2350B by rallepalaveev

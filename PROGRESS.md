@@ -6,8 +6,7 @@ automated, and physical validation.
 
 ## Status
 
-- Plan recorded; implementation starting at step 1.
-- Steps 1-21: pending.
+- Step 1 complete; steps 2-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -23,3 +22,12 @@ automated, and physical validation.
 - Validation: inspected repository status and local module reference paths.
 - Blockers: none for starting documentation; hardware power sequencing and
   physical qualification remain explicit later gates.
+
+### Step 1 — module and connector contract
+
+- Updated PRD to target WeAct RP2350B Core Board V1.0, two 2x15 headers,
+  60 contacts, and the module's 41.4 x 41.1 mm outline.
+- Recorded II/II+/IIe compatibility and schematic-only hardware deliverables.
+- Validation: compared the supplied schematic, pinout image, and dimension PDF;
+  confirmed both headers number 1-30. No hardware measurements performed.
+- Blockers: none for this step; physical module revision must match the reference.
