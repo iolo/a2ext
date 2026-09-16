@@ -1,0 +1,14 @@
+Reference,Value,Footprint,Assembly note
+J1,Carrier IDC20,,
+J2,DE-15HD female,,Shell contact modeled as SH; select physical connector before PCB layout
+R1,2k 1%,,
+R2,1k 1%,,
+R3,500R 1%,,
+R4,2k 1%,,
+R5,1k 1%,,
+R6,500R 1%,,
+R7,2k 1%,,
+R8,1k 1%,,
+R9,500R 1%,,
+R10,47R,,
+R11,47R,,

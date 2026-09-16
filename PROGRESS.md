@@ -11,7 +11,7 @@ automated, and physical validation.
   active-response implementation/timing proof deferred to step 14.
 - Step 7 schematic draft complete; step 8 procedure/review complete, physical
   acceptance blocked on hardware and a measurement fixture.
-- Steps 9-21 pending.
+- Step 9 VGA schematic complete (automated checks); steps 10-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -119,3 +119,13 @@ automated, and physical validation.
   no physical qualification is claimed.
 - Blocker: no assembled carrier, identified module regulator, or scope fixture
   is available. Keep this gate open while independent steps continue.
+
+### Step 9 — VGA daughterboard
+
+- Added the VGA KiCad project, local symbols, BOM, PDF, and connectivity
+  contract with 9 DAC resistors and two sync resistors.
+- Documented nominal 75-ohm DAC levels (0-0.6861 V), per-pin loading, grounding,
+  and the direct-mating baseline.
+- Validation: zero ERC violations and exported netlist checks; ideal DAC
+  calculation checked. Physical signal levels/timing remain untested.
+- Blockers: physical acceptance requires a built board, scope, and monitor.

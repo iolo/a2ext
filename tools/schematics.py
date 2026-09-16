@@ -216,12 +216,37 @@ def carrier():
     b.save()
 
 
+def vga():
+    b = base("a2ext-vga")
+    b.part("J1", "IDC20", "Carrier IDC20", 50.8, 71.12, idc_nets("vga"))
+    signals={1:"RED",2:"GREEN",3:"BLUE",4:"ID2",5:"GND",6:"RGND",7:"GGND",8:"BGND",
+             9:"KEY",10:"SGND",11:"ID0",12:"DDC_SDA",13:"HSYNC",14:"VSYNC",15:"DDC_SCL"}
+    b.symbol("VGA_Female",[(i,signals[i],"passive") for i in range(1,16)],
+             [("SH","SHELL","passive")],30.48)
+    nets={str(i):None for i in range(1,16)}
+    nets.update({"1":"VGA_R","2":"VGA_G","3":"VGA_B","13":"VGA_HSYNC","14":"VGA_VSYNC","SH":"GND"})
+    nets.update({str(i):"GND" for i in [5,6,7,8,10]})
+    b.part("J2","VGA_Female","DE-15HD female",350.52,83.82,nets,
+           note="Shell contact modeled as SH; select physical connector before PCB layout")
+    for channel, color in enumerate("RGB"):
+        for bit, value in enumerate(["2k 1%","1k 1%","500R 1%"]):
+            b.two(f"R{channel*3+bit+1}",value,f"{color}{bit}",f"VGA_{color}",
+                  157.48+bit*71.12,55.88+channel*40.64)
+    b.two("R10","47R","HSYNC","VGA_HSYNC",157.48,187.96)
+    b.two("R11","47R","VSYNC","VGA_VSYNC",269.24,187.96)
+    b.text("VGA / 3-bit resistor DAC per color\n640x480 approximately 60 Hz; 75 ohm monitor termination",20.32,15.24)
+    b.text("R0/G0/B0 are the least-significant bits (2k).\nR2/G2/B2 are the most-significant bits (500 ohm).\nCalculated full-scale: 0.686 V at ideal 3.3 V GPIO levels.\nPhysical levels, rise time, and sync timing need validation.\nIDC power, UART, RUN, and GPIO46/47 are unused.",30.48,223.52)
+    b.save()
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("board",choices=["carrier"])
+    parser.add_argument("board",choices=["carrier", "vga"])
     args=parser.parse_args()
     if args.board == "carrier":
         carrier()
+    elif args.board == "vga":
+        vga()
 
 
 if __name__ == "__main__":
