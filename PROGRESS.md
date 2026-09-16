@@ -11,7 +11,8 @@ automated, and physical validation.
   active-response implementation/timing proof deferred to step 14.
 - Step 7 schematic draft complete; step 8 procedure/review complete, physical
   acceptance blocked on hardware and a measurement fixture.
-- Step 9 VGA schematic complete (automated checks); steps 10-21 pending.
+- Steps 9-10 daughterboard schematics complete (automated checks).
+- Steps 11-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -129,3 +130,14 @@ automated, and physical validation.
 - Validation: zero ERC violations and exported netlist checks; ideal DAC
   calculation checked. Physical signal levels/timing remain untested.
 - Blockers: physical acceptance requires a built board, scope, and monitor.
+
+### Step 10 — DVI daughterboard
+
+- Added the HDMI Type A schematic, project-local symbols, BOM, PDF, and
+  connectivity contract; all four TMDS pairs use 270-ohm series resistors.
+- Documented pair polarity, clock PWM pairing, GPIO-base/mask changes required
+  by libdvi, fused pin-18 supply, unused interfaces, and direct mating.
+- Validation: zero ERC violations and exported netlist checks; compared
+  positive/negative mapping with the reference serializer instructions.
+- Blockers: no physical TMDS/monitor tests; abstract connector shell pin must
+  be mapped to the chosen part if PCB layout is later undertaken.

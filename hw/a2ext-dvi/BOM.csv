@@ -1,0 +1,12 @@
+Reference,Value,Footprint,Assembly note
+J1,Carrier IDC20,,
+J2,HDMI-SWM-19 / Type A,,Verify chosen connector footprint; SH represents all shell contacts
+R1,270R 1%,,
+R2,270R 1%,,
+R3,270R 1%,,
+R4,270R 1%,,
+R5,270R 1%,,
+R6,270R 1%,,
+R7,270R 1%,,
+R8,270R 1%,,
+C1,100nF,,

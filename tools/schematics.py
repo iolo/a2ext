@@ -239,14 +239,42 @@ def vga():
     b.save()
 
 
+def dvi():
+    b = base("a2ext-dvi")
+    b.part("J1", "IDC20", "Carrier IDC20",50.8,76.2,idc_nets("dvi"))
+    hdmi={1:"D2_P",2:"D2_SHIELD",3:"D2_N",4:"D1_P",5:"D1_SHIELD",6:"D1_N",
+          7:"D0_P",8:"D0_SHIELD",9:"D0_N",10:"CLK_P",11:"CLK_SHIELD",12:"CLK_N",
+          13:"CEC",14:"UTILITY",15:"SCL",16:"SDA",17:"GND",18:"+5V",19:"HPD"}
+    b.symbol("HDMI_Type_A",[(i,hdmi[i],"passive") for i in range(1,20)],
+             [("SH","SHELL","passive")],30.48)
+    nets={str(i):None for i in range(1,20)}
+    for i in [1,3,4,6,7,9,10,12]:
+        nets[str(i)]="TMDS_"+hdmi[i]
+    nets.update({str(i):"GND" for i in [2,5,8,11,17]})
+    nets.update({"18":"+5V_DB","SH":"GND"})
+    b.part("J2","HDMI_Type_A","HDMI-SWM-19 / Type A",350.52,101.6,nets,
+           note="Verify chosen connector footprint; SH represents all shell contacts")
+    for row,lane in enumerate(["D2","D1","D0","CLK"]):
+        for column,polarity in enumerate(["P","N"]):
+            signal=f"{lane}_{polarity}"
+            b.two(f"R{row*2+column+1}","270R 1%",signal,"TMDS_"+signal,
+                  157.48+column*91.44,55.88+row*38.1)
+    b.two("C1","100nF","+5V_DB","GND",350.52,187.96,"C")
+    b.text("DVI video over HDMI Type A / resistor-driven TMDS\n640x480 approximately 60 Hz; no audio or EDID negotiation",20.32,15.24)
+    b.text("Even GPIO = positive pair member; odd GPIO = negative.\nUse libdvi with invert_diffpairs=false and 64-bit GPIO masks.\n+5V_DB comes from the carrier's fused slot supply.\nDDC/HPD/CEC are NC; direct mating only for initial qualification.\nSignal integrity and monitor compatibility require physical tests.",30.48,223.52)
+    b.save()
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("board",choices=["carrier", "vga"])
+    parser.add_argument("board",choices=["carrier", "vga", "dvi"])
     args=parser.parse_args()
     if args.board == "carrier":
         carrier()
     elif args.board == "vga":
         vga()
+    elif args.board == "dvi":
+        dvi()
 
 
 if __name__ == "__main__":
