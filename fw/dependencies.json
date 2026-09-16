@@ -1,0 +1,8 @@
+{
+  "pico-sdk": {"version": "2.2.0", "commit": "a1438dff1d38bd9c65dbd693f0e5db4b9ae91779", "url": "https://github.com/raspberrypi/pico-sdk.git"},
+  "picotool": {"version": "2.2.0", "commit": "a7eb3988f0645239185fadb4e25d8279478c2dbb", "url": "https://github.com/raspberrypi/picotool.git"},
+  "validation-toolchain": {"gcc": "14.2.1 (14.2.rel1)", "newlib": "4.6.0.20260123"},
+  "AppleII-VGA-rallepalaveev": {"commit": "3bdfb4727a4180e852b1fbd130c7f9d6269892f9"},
+  "A2DVI-Firmware": {"commit": "c37246b3a11ab4e30fc018b3fc3f87354a26a53f"},
+  "a2pico": {"commit": "1489515fa95091c8d6fff0e2a0deaff2defe093e"}
+}

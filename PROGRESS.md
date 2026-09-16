@@ -12,7 +12,7 @@ automated, and physical validation.
 - Step 7 schematic draft complete; step 8 procedure/review complete, physical
   acceptance blocked on hardware and a measurement fixture.
 - Steps 9-10 daughterboard schematics complete (automated checks).
-- Steps 11-21 pending.
+- Step 11 build setup complete; steps 12-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -141,3 +141,16 @@ automated, and physical validation.
   positive/negative mapping with the reference serializer instructions.
 - Blockers: no physical TMDS/monitor tests; abstract connector shell pin must
   be mapped to the chosen part if PCB layout is later undertaken.
+
+### Step 11 — reproducible firmware build setup
+
+- Added CMake targets for demo/VGA/DVI, shared-library build rules, prepared
+  WeAct board definition, dependency revisions, and build instructions.
+- Initial targets only initialize bus pins as inputs; they do not yet capture,
+  respond to slot reads, or generate video. Default LED/button pins are absent.
+- Validation: built all three ELF/UF2/map sets using Pico SDK/picotool 2.2.0 and
+  ARM GCC 14.2.1/newlib. Compiler packages were extracted under /tmp without
+  changing system packages; build artifacts stay in ignored `build/`.
+- The SDK warns that TinyUSB is absent; USB stdio is explicitly disabled and
+  all targets built successfully. No physical flashing was performed.
+- Blockers: none for software implementation; the hardware gate remains open.
