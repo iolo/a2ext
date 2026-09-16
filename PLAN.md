@@ -18,6 +18,10 @@ separately recorded acceptance gate.
 Use the bundled reference projects as porting sources, preserving attribution
 and licenses. Keep their source trees unchanged.
 
+Approved refinement (2026-09-17): include power-off bus isolation wherever
+required to protect the RP2350 during startup/shutdown. The original direct
+connection preference must not override the device's electrical ratings.
+
 ## 1. Resolve the hardware and firmware contracts
 
 1. Update the PRD to identify the WeAct module and correct its connector

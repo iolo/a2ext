@@ -58,7 +58,11 @@ Apple II Peripheral Slot <--(50pin Edge Connector)--> RP2350B <--(20pin IDC Conn
 2. (optional) makes a shadow copy of RAM
 3. provides a 20pin IDC connector for daughter boards.
 
-RP2350B is 5V tolerant, so no 74LVC245 or similar level shifter is needed.
+RP2350B digital fault-tolerant pads accept 5 V only with IOVDD powered to
+3.3 V; ADC-capable pads do not share that rating. The carrier must include
+power-off bus isolation where needed during startup/shutdown (approved design
+refinement). Preserve full parallel address/data wiring; do not multiplex the
+Apple II bus to save GPIOs. Electrical qualification is a release gate.
 
 Required Apple II bus signals required by RP2350B:
 

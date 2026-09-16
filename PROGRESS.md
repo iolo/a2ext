@@ -6,7 +6,10 @@ automated, and physical validation.
 
 ## Status
 
-- Steps 1-5 complete (documentary/automated checks); steps 6-21 pending.
+- Steps 1-5 complete (documentary/automated checks).
+- Step 6 resource allocation and passive/video assembly checks complete;
+  active-response implementation/timing proof deferred to step 14.
+- Steps 7-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -71,3 +74,19 @@ automated, and physical validation.
 - Validation: regeneration, pin-contract check, and whitespace check pass.
 - Blockers: protected power implementation and physical interface validation
   remain for hardware steps; no daughterboard has been tested.
+
+### Step 6 — PIO, DMA, timing, and memory budgets
+
+- Assigned separate PIO blocks and DMA IRQs; documented 126 MHz passive/VGA
+  and experimental 252 MHz DVI clocking, buffer/memory budgets, and high-GPIO
+  SDK requirements. Added the passive-capture PIO source.
+- Validation: built pioasm from Pico SDK 2.2.0 in /tmp; assembled the capture
+  program (3 words), bundled VGA programs (9+8+11 = 28 words), and bundled
+  non-debug DVI serializer (2 words). Each fits its assigned PIO instruction
+  store. Up to 8/16 DMA channels are reserved for capture plus DVI.
+- Active response has a separate 32-word reservation but no assembled design
+  or timing proof yet. Physical capture timing is also unverified. These
+  limitations are explicit in `docs/resources.md`, not marked as test passes.
+- User approved power-off bus isolation where required; updated PLAN/PRD.
+- Blockers: none for daughterboard schematics; carrier isolation circuit still
+  needs detailed electrical review in steps 7-8.
