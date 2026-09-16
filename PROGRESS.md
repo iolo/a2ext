@@ -9,7 +9,8 @@ automated, and physical validation.
 - Steps 1-5 complete (documentary/automated checks).
 - Step 6 resource allocation and passive/video assembly checks complete;
   active-response implementation/timing proof deferred to step 14.
-- Step 7 schematic draft complete; step 8 physical acceptance gate pending.
+- Step 7 schematic draft complete; step 8 procedure/review complete, physical
+  acceptance blocked on hardware and a measurement fixture.
 - Steps 9-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
@@ -106,3 +107,15 @@ automated, and physical validation.
   Visually inspected the schematic PDF. No physical measurements performed.
 - Blockers: module regulator rating, brownout timing, and host signal loading
   remain unqualified; this is a schematic prototype, not a fabrication release.
+
+### Step 8 — power-sequencing gate
+
+- Documented the isolation ratings, supervisor thresholds, undefined ramp
+  regions, module-part uncertainties, and an explicit power-source/brownout
+  measurement matrix in `hw/a2ext-carrier/POWER-VALIDATION.md`.
+- Removed KiCad's per-user `.kicad_prl` state from tracking and added generated
+  build/cache ignores.
+- Validation: manufacturer datasheet review and the earlier ERC/net checks;
+  no physical qualification is claimed.
+- Blocker: no assembled carrier, identified module regulator, or scope fixture
+  is available. Keep this gate open while independent steps continue.
