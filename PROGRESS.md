@@ -12,7 +12,8 @@ automated, and physical validation.
 - Step 7 schematic draft complete; step 8 procedure/review complete, physical
   acceptance blocked on hardware and a measurement fixture.
 - Steps 9-10 daughterboard schematics complete (automated checks).
-- Step 11 build setup complete; steps 12-21 pending.
+- Steps 11-12 build setup and passive capture complete (software checks).
+- Steps 13-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -154,3 +155,19 @@ automated, and physical validation.
 - The SDK warns that TinyUSB is absent; USB stdio is explicitly disabled and
   all targets built successfully. No physical flashing was performed.
 - Blockers: none for software implementation; the hardware gate remains open.
+
+### Step 12 — passive DMA bus capture
+
+- Added chained DMA capture into two 1024-word blocks, atomic cycle decoding,
+  FIFO-stall/overwrite detection, stream epochs, and resynchronization. Demo
+  now consumes the passive capture stream; video targets remain bring-up code.
+- Capturing, polling, stopping, and statistics access belong to the same core;
+  its DMA IRQ1 owns completion handling. No UART/render callback runs there.
+- Validation: all three targets rebuild successfully. Host tests cover every
+  16-bit address, data/select decoding, ordered block consumption, repeated
+  wrap, and rejection when DMA would overwrite an unread or partial block.
+- On resume, /tmp dependencies were gone. Reused the matching SDK at
+  `/home/iolo/pico-sdk`, restored ARM packages under ignored `.cache/`, and
+  created `build/resumed`. The SDK now has TinyUSB, still disabled for stdio.
+- Blockers: physical PIO sampling, DMA throughput, and electrical qualification
+  remain untested; host queue tests do not emulate the RP2350 DMA engine.
