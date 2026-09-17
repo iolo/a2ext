@@ -34,7 +34,11 @@ SOFTWARE.
 
 #define PAGE2SEL ((soft_switches & (SOFTSW_80STORE | SOFTSW_PAGE_2)) == SOFTSW_PAGE_2)
 
+#ifdef APPLE_MODEL_IIPLUS
 volatile uint_fast32_t text_flasher_mask = 0;
+#else
+volatile uint_fast32_t text_flasher_mask = 0xff; /* Match VGA IIe flash phase. */
+#endif
 static uint64_t next_flash_tick = 0;
 
 void DELAYED_COPY_CODE(update_text_flasher)()
@@ -70,6 +74,12 @@ void DELAYED_COPY_CODE(update_text_flasher)()
 
 static inline uint_fast8_t char_text_bits(uint_fast8_t ch, uint_fast8_t glyph_line)
 {
+#ifdef APPLE_MODEL_IIPLUS
+    /* II/II+ ROM carries the flash flag in bit 7, unlike the IIe ROM. */
+    uint_fast8_t bits=character_rom[((uint_fast16_t)ch<<3)+glyph_line];
+    if (ch<0x80 && (bits&0x80)) bits^=text_flasher_mask;
+    return bits&0x7f;
+#else
     uint_fast8_t bits, invert;
 
     if((ch & 0x80) || (soft_switches & SOFTSW_ALTCHAR))
@@ -86,6 +96,7 @@ static inline uint_fast8_t char_text_bits(uint_fast8_t ch, uint_fast8_t glyph_li
     bits = character_rom[LanguageOffset | ((uint_fast16_t)ch << 3) | glyph_line];
 
     return (bits ^ invert) & 0x7f;
+#endif
 }
 
 void DELAYED_COPY_CODE(render_text40_line)(const uint8_t *page, unsigned int line, uint8_t color_mode)

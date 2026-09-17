@@ -49,7 +49,10 @@ void SHADOW_HOT(a2ext_shadow_apply)(a2ext_shadow_t *s, const a2ext_cycle_t *c) {
         } else if (s->iie && !c->read && a <= 0xc00f) {
             static const uint32_t bits[] = {A2EXT_80STORE,A2EXT_AUXREAD,A2EXT_AUXWRITE,0,A2EXT_ALTZP,0,A2EXT_80COL,A2EXT_ALTCHAR};
             bit = bits[(a-0xc000)/2];
-        } else if (s->iie && (a == 0xc05e || a == 0xc05f)) {
+        } else if (s->iie && !c->read && (a == 0xc07e || a == 0xc07f)) {
+            bit = A2EXT_IOUDIS; on = !(a & 1);
+        } else if (s->iie && (known & flags & A2EXT_IOUDIS) &&
+                   (a == 0xc05e || a == 0xc05f)) {
             bit = A2EXT_DHIRES; on = !(a & 1);
         }
         if (bit) {

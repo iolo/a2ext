@@ -7,9 +7,9 @@ enum {
     A2EXT_TEXT=1u, A2EXT_MIXED=2u, A2EXT_HIRES=4u, A2EXT_PAGE2=8u,
     A2EXT_80STORE=1u<<8, A2EXT_AUXREAD=1u<<9, A2EXT_AUXWRITE=1u<<10,
     A2EXT_ALTZP=1u<<11, A2EXT_80COL=1u<<13, A2EXT_ALTCHAR=1u<<14,
-    A2EXT_DHIRES=1u<<15,
+    A2EXT_DHIRES=1u<<15, A2EXT_IOUDIS=1u<<19,
 };
-#define A2EXT_SHADOW_FLAGS (0xef0fu)
+#define A2EXT_SHADOW_FLAGS (0x8ef0fu)
 #define A2EXT_BANK_BYTES 65536u
 /* Single capture-core writer, atomic byte readers. No frame coherence promise. */
 typedef struct {

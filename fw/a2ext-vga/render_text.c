@@ -15,7 +15,11 @@ void update_text_flasher() {
     uint64_t now = time_us_64();
     if(now > next_flash_tick) {
         text_flasher_mask ^= 0xff;
+#ifdef APPLE_MODEL_IIPLUS
+        next_flash_tick = now + 227000u;
+#else
         next_flash_tick = now + 250000u;
+#endif
     }
 }
 

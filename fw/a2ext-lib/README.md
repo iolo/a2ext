@@ -71,10 +71,11 @@ host initializes its switches and redraws. Reading RAM alone cannot recover it.
 
 RAM writes below C000 are tracked. ALTZP controls 0000-01FF; AUXWRITE controls
 0200-BFFF except 80STORE's page-1 text and HIRES-dependent graphics overrides.
-80STORE suppresses displayed page 2. IIe 80COL/ALTCHAR/AN3 are tracked; II/II+
+80STORE suppresses displayed page 2. IIe 80COL/ALTCHAR/IOUDIS/AN3 are tracked; II/II+
 ignore these. Language-card RAM, RamWorks, IIc/IIgs extensions, and Videx are
-not modeled. `shadow_byte` reports unknown bytes; `shadow_copy` substitutes zero.
+not modeled. IOUDIS must be observed on before AN3 changes DHIRES.
+`shadow_byte` reports unknown bytes; `shadow_copy` substitutes zero.
 Atomic readers can take a frame copy while capture continues, with possible
 tearing. No API claims a coherent host framebuffer snapshot.
 
-Banking reference: [Apple IIe Reference Manual, chapter 4](https://www.applelogic.org/files/AIIEREF.pdf).
+Banking reference: [Apple IIe Reference Manual, chapter 4](https://mirrors.apple2.org.za/Apple%20II%20Documentation%20Project/Computers/Apple%20II/Apple%20IIe/Manuals/Apple%20IIe%20Technical%20Reference%20Manual.pdf).

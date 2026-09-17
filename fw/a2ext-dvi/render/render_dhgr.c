@@ -87,9 +87,9 @@ static void DELAYED_COPY_CODE(render_dhgr_line)(bool p2, uint line, bool mono)
             // Load in as many subpixels as possible
             while((dotc < 28) && (i < 40))
             {
-                dots |= (line_memb[i] & 0x7f) << dotc;
+                dots |= ((uint32_t)line_memb[i] & 0x7f) << dotc;
                 dotc += 7;
-                dots |= (line_mema[i] & 0x7f) << dotc;
+                dots |= ((uint32_t)line_mema[i] & 0x7f) << dotc;
                 dotc += 7;
                 i++;
             }
@@ -171,9 +171,9 @@ static void DELAYED_COPY_CODE(render_dhgr_line)(bool p2, uint line, bool mono)
             // Load in as many subpixels as possible
             while((dotc <= 18) && (i < 40))
             {
-                dots |= (line_memb[i] & 0xff) << dotc;
+                dots |= ((uint32_t)line_memb[i] & 0xff) << dotc;
                 dotc += 8;
-                dots |= (line_mema[i] & 0xff) << dotc;
+                dots |= ((uint32_t)line_mema[i] & 0xff) << dotc;
                 dotc += 8;
                 i++;
             }
@@ -204,11 +204,11 @@ static void DELAYED_COPY_CODE(render_dhgr_line)(bool p2, uint line, bool mono)
             // Load in as many subpixels as possible
             while((dotc <= 18) && (i < 40))
             {
-                dots |= (line_memb[i] & 0x7f) << dotc;
-                pixelmode |= ((line_memb[i] & 0x80) ? 0x7f : 0x00) << dotc;
+                dots |= ((uint32_t)line_memb[i] & 0x7f) << dotc;
+                pixelmode |= ((line_memb[i] & 0x80) ? 0x7fu : 0x00u) << dotc;
                 dotc += 7;
-                dots |= (line_mema[i] & 0x7f) << dotc;
-                pixelmode |= ((line_mema[i] & 0x80) ? 0x7f : 0x00) << dotc;
+                dots |= ((uint32_t)line_mema[i] & 0x7f) << dotc;
+                pixelmode |= ((line_mema[i] & 0x80) ? 0x7fu : 0x00u) << dotc;
                 dotc += 7;
                 i++;
             }
@@ -263,9 +263,9 @@ static void DELAYED_COPY_CODE(render_dhgr_line)(bool p2, uint line, bool mono)
             // Load in as many subpixels as possible
             while((dotc <= 18) && (i < 40))
             {
-                dots |= (line_memb[i] & 0x7f) << dotc;
+                dots |= ((uint32_t)line_memb[i] & 0x7f) << dotc;
                 dotc += 7;
-                dots |= (line_mema[i] & 0x7f) << dotc;
+                dots |= ((uint32_t)line_mema[i] & 0x7f) << dotc;
                 dotc += 7;
                 i++;
             }
@@ -305,9 +305,9 @@ static void DELAYED_COPY_CODE(render_dhgr_line)(bool p2, uint line, bool mono)
             // Load in as many subpixels as possible
             while((dotc <= 18) && (i < 40))
             {
-                dots |= (line_memb[i] & 0x7f) << dotc;
+                dots |= ((uint32_t)line_memb[i] & 0x7f) << dotc;
                 dotc += 7;
-                dots |= (line_mema[i] & 0x7f) << dotc;
+                dots |= ((uint32_t)line_mema[i] & 0x7f) << dotc;
                 dotc += 7;
                 i++;
             }
@@ -349,9 +349,9 @@ static void DELAYED_COPY_CODE(render_dhgr_line)(bool p2, uint line, bool mono)
             // Load in as many subpixels as possible
             while((dotc <= 18) && (i < 40))
             {
-                dots |= (line_memb[i] & 0x7f) << dotc;
+                dots |= ((uint32_t)line_memb[i] & 0x7f) << dotc;
                 dotc += 7;
-                dots |= (line_mema[i] & 0x7f) << dotc;
+                dots |= ((uint32_t)line_mema[i] & 0x7f) << dotc;
                 dotc += 7;
                 i++;
             }

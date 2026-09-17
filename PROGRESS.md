@@ -18,7 +18,8 @@ automated, and physical validation.
 - Step 16 VGA port builds; replay/physical display acceptance pending.
 - Step 17 DVI port builds; replay/physical display acceptance pending.
 - Step 18 clocks, priorities and RAM budgets checked; runtime timing open.
-- Steps 19-21 pending.
+- Step 19 automated software/ERC checks pass; physical coverage remains open.
+- Steps 20-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -260,3 +261,21 @@ automated, and physical validation.
 - Validation: all three Release builds pass, clock/divider arithmetic reviewed,
   memory report passes. PLL/timing/overclock stability and simultaneous live
   capture/render throughput remain physical acceptance tests, not build claims.
+
+### Step 19 — automated checks and renderer replay
+
+- Added one-command host/pin/ERC verification and clean firmware matrices for
+  IIe, II/II+ with active demo, and video patterns. All nine ELF/UF2/map sets
+  build, and SRAM budgets pass. All three schematics retain zero ERC violations.
+- Replayed real VGA/DVI renderer sources into host pixel sinks with bounds/UB
+  sanitizers. Checked dimensions, page/80STORE selection, mixed text rows,
+  double modes and matching normal/inverse/flashing/alternate text in both
+  host models. Saved reproducible PPM artifacts under ignored build/replay.
+- Fixed DVI double-hires signed shifts, II/II+ character-ROM flash handling and
+  flash-phase agreement. Added IOUDIS gating after inspecting the Apple IIe
+  Technical Reference Manual table 2-10. Retained conservative reset recovery.
+- Concurrent desktop test passes 1,572,864 decoded writes with frame snapshots,
+  reset and capture-loss invalidation. It does not benchmark target DMA.
+- Detailed coverage/limitations are in docs/VERIFICATION.md. Physical missing
+  SYNC, UART/interrupt behavior, response timing and live video/capture load
+  tests cannot run without hardware; those acceptance items remain open.

@@ -23,14 +23,22 @@ int main(void) {
     access(0x2000,0x55,false); expect(0,0x2000,0x55);
     access(0xc057,0,true); access(0x2000,0x66,false); expect(1,0x2000,0x66);
     access(0xc009,0,false); access(0x100,0x77,false); expect(1,0x100,0x77);
+    access(0xc05e,0,true); assert(!(atomic_load(&s.flags)&A2EXT_DHIRES));
+    access(0xc07e,0,false);
     access(0xc00d,0,false); access(0xc00f,0,false); access(0xc05e,0,true);
     assert((atomic_load(&s.flags)&(A2EXT_80COL|A2EXT_ALTCHAR|A2EXT_DHIRES))==(A2EXT_80COL|A2EXT_ALTCHAR|A2EXT_DHIRES));
+    access(0xc07f,0,false); access(0xc05f,0,true);
+    assert(atomic_load(&s.flags)&A2EXT_DHIRES); /* IOUDIS off gates AN3 */
+    access(0xc07e,0,true); /* read is not a write to IOUDIS */
+    assert(!(atomic_load(&s.flags)&A2EXT_IOUDIS));
     access(0xc050,0,true); access(0xc053,0,true);
     assert((atomic_load(&s.flags)&7)==(A2EXT_HIRES|A2EXT_MIXED));
     a2ext_shadow_reset(&s); expect(1,0x2000,0x66); assert(!atomic_load(&s.known));
     a2ext_shadow_epoch(&s,1); assert(!a2ext_shadow_byte(&s,1,0x2000,&v));
     a2ext_shadow_init(&s,false);
-    access(0xc005,0,false); access(0xc00d,0,false);
+    access(0xc005,0,false); access(0xc05e,0,true); assert(!(atomic_load(&s.flags)&A2EXT_DHIRES));
+    access(0xc07e,0,false);
+    access(0xc00d,0,false);
     access(0x400,0xa5,false); expect(0,0x400,0xa5);
     assert(!(atomic_load(&s.flags)&(A2EXT_AUXWRITE|A2EXT_80COL)));
     access(0x400,0x5a,true); expect(0,0x400,0xa5);
