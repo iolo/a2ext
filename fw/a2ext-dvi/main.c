@@ -30,10 +30,11 @@ int main(void) {
     uint lock=spin_lock_claim_unused(true);
     dvi_init(&dvi0,lock,lock);
     dvi_register_irqs_this_core(&dvi0,DMA_IRQ_0);
+    irq_set_priority(DMA_IRQ_0, PICO_DEFAULT_IRQ_PRIORITY);
     dvi_start(&dvi0);
     for (;;) {
         soft_switches=atomic_load(&video_shadow.flags);
         video_snapshot(apple_memory,aux_memory);
-        render_frame(); video_poll();
+        render_frame(); video_output_errors(dvi0.scanline_errors); video_poll();
     }
 }

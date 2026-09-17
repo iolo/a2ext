@@ -80,3 +80,36 @@ until step 14's implementation and the hardware procedure pass.
 Sources: bundled `ref/AppleII-VGA-rallepalaveev/pico/vga.pio`,
 `ref/A2DVI-Firmware/libraries/libdvi/dvi_serialiser.pio` and `dvi.c`, and the
 [RP2350 datasheet](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf).
+
+## Implemented clocks and scheduling
+
+Both backends use a 25.2 MHz pixel clock, 800 pixels/line and 525 lines/frame:
+31.5 kHz horizontal and exactly 60 Hz nominal vertical. VGA system/capture
+clock is 126 MHz; RGB PIO runs at 50.4 MHz and sync PIO at 3.15 MHz. DVI system
+and serializer run at 252 MHz, PWM divides by 10, and capture SM divides by 2.
+All clock changes happen before UART/capture initialization. No voltage override
+is used. DVI and the opt-in active demo exceed the rated 150 MHz; their actual
+operating margin is unmeasured. PLL lock/build success is not qualification.
+
+Capture DMA uses high-priority channels and IRQ1 at highest priority on core 1.
+Video DMA/IRQ0 and UART/event dispatch stay on core 0. Capture polling, statistics
+and shadow-write hot paths reside in SRAM. Frame copies add 48 KiB to the initial
+memory budget; renderers operate on these copies without blocking capture.
+UART status output sends at most 16 immediately writable bytes per frame, so a
+slow UART cannot stall the renderer. The DVI status includes missed scanlines.
+No video output is synchronized to optional slot-7 SYNC.
+
+`tools/memory_report.py BUILD --size-tool /path/to/arm-none-eabi-size` checks
+allocated SRAM sections and a separate DVI runtime-allocation allowance.
+Release build at step 18 (bytes, including minimum heap and both stacks):
+
+| Target | Allocated SRAM | Additional runtime allowance | Remaining of 520 KiB |
+|---|---:|---:|---:|
+| Passive demo | 17,688 | 0 | 514,792 |
+| VGA | 232,332 | 0 | 300,148 |
+| DVI | 256,316 | 31,744 | 244,420 |
+
+The DVI allowance covers 30,720 bytes of TMDS data plus 1 KiB for queues and
+allocation overhead; minimum heap already counted above makes this conservative.
+Map sizes vary with toolchain/configuration. Stack high-water marks, worst-case
+capture service time and live DMA/render throughput still require measurement.

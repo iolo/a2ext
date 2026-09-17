@@ -80,6 +80,11 @@ static void open_drain(unsigned pin, bool asserted) {
 void a2ext_irq(bool on) { open_drain(A2EXT_GPIO_IRQ_N, on); }
 void a2ext_nmi(bool on) { open_drain(A2EXT_GPIO_NMI_N, on); }
 void a2ext_send(uint8_t data) { uart_putc_raw(uart0, data); }
+bool a2ext_try_send(uint8_t data) {
+    if (!uart_is_writable(uart0)) return false;
+    uart_putc_raw(uart0, data);
+    return true;
+}
 void a2ext_on_reset(void (*handler)(bool)) { reset_handler = handler; }
 void a2ext_on_receive(void (*handler)(uint32_t)) { receive_handler = handler; }
 

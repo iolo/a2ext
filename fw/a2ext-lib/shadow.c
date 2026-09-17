@@ -1,5 +1,11 @@
 #include "a2ext_shadow.h"
 #include <string.h>
+#ifdef PICO_ON_DEVICE
+#include "pico.h"
+#define SHADOW_HOT(name) __not_in_flash_func(name)
+#else
+#define SHADOW_HOT(name) name
+#endif
 #define RELAXED memory_order_relaxed
 
 void a2ext_shadow_init(a2ext_shadow_t *s, bool iie) {
@@ -27,7 +33,7 @@ void a2ext_shadow_epoch(a2ext_shadow_t *s, uint32_t epoch) {
     atomic_fetch_add_explicit(&s->losses, 1, RELAXED);
 }
 
-void a2ext_shadow_apply(a2ext_shadow_t *s, const a2ext_cycle_t *c) {
+void SHADOW_HOT(a2ext_shadow_apply)(a2ext_shadow_t *s, const a2ext_cycle_t *c) {
     if (c->reset && !s->reset_held) a2ext_shadow_reset(s);
     s->reset_held = c->reset;
     if (c->reset) return;

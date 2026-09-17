@@ -53,7 +53,7 @@ struct dvi_inst {
 	// solid colour until they catch up (rather than dying spectacularly)
 	uint32_t late_scanline_ctr;
 	// count production errors (scanlines were not ready in time)
-	uint32_t scanline_errors;
+	volatile uint32_t scanline_errors;
 	// enable/disable scan line emulation (alternating blank lines)
 	uint8_t scanline_emulation;
 

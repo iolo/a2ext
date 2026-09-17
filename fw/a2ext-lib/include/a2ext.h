@@ -54,6 +54,7 @@ void a2ext_on_reset(void (*handler)(bool on));
 void a2ext_on_sync(void (*handler)(void), uint32_t counter);
 void a2ext_on_receive(void (*handler)(uint32_t data));
 void a2ext_send(uint8_t data); /* blocking UART0 byte, 115200 8N1 */
+bool a2ext_try_send(uint8_t data); /* core 0, no waiting */
 void a2ext_poll(void);
 uint32_t a2ext_callback_drops(void);
 

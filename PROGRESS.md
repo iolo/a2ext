@@ -17,7 +17,8 @@ automated, and physical validation.
 - Step 15 shared shadow model complete (host traces).
 - Step 16 VGA port builds; replay/physical display acceptance pending.
 - Step 17 DVI port builds; replay/physical display acceptance pending.
-- Steps 18-21 pending.
+- Step 18 clocks, priorities and RAM budgets checked; runtime timing open.
+- Steps 19-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -246,3 +247,16 @@ automated, and physical validation.
 - Validation: all three firmware targets compile/link with -Werror. Renderer
   replay is step 19 work; hardware DVI/capture throughput is not measured.
   The required 252 MHz remains explicitly experimental with no voltage change.
+
+### Step 18 — clock, priority and memory integration
+
+- Fixed both outputs at nominal 640x480/60 Hz (25.2 MHz pixels, 800x525 total).
+  Capture remains 126 MHz across VGA/DVI system clocks, with a dedicated core,
+  high-priority DMA/IRQ and SRAM hot paths. UART diagnostics are bounded and
+  nonblocking; DVI exposes missed-scanline count.
+- Added ELF SRAM accounting including frame copies and a separate DVI runtime
+  buffer/queue allowance. Current VGA total is 232,332 bytes; DVI conservative
+  total is 288,060 bytes, within 520 KiB. No full RGB framebuffer is allocated.
+- Validation: all three Release builds pass, clock/divider arithmetic reviewed,
+  memory report passes. PLL/timing/overclock stability and simultaneous live
+  capture/render throughput remain physical acceptance tests, not build claims.

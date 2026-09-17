@@ -143,7 +143,7 @@ bool __not_in_flash_func(a2ext_next_cycle)(a2ext_cycle_t *cycle) {
     return true;
 }
 
-a2ext_capture_stats_t a2ext_capture_stats(void) {
+a2ext_capture_stats_t __not_in_flash_func(a2ext_capture_stats)(void) {
     uint32_t saved = save_and_disable_interrupts();
     a2ext_capture_stats_t snapshot = stats;
     restore_interrupts(saved);
