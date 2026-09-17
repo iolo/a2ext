@@ -16,7 +16,8 @@ automated, and physical validation.
 - Step 14 implemented and software-checked; physical active-response timing open.
 - Step 15 shared shadow model complete (host traces).
 - Step 16 VGA port builds; replay/physical display acceptance pending.
-- Steps 17-21 pending.
+- Step 17 DVI port builds; replay/physical display acceptance pending.
+- Steps 18-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -232,3 +233,16 @@ automated, and physical validation.
   replay is scheduled in step 19; physical sync/color/throughput checks remain
   open. Added 48 KiB frame-copy storage beyond the original memory estimate;
   final linker-size accounting is step 18 work.
+
+### Step 17 — A2DVI renderer and serializer port
+
+- Retained A2DVI's text/lores/hires/double-mode renderers, TMDS palettes and
+  libdvi PIO/DMA serializer with licenses. Adapted high-pin masks, PIO1 base 16,
+  RAM sections, pair polarity, model/font selection and shared frame copies.
+- Removed upstream debug/status-row demand from the scanline consumer; it now
+  displays 384 content lines centered in 480. Eight TMDS buffers use 30 KiB.
+  No original transceiver capture, menus, LED/button GPIOs or custom flash
+  configuration code runs in this target.
+- Validation: all three firmware targets compile/link with -Werror. Renderer
+  replay is step 19 work; hardware DVI/capture throughput is not measured.
+  The required 252 MHz remains explicitly experimental with no voltage change.

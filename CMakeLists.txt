@@ -68,3 +68,16 @@ target_sources(a2ext-vga PRIVATE
     fw/a2ext-vga/render_testpat.c fw/a2ext-vga/vga.c
     fw/a2ext-vga/textfont/iie_us_enhanced.c fw/a2ext-vga/textfont/iiplus_us.c)
 pico_generate_pio_header(a2ext-vga ${CMAKE_CURRENT_LIST_DIR}/fw/a2ext-vga/vga.pio)
+
+add_subdirectory(fw/a2ext-dvi/libdvi)
+target_link_libraries(a2ext-dvi PRIVATE libdvi)
+target_include_directories(a2ext-dvi PRIVATE fw/a2ext-dvi)
+target_compile_definitions(a2ext-dvi PRIVATE DVI_N_TMDS_BUFFERS=8 DVI_VERTICAL_REPEAT=2)
+target_sources(a2ext-dvi PRIVATE
+    fw/a2ext-dvi/applebus/buffers.c fw/a2ext-dvi/render/frame.c
+    fw/a2ext-dvi/render/render_text.c fw/a2ext-dvi/render/render_lores.c
+    fw/a2ext-dvi/render/render_hires.c fw/a2ext-dvi/render/render_dgr.c
+    fw/a2ext-dvi/render/render_dhgr.c
+    fw/a2ext-dvi/dvi/tmds.c fw/a2ext-dvi/dvi/tmds_lores.c
+    fw/a2ext-dvi/dvi/tmds_hires.c fw/a2ext-dvi/dvi/tmds_dhgr.c
+    fw/a2ext-dvi/fonts/iie_us_enhanced.c fw/a2ext-dvi/fonts/iiplus_us.c)
