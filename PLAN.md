@@ -67,11 +67,10 @@ firmware constants, and documentation.
    - Implement /IRQ and /NMI as assert-low/release outputs.
    - Document USB/slot power interaction, reverse-current protection,
      decoupling, and daughterboard power budgets.
-8. Make power sequencing an explicit design gate. Direct 5 V GPIO connections
-   require IOVDD at 3.3 V; validate startup and shutdown behavior before
-   accepting the no-transceiver design. Keep ADC-capable GPIO40-47 exclusively
-   on the 3.3 V daughterboard interface. Do not declare hardware ready if
-   sequencing remains unresolved.
+8. Make power sequencing an explicit design gate. Implement the approved
+   power-off isolation and validate startup, shutdown and brownout behavior.
+   Keep ADC-capable GPIO40-47 exclusively on the 3.3 V daughterboard interface.
+   Do not declare hardware ready if sequencing remains unresolved.
 9. Create the VGA schematic under `hw/a2ext-vga`:
    - Assign R0-R2 to GPIO35-37, G0-G2 to GPIO38-40, B0-B2 to GPIO41-43.
    - Assign HSYNC/VSYNC to GPIO44/45.

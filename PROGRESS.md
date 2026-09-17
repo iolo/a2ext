@@ -19,7 +19,8 @@ automated, and physical validation.
 - Step 17 DVI port builds; replay/physical display acceptance pending.
 - Step 18 clocks, priorities and RAM budgets checked; runtime timing open.
 - Step 19 automated software/ERC checks pass; physical coverage remains open.
-- Step 20 physical validation procedure published; step 21 pending.
+- Steps 20-21 validation procedures, build/flashing docs and attribution complete.
+- Software/design deliverables are committed; physical acceptance is still open.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -290,3 +291,18 @@ automated, and physical validation.
 - Validation: reviewed against implemented pin/resource/API contracts and the
   existing power gate. Every physical worksheet entry remains NOT_RUN; no board,
   instrument reading, flashing, monitor result or live host test is claimed.
+
+### Step 21 — documentation and handoff
+
+- Replaced the placeholder README with deliverable links, build/check workflow,
+  compatibility matrix, module preparation, initialization behavior, attribution
+  and explicit physical limits. Expanded firmware setup/options/flashing and
+  recovery instructions; included the verified local toolchain configuration.
+- Resolved obsolete PRD power/pull-up placeholders to match the schematics and
+  updated the plan's power gate wording to the approved isolation design.
+- Validation: reviewed local documentation links and repository diff; final
+  source builds and software checks passed in step 19. No flashing performed.
+- Remaining acceptance: step 8 power qualification, active response edge/reset
+  races and setup/hold timing, target capture/render load, UART/interrupt/SYNC,
+  VGA levels and DVI stability. The measurement worksheet records all as NOT_RUN.
+  Completion of documentation does not close these physical gates.

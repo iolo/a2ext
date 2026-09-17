@@ -60,7 +60,7 @@ uint32_t a2ext_callback_drops(void);
 
 /* Experimental responder, explicit opt-in and same-core ownership. Handler
  * must be bounded/nonblocking. Return true with *reply set for a read reply;
- * write callbacks receive the delayed, valid write-data sample.
+ * write callbacks receive the delayed write-data sample (timing unqualified).
  */
 typedef bool (*a2ext_slot_handler_t)(const a2ext_cycle_t *cycle, uint8_t *reply);
 bool a2ext_slot_enable(a2ext_slot_handler_t handler);

@@ -88,7 +88,7 @@ Required Apple II bus signals required by RP2350B:
 The slot symbol uses counter-clockwise numbering, with pin 1 at the upper
 left: 1–25 run down the left side and 26–50 run back up the right side.
 Opposing contacts are 1/50, 2/49, through 25/26, matching the
-[slot reference](a2slot.png) rotated 180 degrees.
+[slot reference](ref/a2slot.png) rotated 180 degrees.
 
 ```text
  1 /IOSEL  ┌─────────┐  50 +12V
@@ -128,13 +128,13 @@ Opposing contacts are 1/50, 2/49, through 25/26, matching the
 - 22 /DMA - N/C
 - 23 /INTOUT - 28 /INTIN
 - 24 /DMAOUT - 27 /DMAIN
-- 25 +5V_SLOT --(diode **TBD**)--> VSYS
+- 25 +5V_SLOT -- F1 / D1 (SS14) --> module 5V input; USB VBUS -- D2 (SS14) --> same input
 - 26 GND --- GND; 26 GND --(100n cap.)-- 25 +5V
 - 27 /DMAIN - 24 /DMAOUT
 - 28 /INTIN - 23 /INTOUT
-- 29 /NMI <--(pullup **TBD**)-- GPIO 33
-- 30 /IRQ <--(pullup **TBD**)-- GPIO 32
-- 31 /RES <--(pullup **TBD**)-- GPIO 31
+- 29 /NMI <--> isolation switch <--> GPIO 33 (assert low/release; host pull-up)
+- 30 /IRQ <--> isolation switch <--> GPIO 32 (assert low/release; host pull-up)
+- 31 /RES --> isolation switch --> GPIO 31 (input only)
 - 32 /INH - N/C
 - 33 -12V - N/C
 - 34 -5V - N/C
@@ -269,7 +269,7 @@ a2ext-carrier daughterboard for DVI video over an HDMI Type A connector.
 - 15 N/C
 - 16 N/C
 - 17 GND -- 20 GND
-- 18 VSYS (diode?) - 19 5V
+- 18 +5V_DB (raw slot 5V through F2) -- IDC 19; absent on USB-only power
 - 19 N/C
 - Connector shell -- 20 GND
 
@@ -342,7 +342,7 @@ firmware for a2ext-carrier without daughter board
 - [AppleII-VGA](https://github.com/markadev/AppleII-VGA) original by markadev
 - [AppleII-VGA-rallepalaveev](https://github.com/rallepalaveev/AppleII-VGA) for RP2350B by rallepalaveev
 - [A2DVI](https://github.com/rallepalaveev/a2dvi)
-- [A2DVI-Firmware](git@github.com:ThorstenBr/A2DVI-Firmware.git)
+- [A2DVI-Firmware](https://github.com/ThorstenBr/A2DVI-Firmware)
 - [A2C_DVI_Prototype](https://github.com/FarLeftLane/A2C_DVI_Prototype)
 - [a2pico](https://github.com/oliverschmidt/a2pico)
 - [Raspberry Pi Pico C SDK](https://www.raspberrypi.com/documentation/pico-sdk/)
