@@ -31,3 +31,6 @@
 [submodule "ref/a2pico"]
 	path = ref/a2pico
 	url = git@github.com:oliverschmidt/a2pico.git
+[submodule "ref/WeActStudio.RP2350BCoreBoard"]
+	path = ref/WeActStudio.RP2350BCoreBoard
+	url = git@github.com:WeActStudio/WeActStudio.RP2350BCoreBoard.git
