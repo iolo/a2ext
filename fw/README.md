@@ -74,12 +74,15 @@ never flash the module. UF2 generation is not evidence of hardware operation.
 ## Flashing procedure
 
 No flashing has been performed in this project session. First complete module
-preparation and the fixture power gate. Keep the Apple II disconnected during
-bench flashing. A prepared module needs the carrier's replacement USB diode
-path or an appropriate qualified fixture because on-module U2 was removed.
+preparation and the fixture power checks. Remove the card from the Apple II
+before flashing. USB is data only: on-module U2 and carrier D2 are removed.
+Use a current-limited 5 V fixture connected to J1 pin 25 (+5 V) and pin 26 (GND),
+with bus signal outputs released. This powers the normal F1/D1/VSYS path.
 
-1. Hold BOOTSEL while applying USB power (or hold BOOTSEL and pulse module RUN).
-2. Confirm the RP2350 boot drive appears; copy exactly one selected `.uf2` to it.
+1. Hold BOOTSEL while applying fixture power (or hold BOOTSEL and pulse module
+   RUN with fixture power already on), then release BOOTSEL.
+2. Connect USB for data. Confirm the RP2350 boot drive appears; copy exactly one
+   selected `.uf2` to it.
    Use the passive demo first, then a video test-pattern build on a fixture.
 3. Let the module reboot; verify current draw and released host-bus pins before
    any host connection. UART uses IDC 1/2 at 3.3 V, 115200 8N1; no USB console.

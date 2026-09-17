@@ -15,7 +15,7 @@ rating. PCB layout and fabrication files are outside this release.
 
 | Component | Files |
 |---|---|
-| Carrier with power-off bus isolation | [KiCad project, PDF, BOM and assembly notes](hw/a2ext-carrier/) |
+| Carrier with direct Apple II bus connections | [KiCad project, PDF, BOM and assembly notes](hw/a2ext-carrier/) |
 | RGB333 VGA daughterboard | [KiCad project, PDF, BOM and DAC calculations](hw/a2ext-vga/) |
 | DVI over HDMI connector | [KiCad project, PDF, BOM and wiring](hw/a2ext-dvi/) |
 | Common capture, API and shadow library | [a2ext-lib](fw/a2ext-lib/README.md) |
@@ -57,15 +57,19 @@ clocking, scheduling and SRAM; no full output framebuffer is allocated.
 The module has **two 2x15 headers**, not Pico headers. With all power removed,
 prepare its GPIO23 button, GPIO25 LED, secondary-memory branch and USB power path:
 remove **R16, R19, R14 when fitted, and on-module U2**; leave U7/R13/C23
-unpopulated. Carrier D2 replaces that U2 power path. Read the
+unpopulated. U2 removal disables USB power; carrier D2 is omitted. Read the
 [carrier assembly notes](hw/a2ext-carrier/README.md) before modifying a module;
 on-module designators differ from carrier designators.
 
-All 33 host-bus lines pass through SN74CB3T3245 isolation switches. GPIO40-47
-remain on the 3.3 V daughterboard interface. The approved isolation design still
-requires the [power-sequencing gate](hw/a2ext-carrier/POWER-VALIDATION.md) and
-[bench validation procedure](docs/HARDWARE-VALIDATION.md) before host connection.
-Use direct daughterboard mating first. USB-only power does not supply HDMI +5 V.
+All 33 host-bus lines connect directly to GPIO2-34, with an optional SYNC jumper.
+GPIO40-47 remain on the 3.3 V daughterboard interface. There is no power-off bus
+isolation. Slot pin 25 feeds F1/D1 and the module's **5V (H1.2)** input,
+labelled `VSYS` on the carrier; **VBUS (H1.1)** is unconnected. USB is data only.
+For flashing, remove the card and supply 5 V through a fixture at slot pins
+25/26. Do not hot-plug it. The
+[power-transition checks](hw/a2ext-carrier/POWER-VALIDATION.md) and
+[bench procedure](docs/HARDWARE-VALIDATION.md) remain open.
+Use direct daughterboard mating first. The fused slot rail supplies HDMI +5 V.
 
 UART0 is 115200 8N1, 3.3 V, on IDC pins 1 (TX) and 2 (RX), with ground on 16/20.
 Send `?` for passive/video diagnostics. Missing slot-7 SYNC does not gate video.

@@ -27,14 +27,12 @@ def check(board):
             assert nets.get(name) == {tuple(n) for n in nodes if not n[0].startswith("#")}, (name, nets.get(name), nodes)
         if board == "a2ext-carrier":
             pins = json.loads((ROOT / "hw/pinout.json").read_text())
-            for i, p in enumerate(pins["bus"]):
-                ref, channel = f"U{i//8+1}", i % 8
-                assert (ref, str(channel+2)) in nets["A2_"+p["signal"]]
-                assert (ref, str(18-channel)) in nets[f'GP{p["gpio"]}']
-                if p["signal"] != "SYNC":
-                    assert ("J1", str(p["slot"])) in nets["A2_"+p["signal"]]
+            gpio_nets = {p["gpio"]: p["signal"] for p in pins["bus"]}
             for p in pins["idc"]:
-                net = f'GP{p["gpio"]}' if "gpio" in p else p["signal"]
+                net = (f'IDC{p["pin"]:02d}_GPIO{p["gpio"]}'
+                       if p.get("gpio") in pins["daughter_gpios"] else p["signal"])
+                if "gpio" in p:
+                    gpio_nets[p["gpio"]] = net
                 assert ("J2", str(p["pin"])) in nets[net]
             for gpio in range(48):
                 if gpio <= 24:
@@ -45,7 +43,24 @@ def check(board):
                     contact = f"H2.{54-gpio}"
                 else:
                     contact = f"H2.{56-gpio}"
-                assert ("M1", contact) in nets[f"GP{gpio}"], (gpio, contact)
+                assert ("M1", contact) in nets[gpio_nets[gpio]], (gpio, contact)
+            for p in pins["bus"]:
+                gpio = p["gpio"]
+                contact = (f"H1.{gpio+6}" if gpio <= 24 else
+                           f"H2.{54-gpio}" if gpio % 2 else f"H2.{56-gpio}")
+                host = ("JP1", "2") if p["signal"] == "SYNC" else ("J1", str(p["slot"]))
+                assert nets[gpio_nets[gpio]] == {host, ("M1", contact)}, p
+            assert nets["SLOT19_OPTIONAL"] == {("J1", "19"), ("JP1", "1")}
+            assert "BUS_GOOD" not in nets and "BUS_OE_N" not in nets
+            # Slot-only power: D1 anode is pin 2, cathode is pin 1.
+            assert nets["+5V_SLOT"] == {("J1", "25"), ("F1", "1"), ("C8", "1")}
+            assert nets["+5V_FUSED"] == {("F1", "2"), ("D1", "2"), ("F2", "1")}
+            assert nets["VSYS"] == {("D1", "1"), ("M1", "H1.2"), ("C9", "1")}
+            assert "USB_VBUS" not in nets
+            # KiCad may export an NC pin as its own singleton net.
+            assert all(nodes == {("M1", "H1.1")} for nodes in nets.values()
+                       if ("M1", "H1.1") in nodes)
+            assert "D2" not in {c.get("ref") for c in tree.findall(".//components/comp")}
             assert nets["INT_CHAIN"] == {("J1","23"),("J1","28")}
             assert nets["DMA_CHAIN"] == {("J1","24"),("J1","27")}
         print(f"{board}: ERC and {len(expected)} named net connectivity checks passed")

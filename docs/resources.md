@@ -40,7 +40,7 @@ never configure the module's default LED/button GPIOs.
 29-cycle delay. At a 126 MHz SM clock, the sample is approximately 32 SM clocks
 (254 ns) after the observed external edge, allowing for input synchronization.
 This follows the direct-capture reference's write-data sampling window; scope
-measurements must account for added bus isolation propagation and host model.
+measurements must account for direct wiring, bus loading, and host model.
 Do not disable input synchronizers until measured timing justifies it.
 
 The 30-bit word is shifted left and autopushed: bits 0-15 address, 16-23 data,

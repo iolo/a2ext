@@ -1,31 +1,12 @@
 Reference,Value,Footprint,Assembly note
 J1,"Apple II slot, counter-clockwise numbering",,
 JP1,SYNC: OPEN except verified slot 7,,
-M1,WeAct RP2350B V1.0 (prepared module),,"Remove R16, R19, R14, U2; U7/R13/C23 unpopulated. Verify module revision."
+M1,WeAct RP2350B V1.0 (prepared module),,"Remove R16, R19, R14, U2; U7/R13/C23 unpopulated. H1.2 5V is VSYS; H1.1 VBUS is NC. USB data only."
 J2,Daughterboard IDC20,,
-U1,SN74CB3T3245PWR,Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm,
-C1,100nF,,
-U2,SN74CB3T3245PWR,Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm,
-C2,100nF,,
-U3,SN74CB3T3245PWR,Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm,
-C3,100nF,,
-U4,SN74CB3T3245PWR,Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm,
-C4,100nF,,
-U5,SN74CB3T3245PWR,Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm,
-C5,100nF,,
-U6,TPS3808G33DBVR,Package_TO_SOT_SMD:SOT-23-6,CT open: nominal 20 ms release delay
-U7,TPS3808G50DBVR,Package_TO_SOT_SMD:SOT-23-6,CT open: nominal 20 ms release delay
-Q1,2N7002,Package_TO_SOT_SMD:SOT-23,
-R1,10k,,
-R2,100k,,
-R3,4.7k,,
 R4,10k,,
 D1,SS14,,
-D2,SS14,,
 F1,500mA PTC,,
 F2,100mA PTC,,
-C6,100nF,,
-C7,100nF,,
 C8,100nF,,
 C9,10uF,,
 C10,10uF,,

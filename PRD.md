@@ -43,13 +43,14 @@ before changing components. With all power removed:
   R14 (0 ohm), if fitted, to isolate GPIO0 from the FLASH2_SS branch. UART TX
   must not toggle a secondary memory chip select or inherit its pull-up.
 - Remove on-module U2 (the vendor's unidentified VBUS-to-5V power-path device).
-  Carrier D1/D2 provide explicit slot/USB diode OR-ing through the module's
-  exposed VBUS and 5V contacts. Do not confuse on-module U2 with carrier U2.
+  This disables USB power. Carrier D2 is omitted and module H1.1 (VBUS) is NC.
+  Slot pin 25 feeds F1/D1 and module H1.2 (marked 5V, the VSYS-equivalent input).
+  D1 is retained for reverse-current protection; USB is data only.
 - Check for opens across the removed resistor pads and shorts to neighboring
   pads before installation. Pressing KEY must no longer connect GPIO23 to GND;
   GPIO25 must no longer connect to U8 through R19.
 
-BOOTSEL, RUN/reset, primary flash, USB (with carrier D2), and SWD remain usable. The firmware must
+BOOTSEL, RUN/reset, primary flash, USB data (with external power), and SWD remain usable. The firmware must
 not initialize GPIO25 as an LED or GPIO23 as a button. Never fit an unprepared
 module: KEY could otherwise pull an Apple II data line low.
 
@@ -62,10 +63,12 @@ Apple II Peripheral Slot <--(50pin Edge Connector)--> RP2350B <--(20pin IDC Conn
 3. provides a 20pin IDC connector for daughter boards.
 
 RP2350B digital fault-tolerant pads accept 5 V only with IOVDD powered to
-3.3 V; ADC-capable pads do not share that rating. The carrier must include
-power-off bus isolation where needed during startup/shutdown (approved design
-refinement). Preserve full parallel address/data wiring; do not multiplex the
-Apple II bus to save GPIOs. Electrical qualification is a release gate.
+3.3 V; ADC-capable pads do not share that rating. Approved revision 0.2 connects
+the bus directly, removing the earlier isolation/control circuit. Use slot power
+exclusively. For off-host USB flashing, power the card from a fixture at slot
+pins 25/26; USB does not supply power.
+Preserve full parallel address/data wiring; do not multiplex the Apple II bus
+to save GPIOs. Power-transition measurements remain open.
 
 Required Apple II bus signals required by RP2350B:
 
@@ -128,13 +131,13 @@ Opposing contacts are 1/50, 2/49, through 25/26, matching the
 - 22 /DMA - N/C
 - 23 /INTOUT - 28 /INTIN
 - 24 /DMAOUT - 27 /DMAIN
-- 25 +5V_SLOT -- F1 / D1 (SS14) --> module 5V input; USB VBUS -- D2 (SS14) --> same input
+- 25 +5V_SLOT -- F1 / D1 (SS14) --> VSYS --> module H1.2 (5V); H1.1 (VBUS) N/C
 - 26 GND --- GND; 26 GND --(100n cap.)-- 25 +5V
 - 27 /DMAIN - 24 /DMAOUT
 - 28 /INTIN - 23 /INTOUT
-- 29 /NMI <--> isolation switch <--> GPIO 33 (assert low/release; host pull-up)
-- 30 /IRQ <--> isolation switch <--> GPIO 32 (assert low/release; host pull-up)
-- 31 /RES --> isolation switch --> GPIO 31 (input only)
+- 29 /NMI <--> GPIO 33 (assert low/release; host pull-up)
+- 30 /IRQ <--> GPIO 32 (assert low/release; host pull-up)
+- 31 /RES --> GPIO 31 (input only)
 - 32 /INH - N/C
 - 33 -12V - N/C
 - 34 -5V - N/C
@@ -269,7 +272,7 @@ a2ext-carrier daughterboard for DVI video over an HDMI Type A connector.
 - 15 N/C
 - 16 N/C
 - 17 GND -- 20 GND
-- 18 +5V_DB (raw slot 5V through F2) -- IDC 19; absent on USB-only power
+- 18 +5V_DB (slot 5V through F1/F2, before D1) -- IDC 19
 - 19 N/C
 - Connector shell -- 20 GND
 

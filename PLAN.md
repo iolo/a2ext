@@ -18,9 +18,13 @@ separately recorded acceptance gate.
 Use the bundled reference projects as porting sources, preserving attribution
 and licenses. Keep their source trees unchanged.
 
-Approved refinement (2026-09-17): include power-off bus isolation wherever
-required to protect the RP2350 during startup/shutdown. The original direct
-connection preference must not override the device's electrical ratings.
+Approved revision (2026-09-17): use direct bus connections, following the
+RP2350 reference designs. Remove the CB3T switches and their supervisors,
+BUS_GOOD/OE control, and local support components. This supersedes the earlier
+isolation refinement. Keep power-transition measurements and document installed
+slot-only power operation. Revision 0.3 removes D2 and leaves module VBUS NC;
+slot power feeds F1/D1 and H1.2 (5V, equivalent to VSYS). On-module U2 stays
+removed to disable USB power. Off-host flashing uses fixture power and USB data.
 
 ## 1. Resolve the hardware and firmware contracts
 
@@ -65,10 +69,10 @@ firmware constants, and documentation.
    - Preserve interrupt/DMA chain connections and specified unused slot pins.
    - Keep Apple /RES sensing separate from module RUN.
    - Implement /IRQ and /NMI as assert-low/release outputs.
-   - Document USB/slot power interaction, reverse-current protection,
+   - Document slot-only power, USB power disconnection, reverse-current protection,
      decoupling, and daughterboard power budgets.
-8. Make power sequencing an explicit design gate. Implement the approved
-   power-off isolation and validate startup, shutdown and brownout behavior.
+8. Validate startup, shutdown and brownout behavior for the approved direct-bus
+   circuit. Document the powered-IOVDD requirement and USB operating restrictions.
    Keep ADC-capable GPIO40-47 exclusively on the 3.3 V daughterboard interface.
    Do not declare hardware ready if sequencing remains unresolved.
 9. Create the VGA schematic under `hw/a2ext-vga`:

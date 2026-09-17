@@ -21,15 +21,19 @@ paths. Photograph connector orientation and module modifications.
 With all power removed, verify module R16/R19/R14 and on-module U2 isolation,
 secondary-memory population, slot orientation, ground continuity, chain links,
 IDC pin 1, and open JP1 unless using a documented slot-7 SYNC source. Inspect
-resistor values, switch variant (CB3T), supervisor parts and diode polarities.
+resistor values and diode polarities. Revision 0.2 has direct bus connections;
+verify slot-to-module continuity, with JP1 open in the optional SYNC path.
 
 Complete every scenario in
-[POWER-VALIDATION.md](../hw/a2ext-carrier/POWER-VALIDATION.md), including both
-source orders, source removal, slow ramps, rapid brownouts, RUN, BOOTSEL and
-external UART power. Compare the entire voltage trace against component ratings;
+[POWER-VALIDATION.md](../hw/a2ext-carrier/POWER-VALIDATION.md), including slot
+startup/shutdown, slow ramps, brownouts, RUN, externally powered off-host
+USB/BOOTSEL operation, and UART attachment. USB is data only; bench power goes
+to slot pins 25/26 with the card removed. Do not hot-plug the card.
+Compare voltage traces against component ratings;
 identify the regulator and qualify current/temperature. Resolve failures before
 connecting a host. Establish the maximum intended slot/daughterboard load and
-check fuse/diode drop at that load. USB-only does not supply HDMI connector +5 V.
+check fuse/diode drop at that load. Verify USB cannot power the module and
+slot power does not feed back into VBUS; the fused slot rail supplies HDMI +5 V.
 
 ## 2. Passive capture and bus loading
 
@@ -41,7 +45,7 @@ rate (include a 1.1 MHz stress point). Compare decoded cycles with the fixture
 trace; use an instrumented capture dump or debugger only with the fixture halted.
 
 Measure PHI0 and write-data setup/hold at both the slot and module pins. The PIO
-sample is nominally about 254 ns after rising PHI0 at 126 MHz; include switch and
+sample is nominally about 254 ns after rising PHI0 at 126 MHz; include wiring and
 input-synchronizer delay in the measured margin. Compare against the installed
 CPU's timing limits. Observe all signal rise/fall times and logic levels with
 and without the carrier. Verify input pull behavior during startup and loader
@@ -58,8 +62,8 @@ RAM redraw. Save the instrumented source diff with results.
 ## 3. Active response, only after the preceding gates
 
 Use `A2EXT_DEMO_ACTIVE=ON` on the fixture before a host. This build runs from SRAM
-at experimental 252 MHz. Probe D0-D7, RWB, PHI0, /RES, all slot selects and switch
-OE. Test every data bit in selected Cnxx ROM and C0n0 register reads/writes.
+at experimental 252 MHz. Probe D0-D7, RWB, PHI0, /RES, and all slot selects.
+Test every data bit in selected Cnxx ROM and C0n0 register reads/writes.
 Confirm no output on RAM, writes, unselected cycles, or C800 without ownership.
 Acquire ownership with local Cnxx, read C800, access another slot's Cnxx, and
 verify release. Repeat with CFFF release and reset.

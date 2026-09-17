@@ -9,21 +9,89 @@ automated, and physical validation.
 - Steps 1-5 complete (documentary/automated checks).
 - Step 6 resource allocation and passive/video assembly checks complete;
   active-response implementation/timing proof deferred to step 14.
-- Step 7 schematic draft complete; step 8 procedure/review complete, physical
+- Step 7 schematic revised to slot-powered direct bus with signal labels
+  (revision 0.5, A4 landscape); step 8 procedure updated, physical
   acceptance blocked on hardware and a measurement fixture.
-- Steps 9-10 daughterboard schematics complete (automated checks).
+- Steps 9-10 daughterboard schematics complete (revision 0.2, A4 landscape;
+  automated checks).
 - Steps 11-13 build setup, passive capture, and API definition complete (software checks).
 - Step 14 implemented and software-checked; physical active-response timing open.
 - Step 15 shared shadow model complete (host traces).
-- Step 16 VGA port builds; replay/physical display acceptance pending.
-- Step 17 DVI port builds; replay/physical display acceptance pending.
+- Step 16 VGA port builds and replay passes; physical display acceptance pending.
+- Step 17 DVI port builds and replay passes; physical display acceptance pending.
 - Step 18 clocks, priorities and RAM budgets checked; runtime timing open.
 - Step 19 automated software/ERC checks pass; physical coverage remains open.
 - Steps 20-21 validation procedures, build/flashing docs and attribution complete.
-- Software/design deliverables are committed; physical acceptance is still open.
+- Initial software/design deliverables are committed; the direct-bus revision
+  is recorded below. Physical acceptance is still open.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
+
+### All schematics — larger type and A4 landscape — 2026-09-18
+
+- Reflowed carrier, VGA, and DVI onto one A4 landscape sheet each. Increased
+  pin names/net labels/values from 1.0 to 1.524 mm, pin numbers to 1.27 mm,
+  references and notes to 1.778 mm, and headings to 2.032 mm.
+- Moved carrier IDC20 below the module, grouped its power components, and
+  compacted the daughterboard resistor grids. Labels face outward on all
+  sheets; notes fit clear of the drawing borders and title blocks.
+- Regenerated schematics, local libraries, and PDFs (carrier 0.5, VGA/DVI 0.2).
+  Compared every named net's endpoints with the pre-layout snapshot: all
+  58/17/18 nets and electrical connections are unchanged.
+- Validation: all three ERC/connectivity checks pass with zero violations;
+  PDF page dimensions confirm A4 landscape (841.896 x 595.296 points), and
+  rendered pages were visually reviewed. `git diff --check` passes. No firmware
+  changes or physical tests were required for this presentation update.
+
+### Carrier revision 0.4 — readable wire labels — 2026-09-17
+
+- Replaced GP-only carrier nets with Apple II signal names, UART_TX/UART_RX,
+  and IDCnn_GPIOxx daughterboard labels. Retained `_N` for active-low signals
+  and documented UART direction. M1 preserves physical GPIO/header numbering;
+  power pins clarify 5V/VSYS and USB VBUS. J2 now shows contact functions.
+- Placed carrier net labels outward from symbols to avoid pin-number overlap,
+  and regenerated the schematic, local symbols, PDF, and connectivity contract.
+- Validation: compared net endpoint sets against revision 0.3; all 58 net
+  connections are unchanged. Carrier ERC and connectivity checks pass with
+  zero violations. Visually reviewed the PDF; no firmware change or new
+  physical measurements.
+
+### Carrier revision 0.3 — slot-only power — 2026-09-17
+
+- User specified slot power into VSYS and no USB power, retaining D1 as
+  protection. Verified the WeAct reference: H1.2 is marked 5V and feeds its
+  regulator input (the VSYS function); H1.1 is USB VBUS.
+- Existing slot input was already on H1.2. Renamed that rail VSYS, removed
+  carrier D2, and left H1.1 NC. Retained F1/D1 and on-module U2 removal so
+  USB cannot supply the module. F2 still feeds the daughterboard before D1.
+- Regenerated schematic/PDF/BOM/net contract and updated power/flashing docs:
+  off-host flashing uses a 5 V fixture at slot pins 25/26 plus USB data.
+- Added independent netlist checks for slot/F1/D1/VSYS routing, D1 polarity,
+  disconnected VBUS, and absence of D2. Physical power and USB enumeration
+  tests remain NOT_RUN; firmware and GPIO assignments are unchanged.
+- Validation: carrier ERC has zero violations, all 58 named-net checks and
+  the GPIO pin-contract check pass, and `git diff --check` passes. Reviewed
+  the exported schematic PDF against the vendor power/header drawing.
+
+### Carrier revision 0.2 — direct bus — 2026-09-17
+
+- User requested removal of the CB3T switches and their supporting circuit,
+  superseding the isolation design recorded in steps 7-8 below.
+- Removed carrier U1-U7, Q1, R1-R3, C1-C7, and BUS_GOOD/BUS_OE_N. All 33
+  host signals now connect directly to GPIO2-34, retaining the optional SYNC
+  jumper. R4, the existing power paths, and firmware pin assignments remain.
+- Regenerated schematic, PDF, BOM, local symbols, and net contract. Compacted
+  the carrier from A2 to A3 and updated independent slot/module connectivity
+  checks, project documentation, and TODO.md.
+- Updated operating assumptions to installed slot power and USB flashing/power
+  only with the card removed from the host. Replaced switch-specific power
+  tests with direct-bus supply-transition checks; physical results stay NOT_RUN.
+- Validation: `python3 tools/smoke.py --erc` passes, including host regressions,
+  both renderer replays/models, all three ERCs (zero violations), and direct
+  connectivity checks (carrier 59 named nets). `git diff --check` passes.
+  Firmware code/pin mapping did not change; the clean build matrix passed in
+  the preceding status review. No new flashing or physical measurements.
 
 ### Planning baseline — 2026-09-17
 

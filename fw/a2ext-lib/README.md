@@ -20,7 +20,7 @@ samples and resynchronizes on PHI0; shadow users must invalidate their state.
 
 `irq(true)` and `nmi(true)` assert low; false releases the line. The output
 latch is always zero. Apple reset assertion releases both interrupt outputs.
-The carrier's switch isolation and host pull-ups complete this interface.
+These pins connect directly to the host, whose pull-ups complete this interface.
 
 Register reset, UART receive, and optional composite SYNC callbacks on core 0.
 Call `a2ext_poll` there regularly. IRQs enqueue events; poll dispatches at most

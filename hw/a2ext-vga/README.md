@@ -1,5 +1,9 @@
 # a2ext-vga
 
+Revision 0.2 uses A4 landscape with enlarged text: 1.524 mm pin names,
+wire labels and values, 1.27 mm pin numbers, and 1.778 mm references/notes.
+The revised layout preserves all electrical connections.
+
 KiCad 10 schematic and project-local symbols for a passive 9-bit VGA
 daughterboard. J1 follows the common IDC20 pinout. J2 is a female DE-15HD;
 its abstract SH pin represents the connector shell. Select the connector's

@@ -1,5 +1,9 @@
 # a2ext-dvi
 
+Revision 0.2 uses A4 landscape with enlarged text: 1.524 mm pin names,
+wire labels and values, 1.27 mm pin numbers, and 1.778 mm references/notes.
+The revised layout preserves all electrical connections.
+
 Passive DVI video daughterboard using an HDMI Type A connector and the PRD's
 270 ohm series resistor network. Open the KiCad 10 project; symbols are local.
 The abstract SH pin represents all connector shell contacts. Confirm the exact
@@ -25,8 +29,8 @@ reference's resistor-driven signaling approach, not a claim of HDMI compliance.
 Initially use direct carrier mating. No ribbon cable length is qualified.
 Validate a fixed 640x480 timing mode, pair polarity, eye/edge quality, connector
 +5 V, and lock on multiple monitors with a real board. No EDID negotiation or
-hotplug handling is implemented by this schematic. USB-only carrier power
-does not energize +5V_DB and is not a supported monitor-detection setup.
+hotplug handling is implemented by this schematic. Carrier power comes from
+the slot input (or an off-host fixture at that input); USB is data only.
 
 Validation so far: ERC and named-net export checks. Firmware and physical
 TMDS tests are pending. From the repository root:

@@ -13,7 +13,7 @@ checkout. Exact upstream revisions are in `fw/dependencies.json`.
 | WeAct Studio | RP2350B Core Board V1.0 schematic, pinout and mechanical references | Vendor files under `ref/WeActStudio.RP2350BCoreBoard` |
 | Raspberry Pi | Pico SDK/picotool build and peripheral APIs | External dependencies retain their own notices |
 
-New integration includes the shared GPIO contract, carrier isolation and power
+New integration includes the shared GPIO contract, direct-bus carrier and power
 schematics, passive DMA capture, tagged experimental responses, shadow model,
 frame adapters and verification tools. Port modifications are described in each
 firmware README. No claim of upstream hardware endorsement or certification is

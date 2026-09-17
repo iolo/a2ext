@@ -21,7 +21,7 @@ It does not flash or alter reference submodules.
 | Check | Result | What it establishes |
 |---|---|---|
 | GPIO/IDC allocation | PASS | All 48 GPIOs allocated without collisions; video pairs and high-pin restrictions |
-| KiCad ERC/netlists | PASS | Zero ERC violations; carrier 94, VGA 17, DVI 18 named nets checked |
+| KiCad ERC/netlists | PASS | Zero ERC violations; slot-powered direct-bus carrier 58, VGA 17, DVI 18 named nets checked |
 | Clean firmware matrix | PASS | Three variants × three targets compile/link with warnings treated as errors |
 | Passive capture logic | PASS | All 65,536 addresses, data/select/reset decoding, ordered block consumption, wrap and overwrite detection |
 | Slot policy | PASS | Selection/address restrictions, C800 acquisition, other-slot release and CFFF release |
@@ -55,3 +55,25 @@ Toolchain used: Pico SDK/picotool 2.2.0, ARM GCC 14.2.1, extracted newlib,
 CMake Release configuration, ca65/ld65 for active-demo ROM, KiCad CLI 10.0.6.
 Sources/revisions are in `fw/dependencies.json`. No PCB routing or fabrication
 checks are included in this schematic-only release.
+
+Carrier revision 0.2 (2026-09-17) removes the isolation/control circuit and
+connects the bus directly. `python3 tools/smoke.py --erc` was rerun successfully
+after the change. The carrier check verifies each direct slot/module pair and
+the optional SYNC jumper against the GPIO contract. The firmware sources and
+pin assignments are unchanged; the clean build matrix above was verified before
+this schematic revision. Power-transition and all other physical results remain
+NOT RUN under the revised operating assumptions.
+
+Carrier revision 0.3 (2026-09-17) removes D2 and leaves module VBUS unconnected.
+The slot supply feeds F1/D1/VSYS and H1.2 (WeAct's 5V pin). Carrier ERC and
+connectivity checks cover the supply path, diode polarity, and USB disconnection;
+there are now 58 named carrier nets. Module U2 removal and externally powered
+USB flashing still require physical verification.
+
+Carrier revision 0.4 changes wire labels and symbol presentation only. All 58
+net endpoint sets match revision 0.3; carrier ERC and connectivity checks pass.
+
+On 2026-09-18, all three schematics were reflowed to A4 landscape with larger
+text (carrier 0.5, VGA/DVI 0.2). All named nets and endpoint sets match the
+pre-layout versions, all three ERC/connectivity checks pass, and exported PDF
+dimensions and rendered layouts were checked. This is a presentation change.
