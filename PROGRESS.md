@@ -14,7 +14,9 @@ automated, and physical validation.
 - Steps 9-10 daughterboard schematics complete (automated checks).
 - Steps 11-13 build setup, passive capture, and API definition complete (software checks).
 - Step 14 implemented and software-checked; physical active-response timing open.
-- Step 15 shared shadow model complete (host traces); steps 16-21 pending.
+- Step 15 shared shadow model complete (host traces).
+- Step 16 VGA port builds; replay/physical display acceptance pending.
+- Steps 17-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -216,3 +218,17 @@ automated, and physical validation.
 - Validation: host traces pass for bank precedence, 40/80-column and graphics
   switches, reset retention, unknown initial contents, and capture loss.
   Three firmware targets rebuild; capture and slot regressions pass.
+
+### Step 16 — VGA renderer and output port
+
+- Ported the bundled AppleII-VGA text/lores/hires/double-mode renderer, fonts,
+  scanline DMA and 28-word PIO programs with MIT attribution. Shared capture
+  begins on core 1 before renderer initialization; frame copies isolate the
+  renderer from concurrent shadow writes. Added IIe/II+ and test-pattern builds.
+- Corrected PIO1 GPIO base, nine-pin OUT setup and RGB bit order, including
+  precomputed artifact-color tables. Output remains 640x480 with centered
+  560x384 content; model-specific font selection is explicit.
+- Validation: all firmware targets compile/link with -Werror. Host renderer
+  replay is scheduled in step 19; physical sync/color/throughput checks remain
+  open. Added 48 KiB frame-copy storage beyond the original memory estimate;
+  final linker-size accounting is step 18 work.

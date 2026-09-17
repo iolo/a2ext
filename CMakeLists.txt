@@ -47,3 +47,24 @@ if(A2EXT_DEMO_ACTIVE)
     target_compile_definitions(a2ext-demo PRIVATE A2EXT_DEMO_ACTIVE=1)
     pico_set_binary_type(a2ext-demo copy_to_ram)
 endif()
+
+set(A2EXT_APPLE_MODEL "IIE" CACHE STRING "Host model: IIE or IIPLUS (also original II)")
+set_property(CACHE A2EXT_APPLE_MODEL PROPERTY STRINGS IIE IIPLUS)
+if(NOT A2EXT_APPLE_MODEL MATCHES "^(IIE|IIPLUS)$")
+    message(FATAL_ERROR "A2EXT_APPLE_MODEL must be IIE or IIPLUS")
+endif()
+option(A2EXT_VIDEO_TEST_PATTERN "Render a video test pattern instead of host memory" OFF)
+foreach(app vga dvi)
+    target_sources(a2ext-${app} PRIVATE fw/video/runtime.c)
+    target_include_directories(a2ext-${app} PRIVATE fw/video)
+    target_compile_definitions(a2ext-${app} PRIVATE APPLE_MODEL_${A2EXT_APPLE_MODEL}=1)
+    if(A2EXT_VIDEO_TEST_PATTERN)
+        target_compile_definitions(a2ext-${app} PRIVATE A2EXT_VIDEO_TEST_PATTERN=1)
+    endif()
+endforeach()
+target_sources(a2ext-vga PRIVATE
+    fw/a2ext-vga/buffers.c fw/a2ext-vga/colors.c fw/a2ext-vga/render.c
+    fw/a2ext-vga/render_text.c fw/a2ext-vga/render_lores.c fw/a2ext-vga/render_hires.c
+    fw/a2ext-vga/render_testpat.c fw/a2ext-vga/vga.c
+    fw/a2ext-vga/textfont/iie_us_enhanced.c fw/a2ext-vga/textfont/iiplus_us.c)
+pico_generate_pio_header(a2ext-vga ${CMAKE_CURRENT_LIST_DIR}/fw/a2ext-vga/vga.pio)
