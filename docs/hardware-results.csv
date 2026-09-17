@@ -1,0 +1,13 @@
+id,check,status,hardware_revision,firmware_commit,conditions,measurement,evidence
+PWR-01,power source and brownout matrix,NOT_RUN,,,,,
+PWR-02,regulator identity current and temperature,NOT_RUN,,,,,
+BUS-01,passive setup hold and loading,NOT_RUN,,,,,
+BUS-02,30 minute capture and induced overflow recovery,NOT_RUN,,,,,
+ACT-01,active selected and unselected response timing,NOT_RUN,,,,,
+ACT-02,late reply reset and FIFO fault contention,NOT_RUN,,,,,
+IO-01,UART IRQ NMI and reset,NOT_RUN,,,,,
+IO-02,missing and optional slot7 SYNC,NOT_RUN,,,,,
+VID-01,shadow modes banking reset and redraw,NOT_RUN,,,,,
+VGA-01,DAC levels sync and sustained output,NOT_RUN,,,,,
+DVI-01,TMDS monitor stability and clock envelope,NOT_RUN,,,,,
+LOAD-01,simultaneous capture video and diagnostics,NOT_RUN,,,,,

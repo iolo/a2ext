@@ -19,7 +19,7 @@ automated, and physical validation.
 - Step 17 DVI port builds; replay/physical display acceptance pending.
 - Step 18 clocks, priorities and RAM budgets checked; runtime timing open.
 - Step 19 automated software/ERC checks pass; physical coverage remains open.
-- Steps 20-21 pending.
+- Step 20 physical validation procedure published; step 21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -279,3 +279,14 @@ automated, and physical validation.
 - Detailed coverage/limitations are in docs/VERIFICATION.md. Physical missing
   SYNC, UART/interrupt behavior, response timing and live video/capture load
   tests cannot run without hardware; those acceptance items remain open.
+
+### Step 20 — physical validation procedure
+
+- Published fixture-first assembly/power, passive capture/loading, active timing,
+  IRQ/NMI/reset/UART/SYNC, video levels/monitor stability and simultaneous-load
+  procedures with measurable acceptance conditions and an evidence worksheet.
+- Documented explicit IIe switch initialization/redraw for conservative shadow
+  acquisition and the unresolved active-response edge/reset races.
+- Validation: reviewed against implemented pin/resource/API contracts and the
+  existing power gate. Every physical worksheet entry remains NOT_RUN; no board,
+  instrument reading, flashing, monitor result or live host test is claimed.
