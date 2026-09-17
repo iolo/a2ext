@@ -79,7 +79,7 @@ bool a2ext_capture_start(void) {
     program_offset = pio_add_program(pio0, &a2ext_capture_program);
     pio_sm_config cfg = a2ext_capture_program_get_default_config(program_offset);
     sm_config_set_in_pins(&cfg, A2EXT_GPIO_ADDR_BASE);
-    sm_config_set_in_shift(&cfg, false, true, 28);
+    sm_config_set_in_shift(&cfg, false, true, 30);
     sm_config_set_fifo_join(&cfg, PIO_FIFO_JOIN_RX);
     sm_config_set_clkdiv(&cfg, (float)clock_get_hz(clk_sys) / CAPTURE_HZ);
     pio_sm_init(pio0, CAPTURE_SM, program_offset, &cfg);

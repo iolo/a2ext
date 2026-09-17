@@ -4,6 +4,8 @@
 #include "capture_queue.h"
 
 int main(void) {
+    assert(a2ext_decode_cycle(0).reset);
+    assert(!a2ext_decode_cycle(1u << 29).reset);
     /* Exercise every address bit and both data extremes, independent of GPIO IDs. */
     for (unsigned address = 0; address < 65536; ++address) {
         a2ext_cycle_t c = a2ext_decode_cycle(0x0e000000u | (0x5au << 16) | address);

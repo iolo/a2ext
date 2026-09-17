@@ -46,7 +46,7 @@ bool a2ext_slot_enable(a2ext_slot_handler_t handler) {
     for (unsigned pin = A2EXT_GPIO_D0; pin <= A2EXT_GPIO_D7; ++pin) pio_gpio_init(pio2, pin);
     pio_sm_config lc = a2ext_capture_program_get_default_config(late_offset);
     sm_config_set_in_pins(&lc, A2EXT_GPIO_ADDR_BASE);
-    sm_config_set_in_shift(&lc, false, true, 28);
+    sm_config_set_in_shift(&lc, false, true, 30);
     sm_config_set_fifo_join(&lc, PIO_FIFO_JOIN_RX);
     sm_config_set_clkdiv(&lc, (float)clock_get_hz(clk_sys)/RESPONSE_HZ);
     pio_sm_init(pio0, LATE_SM, late_offset, &lc);

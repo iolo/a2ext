@@ -9,6 +9,7 @@ typedef struct {
     uint16_t address;
     uint8_t data;
     bool read;
+    bool reset; /* sampled /RES asserted; ordered with passive capture */
     bool devsel, iosel, iostrb; /* true when asserted */
 } a2ext_cycle_t;
 
@@ -22,6 +23,7 @@ static inline a2ext_cycle_t a2ext_decode_cycle(uint32_t word) {
     a2ext_cycle_t cycle = {
         .address = (uint16_t)word, .data = (uint8_t)(word >> 16),
         .read = (word & (1u << 24)) != 0,
+        .reset = (word & (1u << 29)) == 0,
         .devsel = (word & (1u << 25)) == 0,
         .iosel = (word & (1u << 26)) == 0,
         .iostrb = (word & (1u << 27)) == 0,

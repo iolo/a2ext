@@ -1,6 +1,7 @@
-; Full-address passive capture. GPIO2..29 map to a 28-bit cycle word:
+; Full-address passive capture. GPIO2..31 map to a 30-bit cycle word:
 ; bits 0..15 address, 16..23 data, 24 RWB, 25..27 active-low selects.
-; Configure IN base=2, shift left, autopush=28, joined RX FIFO.
+; bit 28 PHI0, bit 29 active-low /RES.
+; Configure IN base=2, shift left, autopush=30, joined RX FIFO.
 ; Run this SM at 126 MHz independently of the system clock (126/252 MHz).
 ; Write sampling approximately 254 ns after PHI0 rises, including input sync.
 ; Read-cycle data is observational only, not a guaranteed CPU read value.
@@ -11,5 +12,5 @@
 .wrap_target
     wait 0 gpio PHI0_GPIO
     wait 1 gpio PHI0_GPIO [29]
-    in pins, 28
+    in pins, 30
 .wrap

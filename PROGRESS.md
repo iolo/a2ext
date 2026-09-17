@@ -14,7 +14,7 @@ automated, and physical validation.
 - Steps 9-10 daughterboard schematics complete (automated checks).
 - Steps 11-13 build setup, passive capture, and API definition complete (software checks).
 - Step 14 implemented and software-checked; physical active-response timing open.
-- Steps 15-21 pending.
+- Step 15 shared shadow model complete (host traces); steps 16-21 pending.
 - Hardware acceptance: not tested; no assembled hardware available in this session.
 
 ## Work log
@@ -200,3 +200,19 @@ automated, and physical validation.
   falling edge (up to four PIO cycles to release, plus synchronization), reset
   does not cancel an already queued PIO reply, and callback side effects are
   not acknowledged by successful CPU sampling. Active mode is experimental.
+
+### Step 15 — shared video shadow
+
+- Added 64 KiB main/aux banks with byte validity, II/II+ versus IIe selection,
+  video switches, ALTZP/AUXWRITE/80STORE precedence, and capture-epoch loss
+  invalidation. Read cycles never populate RAM from unqualified read data.
+- Extended passive samples to include /RES in the same 32-bit DMA word, so
+  reset handling follows captured bus order rather than delayed callbacks.
+  Warm reset retains RAM/validity and conservatively reacquires switches;
+  writes with unknown bank selection are ignored until selection is known.
+- Cross-core readers use atomic bytes and validity; frame copies may tear but
+  avoid undefined concurrent accesses. I/O, ROM, language-card and expansion
+  banking are explicitly outside the RAM shadow contract.
+- Validation: host traces pass for bank precedence, 40/80-column and graphics
+  switches, reset retention, unknown initial contents, and capture loss.
+  Three firmware targets rebuild; capture and slot regressions pass.

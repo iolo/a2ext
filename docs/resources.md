@@ -36,15 +36,16 @@ never configure the module's default LED/button GPIOs.
 
 ## Capture timing and capacity
 
-`a2ext_capture` waits for PHI0 low then high and samples GPIO2-29 after the
+`a2ext_capture` waits for PHI0 low then high and samples GPIO2-31 after the
 29-cycle delay. At a 126 MHz SM clock, the sample is approximately 32 SM clocks
 (254 ns) after the observed external edge, allowing for input synchronization.
 This follows the direct-capture reference's write-data sampling window; scope
 measurements must account for added bus isolation propagation and host model.
 Do not disable input synchronizers until measured timing justifies it.
 
-The 28-bit word is shifted left and autopushed: bits 0-15 address, 16-23 data,
-24 RWB, 25 /DEVSEL, 26 /IOSEL, 27 /IOSTRB. Select bits are active low. Capture
+The 30-bit word is shifted left and autopushed: bits 0-15 address, 16-23 data,
+24 RWB, 25 /DEVSEL, 26 /IOSEL, 27 /IOSTRB. Bit 28 is PHI0 and bit 29 is /RES, preserving reset order with the stream.
+Select bits are active low. Capture
 every PHI0 CPU cycle, not only slot-selected traffic. Read-cycle data is not
 guaranteed valid at this sample instant; writes and read-side soft-switch
 addresses are sufficient for the initial shadow model.

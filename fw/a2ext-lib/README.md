@@ -58,3 +58,23 @@ CPU requests but does not asynchronously cancel an already queued reply.
 Callbacks may have side effects even when their reply misses the deadline;
 protocols needing acknowledged reads need a completion mechanism. Qualify
 these limitations with a bus fixture before enabling active mode on a host.
+
+## Optional shadow model
+
+`a2ext_shadow.h` owns 128 KiB RAM plus 16 KiB validity. Select IIe or II/II+
+explicitly at initialization. Feed each cycle and capture epoch from the capture
+core; do not also apply deferred reset callbacks. /RES is sampled with each
+cycle. Reset retains observed RAM but marks switches unknown until accesses
+reacquire them. Startup and stream loss similarly require switch reacquisition;
+unknown-bank writes are discarded. This can delay a useful display until the
+host initializes its switches and redraws. Reading RAM alone cannot recover it.
+
+RAM writes below C000 are tracked. ALTZP controls 0000-01FF; AUXWRITE controls
+0200-BFFF except 80STORE's page-1 text and HIRES-dependent graphics overrides.
+80STORE suppresses displayed page 2. IIe 80COL/ALTCHAR/AN3 are tracked; II/II+
+ignore these. Language-card RAM, RamWorks, IIc/IIgs extensions, and Videx are
+not modeled. `shadow_byte` reports unknown bytes; `shadow_copy` substitutes zero.
+Atomic readers can take a frame copy while capture continues, with possible
+tearing. No API claims a coherent host framebuffer snapshot.
+
+Banking reference: [Apple IIe Reference Manual, chapter 4](https://www.applelogic.org/files/AIIEREF.pdf).
