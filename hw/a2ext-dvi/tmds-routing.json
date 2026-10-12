@@ -1,0 +1,1046 @@
+{
+  "revision": "PCB-P2-THT",
+  "description": "Reviewed output pair routing for fixed P2 resistor and Kycon connector placement. Locked before autorouting the other nets.",
+  "segments": [
+    {
+      "net": "TMDS_CLK_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        94.2475,
+        89.0
+      ],
+      "end_mm": [
+        94.2475,
+        102.7275
+      ]
+    },
+    {
+      "net": "TMDS_CLK_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        94.2475,
+        102.7275
+      ],
+      "end_mm": [
+        97.62,
+        106.1
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        95.4025,
+        89.0
+      ],
+      "end_mm": [
+        95.4025,
+        93.0
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        95.4025,
+        93.0
+      ],
+      "end_mm": [
+        96.098902,
+        93.0
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        95.4025,
+        93.4
+      ],
+      "end_mm": [
+        95.4025,
+        93.8
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        95.4025,
+        93.8
+      ],
+      "end_mm": [
+        96.098902,
+        93.8
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        95.4025,
+        94.2
+      ],
+      "end_mm": [
+        95.4025,
+        94.6
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        95.4025,
+        94.6
+      ],
+      "end_mm": [
+        96.098902,
+        94.6
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        95.4025,
+        95.0
+      ],
+      "end_mm": [
+        95.4025,
+        100.1825
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        95.4025,
+        100.1825
+      ],
+      "end_mm": [
+        97.62,
+        102.4
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        96.098902,
+        93.0
+      ],
+      "end_mm": [
+        96.098902,
+        93.4
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        96.098902,
+        93.4
+      ],
+      "end_mm": [
+        95.4025,
+        93.4
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        96.098902,
+        93.8
+      ],
+      "end_mm": [
+        96.098902,
+        94.2
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        96.098902,
+        94.2
+      ],
+      "end_mm": [
+        95.4025,
+        94.2
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        96.098902,
+        94.6
+      ],
+      "end_mm": [
+        96.098902,
+        95.0
+      ]
+    },
+    {
+      "net": "TMDS_CLK_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        96.098902,
+        95.0
+      ],
+      "end_mm": [
+        95.4025,
+        95.0
+      ]
+    },
+    {
+      "net": "TMDS_D0_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        89.4838,
+        87.7493
+      ],
+      "end_mm": [
+        89.4838,
+        88.7224
+      ]
+    },
+    {
+      "net": "TMDS_D0_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        89.4838,
+        88.7224
+      ],
+      "end_mm": [
+        91.459,
+        90.6976
+      ]
+    },
+    {
+      "net": "TMDS_D0_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        90.3662,
+        86.8669
+      ],
+      "end_mm": [
+        89.4838,
+        87.7493
+      ]
+    },
+    {
+      "net": "TMDS_D0_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        91.459,
+        90.6976
+      ],
+      "end_mm": [
+        94.8654,
+        90.6976
+      ]
+    },
+    {
+      "net": "TMDS_D0_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        94.8469,
+        86.8669
+      ],
+      "end_mm": [
+        90.3662,
+        86.8669
+      ]
+    },
+    {
+      "net": "TMDS_D0_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        94.8654,
+        90.6976
+      ],
+      "end_mm": [
+        98.7516,
+        94.5838
+      ]
+    },
+    {
+      "net": "TMDS_D0_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        95.98,
+        88.0
+      ],
+      "end_mm": [
+        94.8469,
+        86.8669
+      ]
+    },
+    {
+      "net": "TMDS_D0_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        98.7516,
+        94.5838
+      ],
+      "end_mm": [
+        98.7516,
+        97.5684
+      ]
+    },
+    {
+      "net": "TMDS_D0_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        98.7516,
+        97.5684
+      ],
+      "end_mm": [
+        97.62,
+        98.7
+      ]
+    },
+    {
+      "net": "TMDS_D0_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        87.8543,
+        88.8107
+      ],
+      "end_mm": [
+        87.8543,
+        91.1112
+      ]
+    },
+    {
+      "net": "TMDS_D0_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        87.8543,
+        91.1112
+      ],
+      "end_mm": [
+        91.7431,
+        95.0
+      ]
+    },
+    {
+      "net": "TMDS_D0_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        90.1998,
+        86.4652
+      ],
+      "end_mm": [
+        87.8543,
+        88.8107
+      ]
+    },
+    {
+      "net": "TMDS_D0_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        91.7431,
+        95.0
+      ],
+      "end_mm": [
+        97.62,
+        95.0
+      ]
+    },
+    {
+      "net": "TMDS_D0_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        95.6002,
+        86.4652
+      ],
+      "end_mm": [
+        90.1998,
+        86.4652
+      ]
+    },
+    {
+      "net": "TMDS_D0_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        97.135,
+        88.0
+      ],
+      "end_mm": [
+        95.6002,
+        86.4652
+      ]
+    },
+    {
+      "net": "TMDS_D1_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        96.5279,
+        76.7642
+      ],
+      "end_mm": [
+        97.1756,
+        76.1165
+      ]
+    },
+    {
+      "net": "TMDS_D1_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        96.5279,
+        79.8079
+      ],
+      "end_mm": [
+        96.5279,
+        76.7642
+      ]
+    },
+    {
+      "net": "TMDS_D1_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        97.1756,
+        76.1165
+      ],
+      "end_mm": [
+        98.0882,
+        76.1165
+      ]
+    },
+    {
+      "net": "TMDS_D1_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        97.62,
+        80.9
+      ],
+      "end_mm": [
+        96.5279,
+        79.8079
+      ]
+    },
+    {
+      "net": "TMDS_D1_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        98.0882,
+        76.1165
+      ],
+      "end_mm": [
+        104.7589,
+        82.7872
+      ]
+    },
+    {
+      "net": "TMDS_D1_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        98.8548,
+        90.1423
+      ],
+      "end_mm": [
+        97.7125,
+        89.0
+      ]
+    },
+    {
+      "net": "TMDS_D1_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        102.5237,
+        90.1423
+      ],
+      "end_mm": [
+        98.8548,
+        90.1423
+      ]
+    },
+    {
+      "net": "TMDS_D1_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        104.7589,
+        82.7872
+      ],
+      "end_mm": [
+        104.7589,
+        87.9071
+      ]
+    },
+    {
+      "net": "TMDS_D1_N",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        104.7589,
+        87.9071
+      ],
+      "end_mm": [
+        102.5237,
+        90.1423
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        97.62,
+        77.2
+      ],
+      "end_mm": [
+        101.014112,
+        80.594112
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        99.5811,
+        89.7136
+      ],
+      "end_mm": [
+        98.8675,
+        89.0
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        99.894721,
+        81.713503
+      ],
+      "end_mm": [
+        100.177564,
+        81.996345
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        100.177564,
+        81.996345
+      ],
+      "end_mm": [
+        101.296955,
+        80.876955
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        100.460407,
+        82.279188
+      ],
+      "end_mm": [
+        100.743249,
+        82.562031
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        100.743249,
+        82.562031
+      ],
+      "end_mm": [
+        101.86264,
+        81.44264
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.014112,
+        80.594112
+      ],
+      "end_mm": [
+        99.894721,
+        81.713503
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.026092,
+        82.844874
+      ],
+      "end_mm": [
+        101.308935,
+        83.127716
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.296955,
+        80.876955
+      ],
+      "end_mm": [
+        101.579797,
+        81.159797
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.308935,
+        83.127716
+      ],
+      "end_mm": [
+        102.428326,
+        82.008326
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.579797,
+        81.159797
+      ],
+      "end_mm": [
+        100.460407,
+        82.279188
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.86264,
+        81.44264
+      ],
+      "end_mm": [
+        102.145483,
+        81.725483
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        102.145483,
+        81.725483
+      ],
+      "end_mm": [
+        101.026092,
+        82.844874
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        102.3843,
+        89.7136
+      ],
+      "end_mm": [
+        99.5811,
+        89.7136
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        102.428326,
+        82.008326
+      ],
+      "end_mm": [
+        104.3375,
+        83.9175
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        104.3375,
+        83.9175
+      ],
+      "end_mm": [
+        104.3375,
+        87.7604
+      ]
+    },
+    {
+      "net": "TMDS_D1_P",
+      "layer": "F.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        104.3375,
+        87.7604
+      ],
+      "end_mm": [
+        102.3843,
+        89.7136
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        97.62,
+        73.5
+      ],
+      "end_mm": [
+        101.4039,
+        77.2839
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        99.445,
+        88.0
+      ],
+      "end_mm": [
+        100.515,
+        86.93
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        100.195105,
+        78.1
+      ],
+      "end_mm": [
+        100.195105,
+        78.5
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        100.195105,
+        78.5
+      ],
+      "end_mm": [
+        101.4039,
+        78.5
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        100.195105,
+        78.899999
+      ],
+      "end_mm": [
+        100.195105,
+        79.3
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        100.195105,
+        79.3
+      ],
+      "end_mm": [
+        101.4039,
+        79.3
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        100.195105,
+        79.699999
+      ],
+      "end_mm": [
+        100.195105,
+        80.1
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        100.195105,
+        80.1
+      ],
+      "end_mm": [
+        101.4039,
+        80.1
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        100.515,
+        86.93
+      ],
+      "end_mm": [
+        100.6252,
+        86.93
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.1874,
+      "start_mm": [
+        100.6252,
+        86.93
+      ],
+      "end_mm": [
+        101.4039,
+        86.1513
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.4039,
+        77.2839
+      ],
+      "end_mm": [
+        101.4039,
+        78.1
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.4039,
+        78.1
+      ],
+      "end_mm": [
+        100.195105,
+        78.1
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.4039,
+        78.5
+      ],
+      "end_mm": [
+        101.4039,
+        78.899999
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.4039,
+        78.899999
+      ],
+      "end_mm": [
+        100.195105,
+        78.899999
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.4039,
+        79.3
+      ],
+      "end_mm": [
+        101.4039,
+        79.699999
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.4039,
+        79.699999
+      ],
+      "end_mm": [
+        100.195105,
+        79.699999
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.4039,
+        80.1
+      ],
+      "end_mm": [
+        101.4039,
+        85.6248
+      ]
+    },
+    {
+      "net": "TMDS_D2_N",
+      "layer": "B.Cu",
+      "width_mm": 0.1874,
+      "start_mm": [
+        101.4039,
+        86.1513
+      ],
+      "end_mm": [
+        101.4039,
+        85.6248
+      ]
+    },
+    {
+      "net": "TMDS_D2_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        100.6,
+        88.0
+      ],
+      "end_mm": [
+        101.0098,
+        88.4098
+      ]
+    },
+    {
+      "net": "TMDS_D2_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        101.0098,
+        88.4098
+      ],
+      "end_mm": [
+        103.0469,
+        88.4098
+      ]
+    },
+    {
+      "net": "TMDS_D2_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        103.0469,
+        88.4098
+      ],
+      "end_mm": [
+        103.9181,
+        87.5386
+      ]
+    },
+    {
+      "net": "TMDS_D2_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        103.9181,
+        76.0981
+      ],
+      "end_mm": [
+        97.62,
+        69.8
+      ]
+    },
+    {
+      "net": "TMDS_D2_P",
+      "layer": "B.Cu",
+      "width_mm": 0.25,
+      "start_mm": [
+        103.9181,
+        87.5386
+      ],
+      "end_mm": [
+        103.9181,
+        76.0981
+      ]
+    }
+  ]
+}

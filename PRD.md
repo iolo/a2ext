@@ -30,6 +30,11 @@ Initial compatibility: Apple II/II+ and IIe, including IIe auxiliary-memory
 video modes. Deliver schematics, BOMs, documentation, and firmware. The
 2026-10-12 follow-up adds two-layer PCB layouts and Gerber/drill files for all
 three boards, using the Tebl compact prototyping-card envelope for the carrier.
+PCB-P2-THT adds the reviewed assembly requirement: all components soldered to
+the three custom boards use through-hole leads, with DIP ICs if any are added.
+The existing preassembled WeAct module plugs into through-hole sockets and
+retains its internal SMD components. Use axial/radial passives and a fully
+through-hole HDMI connector; preserve the electrical pin contracts.
 
 ### Required WeAct module preparation
 
@@ -132,7 +137,7 @@ Opposing contacts are 1/50, 2/49, through 25/26, matching the
 - 22 /DMA - N/C
 - 23 /INTOUT - 28 /INTIN
 - 24 /DMAOUT - 27 /DMAIN
-- 25 +5V_SLOT -- F1 / D1 (SS14) --> VSYS --> module H1.2 (5V); H1.1 (VBUS) N/C
+- 25 +5V_SLOT -- F1 / D1 (1N5819, DO-41) --> VSYS --> module H1.2 (5V); H1.1 (VBUS) N/C
 - 26 GND --- GND; 26 GND --(100n cap.)-- 25 +5V
 - 27 /DMAIN - 24 /DMAOUT
 - 28 /INTIN - 23 /INTOUT
@@ -254,7 +259,7 @@ a2ext-carrier daughterboard for DVI video over an HDMI Type A connector.
 1. Read TMDS bit stream(encoded by a2ext-dvi firmware) from a2ext-carrier IDC20 connector.
 2. Write to HDMI Type A connector.
 
-### HDMI-SWM-19 <--> a2ext-carrier 20pin IDC Connector
+### HDMI Type A (Kycon KDMIX-SL1-NS-WS-B15) <--> a2ext-carrier 20pin IDC Connector
 
 - 1 D2+ --(270 Ohm resistor)-- IDC 8 / GPIO40 D2_P
 - 2 GND -- 20 GND

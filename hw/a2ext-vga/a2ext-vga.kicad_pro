@@ -275,26 +275,19 @@
   "net_settings": {
     "classes": [
       {
-        "clearance": 0.15,
-        "diff_pair_gap": 0.15,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.15,
         "name": "Default",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": -1,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "clearance": 0.15,
         "track_width": 0.25,
-        "tuning_profile": "",
         "via_diameter": 0.6,
-        "via_drill": 0.3
+        "via_drill": 0.3,
+        "diff_pair_width": 0.15,
+        "diff_pair_gap": 0.15,
+        "diff_pair_via_gap": 0.25
       }
     ],
     "meta": {
-      "version": 5
-    },
-    "net_colors": {},
-    "netclass_assignments": {},
-    "netclass_patterns": []
+      "version": 4
+    }
   },
   "pcbnew": {
     "last_paths": {

@@ -48,12 +48,11 @@ def local_copy(source, name):
     f = p.FootprintLoad('/usr/share/kicad/footprints/'+lib+'.pretty', item)
     f.SetFPID(p.LIB_ID('A2Ext', name)); f.SetReference('REF**')
     # Stock connector side outlines end too close to the intended PCB edge.
-    if name in ('HDMI_Molex','VGA_DE15'):
+    if name=='VGA_DE15':
         for item in f.GraphicalItems():
             if item.GetLayer()==p.F_SilkS and isinstance(item,p.PCB_SHAPE):
                 for get,setter in [(item.GetStart,item.SetStart),(item.GetEnd,item.SetEnd)]:
                     point=get()
-                    if name=='HDMI_Molex' and point.x>MM(6.725): point.x=MM(6.725)
                     if name=='VGA_DE15' and point.y>MM(6.53): point.y=MM(6.53)
                     setter(point)
     p.PCB_IO_MGR.FindPlugin(p.PCB_IO_MGR.KICAD_SEXP).FootprintSave(str(LIB), f)
@@ -62,19 +61,32 @@ def local_copy(source, name):
 def libraries():
     LIB.mkdir(exist_ok=True)
     mapping = {
-        'R0805':'Resistor_SMD:R_0805_2012Metric',
-        'R0402':'Resistor_SMD:R_0402_1005Metric',
-        'C0805':'Capacitor_SMD:C_0805_2012Metric',
-        'C1206':'Capacitor_SMD:C_1206_3216Metric',
-        'PTC1206':'Fuse:Fuse_1206_3216Metric',
-        'SS14':'Diode_SMD:D_SMA',
+        'R_Axial_7.62':'Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal',
+        'C_Radial_5':'Capacitor_THT:C_Rect_L7.0mm_W4.5mm_P5.00mm',
+        'Schottky_DO41':'Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal',
         'IDC20':'Connector_IDC:IDC-Header_2x10_P2.54mm_Vertical',
         'Socket20':'Connector_PinSocket_2.54mm:PinSocket_2x10_P2.54mm_Vertical',
         'SYNC':'Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical',
-        'HDMI_Molex':'Connector_Video:HDMI_A_Molex_208658-1001_Horizontal',
+        'HDMI_Kycon_THT':'Connector_Video:HDMI_A_Kycon_KDMIX-SL1-NS-WS-B15_VerticalRightAngle',
         'VGA_DE15':'Connector_Dsub:DSUB-15-HD_Socket_Horizontal_P2.29x1.90mm_EdgePinOffset3.03mm_Housed_MountingHolesOffset4.94mm',
     }
     for name, src in mapping.items(): local_copy(src, name)
+    # Independent radial PTC drawings from Bourns MF-R dimension table.
+    # Body height is an assembly limit; courtyard uses maximum width/thickness.
+    for name,width in [('PTC_MF_R050',7.9),('PTC_MF_R010',7.4)]:
+        f=p.FOOTPRINT(None);f.SetFPID(p.LIB_ID('A2Ext',name))
+        f.SetReference('REF**');f.SetValue(name);f.SetAttributes(p.FP_THROUGH_HOLE)
+        for n,x in [('1',0),('2',5.1)]:
+            pad=p.PAD(f);pad.SetNumber(n);pad.SetPosition(v(x,0))
+            pad.SetAttribute(p.PAD_ATTRIB_PTH);pad.SetShape(p.PAD_SHAPE_CIRCLE)
+            pad.SetSize(v(1.8,1.8));pad.SetDrillSize(v(.9,.9))
+            pad.SetLayerSet(layers(p.F_Cu,p.B_Cu,p.F_Mask,p.B_Mask));f.Add(pad)
+        for layer,margin,w in [(p.F_Fab,0,.1),(p.F_SilkS,.15,.12),(p.F_CrtYd,.4,.05)]:
+            left,right=2.55-width/2-margin,2.55+width/2+margin
+            low,high=-1.55-margin,1.55+margin
+            for a,z in [((left,low),(right,low)),((right,low),(right,high)),((right,high),(left,high)),((left,high),(left,low))]:line(f,a,z,layer,w)
+        f.Reference().SetPosition(v(2.55,-3));f.Value().SetVisible(False)
+        p.PCB_IO_MGR.FindPlugin(p.PCB_IO_MGR.KICAD_SEXP).FootprintSave(str(LIB),f)
     # Independently drawn contacts measured against the user's Tebl compact
     # reference: 2.54 mm pitch, 1.778 x 7.62 mm fingers, 1/50 opposing.
     edge = p.FOOTPRINT(None)
@@ -157,6 +169,7 @@ def build(name):
         f.Reference().SetTextSize(v(.9,.9));f.Reference().SetTextThickness(MM(.13))
         f.Value().SetVisible(False)
         for pad in f.Pads():
+            if not pad.GetNumber(): continue  # Mechanical connector locating holes.
             for net,nodes in contract.items():
                 if [ref,pad.GetNumber()] in nodes: pad.SetNet(nets[net]);break
             else:
@@ -171,12 +184,14 @@ def build(name):
         add('M1','WeAct_RP2350B_V1',70,64)
         add('J2','IDC20',135,73)
         add('JP1','SYNC',117,103)
-        for ref,fp,x,y,ang in [('F1','PTC1206',128,111,0),('D1','SS14',121,111,180),('C8','C0805',135,111,0),('C9','C1206',114,111,0),('F2','PTC1206',143,109,0),('C10','C1206',148,98,90),('R4','R0805',75,58,0)]: add(ref,fp,x,y,ang)
+        for ref,fp,x,y,ang in [('F1','PTC_MF_R050',126,114,0),('D1','Schottky_DO41',111,113,0),('C8','C_Radial_5',123,105,0),('C9','C_Radial_5',61,99,90),('F2','PTC_MF_R010',139,114,0),('C10','C_Radial_5',75,111,0),('R4','R_Axial_7.62',75,58,0)]:
+            f=add(ref,fp,x,y,ang)
+            f.Reference().SetPosition(v(x+2.5,y+3.4 if y<110 else y-3.5))
         holes=[(145,67),(145,104),(57,57)]
         parts['M1'].Reference().SetPosition(v(92,61))
         parts['J1'].Reference().SetPosition(v(107,116))
-        text(b,'a2ext carrier / 2L prototype',102,53,1.2)
-        text(b,'USB DATA ONLY - PREPARED MODULE',93,108,.9)
+        text(b,'a2ext carrier / 2L THT P2',102,53,1.2)
+        text(b,'USB DATA ONLY - PREPARED MODULE',93,106,.8)
         text(b,'SYNC JP1: OPEN',116,100,.8)
         text(b,'Daughterboard',141,61,1)
     else:
@@ -185,29 +200,32 @@ def build(name):
         add('J1','Socket20',70,73,bottom=True)
         holes=[(80,67),(80,104)]
         if dvi:
-            add('J2','HDMI_Molex',102.975,80)
-            ys=[75,76.2,77.5,78.7,80,81.2,82.5,83.7]
-            for i,y in enumerate(ys,1):
-                f=add('R'+str(i),'R0402',91,y)
-                f.Reference().SetPosition(v(87.5,y))
-            add('C1','C0805',94,91,90)
-            # Preserve short output fanouts on the top layer, without vias.
-            for i in range(1,9):
-                a=next(x for x in parts['R'+str(i)].Pads() if x.GetNumber()=='2')
-                node=next((net,nodes) for net,nodes in contract.items() if ['R'+str(i),'2'] in nodes)
-                pin=next(n[1] for n in node[1] if n[0]=='J2')
-                z=next(x for x in parts['J2'].Pads() if x.GetNumber()==pin)
-                ax,ay=a.GetPosition().x/1e6,a.GetPosition().y/1e6
-                zx,zy=z.GetPosition().x/1e6,z.GetPosition().y/1e6
-                points=[(ax,ay),(94,ay),(94+abs(zy-ay),zy),(zx,zy)]
-                for start,end in zip(points,points[1:]):
-                    if start==end:continue
-                    t=p.PCB_TRACK(b);t.SetStart(v(*start));t.SetEnd(v(*end));t.SetWidth(MM(.15));t.SetLayer(p.F_Cu);t.SetNet(nets[node[0]]);t.SetLocked(True);b.Add(t)
+            # Rotate upright receptacle so its cable exits the right edge.
+            # Source drawing PCB edge is local Y=-9.4 mm.
+            f=add('J2','HDMI_Kycon_THT',100.6,88,-90)
+            f.Reference().SetPosition(v(103,95))
+            for i,y in enumerate([69.8,73.5,77.2,80.9,95,98.7,102.4,106.1],1):
+                f=add('R'+str(i),'R_Axial_7.62',90,y)
+                f.Reference().SetPosition(v(85,y))
+            f=add('C1','C_Radial_5',104,100,-90)
+            f.Reference().SetPosition(v(100.5,104))
+            # Preserve the reviewed pair geometry while routing remaining nets.
+            # This template belongs to the fixed PCB-P2-THT placement above.
+            routing=json.loads((folder/'tmds-routing.json').read_text())
+            assert routing['revision']=='PCB-P2-THT'
+            for segment in routing['segments']:
+                assert segment['net'].startswith('TMDS_')
+                assert segment['layer'] in ('F.Cu','B.Cu')
+                t=p.PCB_TRACK(b);t.SetStart(v(*segment['start_mm']));t.SetEnd(v(*segment['end_mm']))
+                t.SetWidth(MM(segment['width_mm']));t.SetLayer(b.GetLayerID(segment['layer']))
+                t.SetNet(nets[segment['net']]);t.SetLocked(True);b.Add(t)
         else:
             add('J2','VGA_DE15',103.17,81,90)
-            for i in range(1,12): add('R'+str(i),'R0805',82 if i<=6 else 88,73+((i-1)%6)*3.4)
-        text(b,'a2ext '+('DVI' if dvi else 'VGA')+' / 2L',94,68,1.1)
-        text(b,'J1 SOCKET ON BOTTOM',88,107,.85)
+            for i in range(1,12):
+                f=add('R'+str(i),'R_Axial_7.62',81 if i<=6 else 90.8,73+((i-1)%6)*5)
+                f.Reference().SetPosition(v(84.8 if i<=6 else 94.6,75.5+((i-1)%6)*5))
+        text(b,'a2ext '+('DVI' if dvi else 'VGA')+' / THT P2',94,66.9,.85)
+        text(b,'J1 SOCKET ON BOTTOM',88,109 if dvi else 107,.85)
     for start,end in zip(outline,outline[1:]+outline[:1]): line(b,start,end,p.Edge_Cuts,.05)
     for i,(x,y) in enumerate(holes,1):
         f=p.FootprintLoad('/usr/share/kicad/footprints/MountingHole.pretty','MountingHole_2.7mm_M2.5');f.SetReference('H'+str(i));f.SetPosition(v(x,y));f.Reference().SetVisible(False);f.Value().SetVisible(False);f.SetAttributes(p.FP_BOARD_ONLY | p.FP_EXCLUDE_FROM_BOM | p.FP_EXCLUDE_FROM_POS_FILES);b.Add(f)
@@ -215,7 +233,8 @@ def build(name):
     assign_schematic(folder,fps)
     # Persist explicit fabrication and routing minima in project JSON.
     project=json.loads((folder/(name+'.kicad_pro')).read_text())
-    project['board']={'design_settings':{'rules':{'min_clearance':.15,'min_track_width':.15,'min_via_diameter':.6,'min_through_hole_diameter':.3,'min_copper_edge_clearance':.25,'min_hole_clearance':.25,'min_hole_to_hole':.25,'min_silk_clearance':.1,'min_silk_text_height':.8,'min_silk_text_thickness':.12}}}
+    rules=project.setdefault('board',{}).setdefault('design_settings',{}).setdefault('rules',{})
+    rules.update({'min_clearance':.15,'min_track_width':.15,'min_via_diameter':.6,'min_through_hole_diameter':.3,'min_copper_edge_clearance':.25,'min_hole_clearance':.25,'min_hole_to_hole':.25,'min_silk_clearance':.1,'min_silk_text_height':.8,'min_silk_text_thickness':.12})
     project['net_settings']={'classes':[{'name':'Default','clearance':.15,'track_width':.25,'via_diameter':.6,'via_drill':.3,'diff_pair_width':.15,'diff_pair_gap':.15,'diff_pair_via_gap':.25}],'meta':{'version':4}}
     if name.endswith('carrier'):
         project['net_settings']['classes'].append({'name':'Power','clearance':.15,'track_width':.5,'via_diameter':.8,'via_drill':.4})
@@ -257,7 +276,18 @@ def main():
                     desired=physical_nets.get((f.GetReference(),pad.GetNumber()))
                     if desired and pad.GetNetname()!=desired:
                         n=p.NETINFO_ITEM(b,desired);b.Add(n);pad.SetNet(n)
-                if f.GetReference()=='JP1': f.Reference().SetPosition(v(121,104))
+                if f.GetReference()=='JP1': f.Reference().SetPosition(v(113.5,104))
+                for pad in f.Pads():
+                    # Grounded shell tabs benefit from a solid plane bond;
+                    # C10's small local copper patch cannot sustain thermals.
+                    if (name=='a2ext-carrier' and f.GetReference()=='C10' and pad.GetNumber()=='2') or (name=='a2ext-dvi' and f.GetReference()=='J2' and pad.GetNumber()=='SH'):
+                        pad.SetLocalZoneConnection(p.ZONE_CONNECTION_FULL)
+                if name=='a2ext-vga' and f.GetReference().startswith('R'):
+                    i=int(f.GetReference()[1:])
+                    f.Reference().SetPosition(v(84.8 if i<=6 else 94.6,75.5+((i-1)%6)*5))
+                if name=='a2ext-dvi':
+                    for item in b.GetDrawings():
+                        if isinstance(item,p.PCB_TEXT) and item.GetText()=='J1 SOCKET ON BOTTOM': item.SetPosition(v(88,109))
                 if name!='a2ext-carrier' and f.GetReference()=='J2':
                     for item in f.GraphicalItems():
                         if item.GetLayer()==p.F_SilkS and isinstance(item,p.PCB_SHAPE):

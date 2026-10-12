@@ -9,7 +9,7 @@ backends, and provides UART and an optional active slot-ROM demo.
 open.** Software tests and all three schematic ERC checks pass. Power sequencing,
 bus timing, live capture throughput and monitor operation have not been measured.
 DVI and the active demo use experimental 252 MHz clocking, above the RP2350
-rating. Two-layer prototype PCB layouts and Gerber/drill packages are available;
+rating. Two-layer through-hole prototype PCB layouts (PCB-P2-THT) and Gerber/drill packages are available;
 assembled-board qualification remains open.
 
 ## Deliverables

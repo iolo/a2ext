@@ -78,7 +78,7 @@ text (carrier 0.5, VGA/DVI 0.2). All named nets and endpoint sets match the
 pre-layout versions, all three ERC/connectivity checks pass, and exported PDF
 dimensions and rendered layouts were checked. This is a presentation change.
 
-## PCB prototype verification, 2026-10-12
+## PCB-P1 prototype verification, 2026-10-12 (superseded)
 
 Two-layer routed PCBs are now available for carrier, VGA and DVI. KiCad 10.0.7
 ERC, DRC including warnings/exclusions, and schematic parity return zero
@@ -96,3 +96,32 @@ Run `/usr/bin/python3 tools/check_pcbs.py --export` to reproduce the checks and
 fabrication packages. [Fabrication notes](../hw/PCB-FABRICATION.md) record
 mechanical assumptions and assembly. These checks do not close the physical
 power, loading, timing, thermal, enclosure-fit or video acceptance gates below.
+
+## PCB-P2-THT verification, 2026-10-12
+
+All three boards now use through-hole component pads, including the HDMI
+signal pins. The checker enforces zero SMD component pads and no paste on
+component leads, allowing only the 50 planar card-edge contacts. The module
+itself remains preassembled SMD and is mounted in through-hole sockets.
+Carrier D1 is now 1N5819/DO-41; resettable fuses are Bourns MF-R050/MF-R010;
+the DVI connector is Kycon KDMIX-SL1-NS-WS-B15. Named net endpoint sets,
+carrier dimensions and daughterboard mating positions are unchanged.
+
+KiCad 10.0.7 ERC, DRC (all severities) and schematic parity report zero
+findings. All 93 named net contracts pass. The carrier/VGA/DVI have 96/59/61
+plated component pads, and VGA/DVI routing uses no vias. DVI output pairs are
+on one layer per pair, with no vias and maximum 0.0197 mm trace-length skew
+after tuning. Complete carrier/IDC paths remain untuned, and controlled
+impedance and through-hole component parasitics are not validated by these
+checks. Results and routed lengths are in each `validation/` folder.
+
+Updated schematic PDFs, layer plots and assembly drawings were inspected.
+Fabrication packages include empty paste layers and separate PTH/NPTH drill
+files, including HDMI shell slots. The taller leaded parts, upright HDMI port,
+actual socket/header stack and physical power/video behavior require bench
+and fit checks; no physical measurements are claimed.
+Gerbv 2.10 renders of both sides of all three fabrication sets were inspected.
+`tools/render_pcbs.py` strips X2 metadata only in temporary viewer copies and
+adds a temporary Gerber stroke layer derived from the four G85 slot commands
+because Gerbv's PNG backend omits those slots. The delivered Excellon files are
+unchanged. Final viewer inputs generate no parser warnings.

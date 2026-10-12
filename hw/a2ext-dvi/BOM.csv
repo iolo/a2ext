@@ -1,12 +1,12 @@
 Reference,Value,Footprint,Assembly note
 J1,Carrier IDC20,A2Ext:Socket20,Mount female socket on bottom; align pin 1 with carrier J2
-J2,HDMI-SWM-19 / Type A,A2Ext:HDMI_Molex,PCB uses Molex 208658-1001; all four shell contacts are SH/GND
-R1,270R 1%,A2Ext:R0402,
-R2,270R 1%,A2Ext:R0402,
-R3,270R 1%,A2Ext:R0402,
-R4,270R 1%,A2Ext:R0402,
-R5,270R 1%,A2Ext:R0402,
-R6,270R 1%,A2Ext:R0402,
-R7,270R 1%,A2Ext:R0402,
-R8,270R 1%,A2Ext:R0402,
-C1,100nF,A2Ext:C0805,
+J2,HDMI Type A THT,A2Ext:HDMI_Kycon_THT,Kycon KDMIX-SL1-NS-WS-B15; all 19 signals and four SH/GND shell contacts through-hole
+R1,270R 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R2,270R 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R3,270R 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R4,270R 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R5,270R 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R6,270R 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R7,270R 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R8,270R 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+C1,100nF,A2Ext:C_Radial_5,"100nF radial ceramic, >=10V; 5.0 mm lead pitch; nonpolar; <=7.0x4.5 mm body"

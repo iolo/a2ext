@@ -12,6 +12,10 @@ layouts and Gerber/drill files for all three boards, using the compact Tebl
 Apple II prototyping card as the carrier mechanical reference. See
 `hw/PCB-FABRICATION.md` and the PCB progress entry. The original steps below
 describe the schematic/firmware release.
+PCB-P2-THT follow-up replaces SMD assembly on all three custom PCBs with
+through-hole components. The preassembled WeAct module remains socketed;
+there are no separate ICs to replace with DIP devices. Regenerate fabrication
+packages and verify routing, assembly geometry and all named net contracts.
 
 Build a WeAct Studio RP2350B Core Board carrier, VGA and DVI daughterboard
 schematics, a shared firmware library, and demo/VGA/DVI firmware.

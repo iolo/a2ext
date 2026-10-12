@@ -3,12 +3,12 @@ J1,"Apple II slot, counter-clockwise numbering",A2Ext:AppleII_Edge50,
 JP1,SYNC: OPEN except verified slot 7,A2Ext:SYNC,
 M1,WeAct RP2350B V1.0 (prepared module),A2Ext:WeAct_RP2350B_V1,"Remove R16, R19, R14, U2; U7/R13/C23 unpopulated. H1.2 5V is VSYS; H1.1 VBUS is NC. USB data only."
 J2,Daughterboard IDC20,A2Ext:IDC20,
-R4,10k,A2Ext:R0805,
-D1,SS14,A2Ext:SS14,
-F1,500mA PTC,A2Ext:PTC1206,
-F2,100mA PTC,A2Ext:PTC1206,
-C8,100nF,A2Ext:C0805,
-C9,10uF,A2Ext:C1206,
-C10,10uF,A2Ext:C1206,
+R4,10k,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+D1,1N5819,A2Ext:Schottky_DO41,"1N5819, DO-41, 10.16 mm formed lead pitch; band/cathode is pad 1"
+F1,500mA PTC,A2Ext:PTC_MF_R050,Bourns MF-R050; 5.1 mm lead pitch; upright radial body
+F2,100mA PTC,A2Ext:PTC_MF_R010,Bourns MF-R010; 5.1 mm lead pitch; upright radial body
+C8,100nF,A2Ext:C_Radial_5,"100nF radial ceramic, >=10V; 5.0 mm lead pitch; nonpolar; <=7.0x4.5 mm body"
+C9,10uF,A2Ext:C_Radial_5,"TDK FG26X5R1H106KRT00, 10uF 50V radial ceramic; 5.0 mm lead pitch; nonpolar; <=7.0x4.5 mm body"
+C10,10uF,A2Ext:C_Radial_5,"TDK FG26X5R1H106KRT00, 10uF 50V radial ceramic; 5.0 mm lead pitch; nonpolar; <=7.0x4.5 mm body"
 #FLG01,PWR_FLAG,,
 #FLG02,PWR_FLAG,,

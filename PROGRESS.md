@@ -397,3 +397,41 @@ automated, and physical validation.
   module power transitions, loading/thermals, bus timing and live video tests.
   DVI output pairs are within 0.083 mm, but complete paths are not impedance
   controlled or length tuned. No physical measurements are claimed.
+
+### PCB-P2-THT follow-up — through-hole assembly (2026-10-12)
+
+- User added the requirement to use through-hole/DIP components. Replaced all
+  SMD parts on the three custom boards with axial 1/4 W resistors, nonpolar
+  radial ceramic capacitors, radial Bourns MF-R050/MF-R010 resettable fuses,
+  a 1N5819 DO-41 Schottky and a fully through-hole Kycon KDMIX-SL1-NS-WS-B15
+  HDMI connector. The original net endpoint sets and resistor/capacitor values
+  are preserved. There are no separate ICs to convert to DIP; the prepared
+  WeAct module remains preassembled SMD in through-hole sockets.
+- Retained the compact carrier envelope and both 45 x 45 mm daughterboards,
+  direct-mating connector positions and spacer holes. Replaced the shared SMD
+  footprint copies with through-hole footprints, including independently
+  drawn radial fuse patterns checked against manufacturer dimensions.
+- Rerouted all boards. Tuned DVI resistor-to-HDMI pairs on one layer per pair
+  with no vias; maximum output trace-length skew is 0.0197 mm. Preserved the
+  reviewed 80 output segments in a locked routing template and verified a
+  placement/autorouting/import/export regeneration of the DVI board. Complete
+  carrier/IDC paths remain untuned and impedance is unqualified.
+- Updated BOM assembly notes, editable schematics (carrier 0.6, VGA/DVI 0.3),
+  PDF schematics, routed PCBs, assembly/layer previews, fabrication ZIPs,
+  drill reports, SHA256 manifests and fabrication/assembly documentation.
+  Both paste layers are empty. Added a reproducible Gerbv/Pillow preview tool,
+  with temporary viewer-only G85 slot geometry; delivered drills are unchanged.
+- Validation: KiCad 10.0.7 ERC, DRC including all severities and schematic
+  parity are zero on all boards, with no exclusions. All 93 named net
+  contracts, mating contacts/spacer holes and through-hole assembly checks
+  pass (96/59/61 plated component pads, zero SMD component pads). Checked the
+  Kycon 19-pin coordinates/drills and four plated 0.9 x 2.7 mm slots. VGA and
+  DVI use no routing vias; carrier has 24. The three ZIPs each contain 12 files,
+  pass archive integrity checks and match exported file hashes. All six final
+  fabrication views and three updated schematic PDFs were inspected; viewer
+  inputs generate no parser warnings. Python syntax and git whitespace checks
+  pass.
+- Remaining physical acceptance: taller components, upright HDMI port/panel
+  clearance, socket/header stack, prepared-module modifications, fuse voltage
+  drop/trip behavior, power transitions, thermals, bus timing and live video.
+  No fabricated or assembled hardware measurements are claimed.

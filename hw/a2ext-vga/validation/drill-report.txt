@@ -1,5 +1,5 @@
 Drill report for a2ext-vga.kicad_pcb
-Created on 2026-10-12T17:18:58
+Created on 2026-10-12T18:36:16
 
 Copper Layer Stackup:
     =============================================================
@@ -10,11 +10,11 @@ Copper Layer Stackup:
 Drill file 'a2ext-vga-PTH.drl' contains
     plated through holes:
     =============================================================
-    T1  0.300mm  0.0118"  (5 holes))
+    T1  0.800mm  0.0315"  (22 holes))
     T2  1.000mm  0.0394"  (35 holes))
     T3  3.200mm  0.1260"  (2 holes))
 
-    Total plated holes count 42
+    Total plated holes count 59
 
 
 Drill file 'a2ext-vga-NPTH.drl' contains

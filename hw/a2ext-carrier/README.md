@@ -5,9 +5,13 @@ in the schematic. `BOM.csv` lists component values and assigned physical
 footprints, retained during schematic regeneration. `connections.json` is the
 generated connectivity contract, checked against KiCad's exported netlist.
 
-Revision 0.5 uses A4 landscape with 1.524 mm pin names, wire labels, and values;
+Revision 0.6 uses A4 landscape with 1.524 mm pin names, wire labels, and values;
 pin numbers are 1.27 mm and references/notes are 1.778 mm. Symbols and notes
 are rearranged for printing at actual size; electrical connections are unchanged.
+PCB-P2-THT uses axial resistors, a 1N5819 DO-41 diode, Bourns MF-R050/MF-R010
+radial resettable fuses and nonpolar leaded ceramic capacitors. All component
+leads on the carrier are through-hole; M1 is still a preassembled SMD module
+plugged into sockets. There are no separate DIP ICs in the schematic.
 
 **Status: schematic draft, not electrically qualified.** ERC checks connectivity,
 not bus timing, power sequencing, module thermals, or Apple II compatibility.

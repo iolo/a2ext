@@ -3,11 +3,11 @@
   "M1": "WeAct_RP2350B_V1",
   "J2": "IDC20",
   "JP1": "SYNC",
-  "F1": "PTC1206",
-  "D1": "SS14",
-  "C8": "C0805",
-  "C9": "C1206",
-  "F2": "PTC1206",
-  "C10": "C1206",
-  "R4": "R0805"
+  "F1": "PTC_MF_R050",
+  "D1": "Schottky_DO41",
+  "C8": "C_Radial_5",
+  "C9": "C_Radial_5",
+  "F2": "PTC_MF_R010",
+  "C10": "C_Radial_5",
+  "R4": "R_Axial_7.62"
 }

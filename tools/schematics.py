@@ -61,8 +61,16 @@ class Board:
             selected = json.loads(assignments.read_text()).get(ref)
             if selected:
                 footprint = "A2Ext:" + selected
-                if selected == "HDMI_Molex":
-                    note = "PCB uses Molex 208658-1001; all four shell contacts are SH/GND"
+                if selected == "HDMI_Kycon_THT":
+                    note = "Kycon KDMIX-SL1-NS-WS-B15; all 19 signals and four SH/GND shell contacts through-hole"
+                elif selected == "Schottky_DO41":
+                    note = "1N5819, DO-41, 10.16 mm formed lead pitch; band/cathode is pad 1"
+                elif selected in ("PTC_MF_R050", "PTC_MF_R010"):
+                    note = "Bourns " + ("MF-R050" if ref == "F1" else "MF-R010") + "; 5.1 mm lead pitch; upright radial body"
+                elif selected == "R_Axial_7.62":
+                    note = "Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+                elif selected == "C_Radial_5":
+                    note = ("TDK FG26X5R1H106KRT00, 10uF 50V radial ceramic" if value == "10uF" else "100nF radial ceramic, >=10V") + "; 5.0 mm lead pitch; nonpolar; <=7.0x4.5 mm body"
                 elif selected == "VGA_DE15":
                     note = "Right-angle female DE-15HD: 2.29x1.90 mm pins, 25 mm shell holes, 3.03 mm edge offset"
                 elif selected == "Socket20":
@@ -112,7 +120,7 @@ class Board:
                     for n, s in self.symbols.items()]
         sch = (f'(kicad_sch (version 20250114) (generator "eeschema") '
                f'(uuid "{self.root}") (paper "{self.paper}") '
-               f'(title_block (title {q(self.name)}) (date "2026-09-18") (rev {q(self.revision)}) '
+               f'(title_block (title {q(self.name)}) (date "2026-10-12") (rev {q(self.revision)}) '
                f'(comment 1 "Schematic prototype: physical qualification pending")) '
                f'(lib_symbols {" ".join(embedded)}) {" ".join(self.items)})\n')
         (folder / (self.name + ".kicad_sch")).write_text(sch)
@@ -166,7 +174,7 @@ def idc_nets(mode=None):
 
 def carrier():
     b = base("a2ext-carrier")
-    b.revision = "0.5"
+    b.revision = "0.6"
     # Labels extend away from symbols so names do not overlap pin numbers.
     b.outward_labels = True
     gpio_nets = carrier_gpio_nets()
@@ -205,7 +213,7 @@ def carrier():
              [(p["pin"],p["signal"],"passive") for p in PINS["idc"] if not p["pin"] % 2], 30.48)
     b.part("J2", "IDC20", "Daughterboard IDC20", 241.3, 134.62, idc_nets())
     b.two("R4","10k","+3V3","RUN_N",38.1,160.02)
-    b.two("D1","SS14","VSYS","+5V_FUSED",96.52,137.16,"D")
+    b.two("D1","1N5819","VSYS","+5V_FUSED",96.52,137.16,"D")
     b.two("F1","500mA PTC","+5V_SLOT","+5V_FUSED",38.1,137.16,"Fuse")
     b.two("F2","100mA PTC","+5V_FUSED","+5V_DB",154.94,137.16,"Fuse")
     for i,rail,x,y,value in [(8,"+5V_SLOT",38.1,182.88,"100nF"),
@@ -223,7 +231,7 @@ def carrier():
 
 def vga():
     b = base("a2ext-vga")
-    b.revision = "0.2"
+    b.revision = "0.3"
     b.part("J1", "IDC20", "Carrier IDC20", 40.64, 66.04, idc_nets("vga"))
     signals={1:"RED",2:"GREEN",3:"BLUE",4:"ID2",5:"GND",6:"RGND",7:"GGND",8:"BGND",
              9:"KEY",10:"SGND",11:"ID0",12:"DDC_SDA",13:"HSYNC",14:"VSYNC",15:"DDC_SCL"}
@@ -247,7 +255,7 @@ def vga():
 
 def dvi():
     b = base("a2ext-dvi")
-    b.revision = "0.2"
+    b.revision = "0.3"
     b.part("J1", "IDC20", "Carrier IDC20",40.64,76.2,idc_nets("dvi"))
     hdmi={1:"D2_P",2:"D2_SHIELD",3:"D2_N",4:"D1_P",5:"D1_SHIELD",6:"D1_N",
           7:"D0_P",8:"D0_SHIELD",9:"D0_N",10:"CLK_P",11:"CLK_SHIELD",12:"CLK_N",
@@ -259,7 +267,7 @@ def dvi():
         nets[str(i)]="TMDS_"+hdmi[i]
     nets.update({str(i):"GND" for i in [2,5,8,11,17]})
     nets.update({"18":"+5V_DB","SH":"GND"})
-    b.part("J2","HDMI_Type_A","HDMI-SWM-19 / Type A",251.46,83.82,nets,
+    b.part("J2","HDMI_Type_A","HDMI Type A THT",251.46,83.82,nets,
            note="Verify chosen connector footprint; SH represents all shell contacts")
     for row,lane in enumerate(["D2","D1","D0","CLK"]):
         for column,polarity in enumerate(["P","N"]):

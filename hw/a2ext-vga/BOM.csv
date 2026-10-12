@@ -1,14 +1,14 @@
 Reference,Value,Footprint,Assembly note
 J1,Carrier IDC20,A2Ext:Socket20,Mount female socket on bottom; align pin 1 with carrier J2
 J2,DE-15HD female,A2Ext:VGA_DE15,"Right-angle female DE-15HD: 2.29x1.90 mm pins, 25 mm shell holes, 3.03 mm edge offset"
-R1,2k 1%,A2Ext:R0805,
-R2,1k 1%,A2Ext:R0805,
-R3,500R 1%,A2Ext:R0805,
-R4,2k 1%,A2Ext:R0805,
-R5,1k 1%,A2Ext:R0805,
-R6,500R 1%,A2Ext:R0805,
-R7,2k 1%,A2Ext:R0805,
-R8,1k 1%,A2Ext:R0805,
-R9,500R 1%,A2Ext:R0805,
-R10,47R,A2Ext:R0805,
-R11,47R,A2Ext:R0805,
+R1,2k 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R2,1k 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R3,500R 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R4,2k 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R5,1k 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R6,500R 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R7,2k 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R8,1k 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R9,500R 1%,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R10,47R,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
+R11,47R,A2Ext:R_Axial_7.62,"Axial DIN0207, 1/4 W, 7.62 mm formed lead pitch; retain stated tolerance"
