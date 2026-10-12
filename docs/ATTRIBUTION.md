@@ -12,6 +12,8 @@ checkout. Exact upstream revisions are in `fw/dependencies.json`.
 | Luke Wren / libdvi contributors | TMDS PIO serializer, DMA/queue and timing machinery, as bundled with A2DVI | `fw/a2ext-dvi/libdvi/LICENSE` |
 | WeAct Studio | RP2350B Core Board V1.0 schematic, pinout and mechanical references | Vendor files under `ref/WeActStudio.RP2350BCoreBoard` |
 | Raspberry Pi | Pico SDK/picotool build and peripheral APIs | External dependencies retain their own notices |
+| KiCad library contributors | Local PCB footprint copies and connector silkscreen adjustments | `hw/a2ext.pretty/LICENSE.md` and source table in its README |
+| Tebl Apple2-Prototyping-Card | Compact carrier mechanical dimensions used as a reference, revision `91ed325a28d3013bd6c6971858b9d634d92732c9` | Source and measurement record in `hw/PCB-FABRICATION.md` |
 
 New integration includes the shared GPIO contract, direct-bus carrier and power
 schematics, passive DMA capture, tagged experimental responses, shadow model,

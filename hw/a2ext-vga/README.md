@@ -6,8 +6,18 @@ The revised layout preserves all electrical connections.
 
 KiCad 10 schematic and project-local symbols for a passive 9-bit VGA
 daughterboard. J1 follows the common IDC20 pinout. J2 is a female DE-15HD;
-its abstract SH pin represents the connector shell. Select the connector's
-exact shell/mounting pad numbers when a PCB is designed.
+its SH pin represents both plated shell/mounting contacts in the selected
+project-local DE-15 footprint.
+
+The 45 x 45 mm two-layer board uses 0805 resistors, a bottom-mounted 2x10 female
+socket at J1, and a right-angle DE-15HD female connector at J2. The connector
+requires 2.29 x 1.90 mm signal pitch, 25 mm shell-hole spacing, and a 3.03 mm
+edge-pin-offset pattern. Compare its mechanical drawing before purchasing.
+H1/H2 are 2.7 mm spacer holes aligned with the carrier. See
+[fabrication notes](../PCB-FABRICATION.md), [Gerbers and drills](a2ext-vga-gerbers.zip),
+[top](previews/top.svg), [bottom](previews/bottom.svg), and
+[assembly](previews/assembly-top.svg) plots. DRC, ERC, and schematic parity
+reports in `validation/` have zero findings.
 
 GPIO35-43 are R0-R2, G0-G2, B0-B2. GPIO44/45 are HSYNC/VSYNC. UART, GPIO46/47,
 power, and RUN are unused. Both IDC ground contacts connect to VGA grounds and

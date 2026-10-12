@@ -27,8 +27,9 @@ specifies a 41.4 mm x 41.1 mm board; use the supplied dimension drawing and
 STEP model for header placement and USB/button access.
 
 Initial compatibility: Apple II/II+ and IIe, including IIe auxiliary-memory
-video modes. Deliver schematics, BOMs, documentation, and firmware; PCB layout
-and fabrication files are outside this release.
+video modes. Deliver schematics, BOMs, documentation, and firmware. The
+2026-10-12 follow-up adds two-layer PCB layouts and Gerber/drill files for all
+three boards, using the Tebl compact prototyping-card envelope for the carrier.
 
 ### Required WeAct module preparation
 

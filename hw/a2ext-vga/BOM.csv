@@ -1,14 +1,14 @@
 Reference,Value,Footprint,Assembly note
-J1,Carrier IDC20,,
-J2,DE-15HD female,,Shell contact modeled as SH; select physical connector before PCB layout
-R1,2k 1%,,
-R2,1k 1%,,
-R3,500R 1%,,
-R4,2k 1%,,
-R5,1k 1%,,
-R6,500R 1%,,
-R7,2k 1%,,
-R8,1k 1%,,
-R9,500R 1%,,
-R10,47R,,
-R11,47R,,
+J1,Carrier IDC20,A2Ext:Socket20,Mount female socket on bottom; align pin 1 with carrier J2
+J2,DE-15HD female,A2Ext:VGA_DE15,"Right-angle female DE-15HD: 2.29x1.90 mm pins, 25 mm shell holes, 3.03 mm edge offset"
+R1,2k 1%,A2Ext:R0805,
+R2,1k 1%,A2Ext:R0805,
+R3,500R 1%,A2Ext:R0805,
+R4,2k 1%,A2Ext:R0805,
+R5,1k 1%,A2Ext:R0805,
+R6,500R 1%,A2Ext:R0805,
+R7,2k 1%,A2Ext:R0805,
+R8,1k 1%,A2Ext:R0805,
+R9,500R 1%,A2Ext:R0805,
+R10,47R,A2Ext:R0805,
+R11,47R,A2Ext:R0805,

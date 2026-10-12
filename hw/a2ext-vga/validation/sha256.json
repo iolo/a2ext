@@ -1,0 +1,16 @@
+{
+  "a2ext-vga.kicad_pcb": "c410371111c7f111ea36929b4d4b848146af8ab7a0c5c59496022e0f6ebed41a",
+  "a2ext-vga.kicad_sch": "3b9088382217755055f50ac4ee62d3ed2fcc8382ad6bcaacf677b3a04c6e634d",
+  "gerbers/a2ext-vga-B_Cu.gbl": "f607ebe8305e9ee82bd2f56e9487b9929712fcf726ec06f74498824df30f2661",
+  "gerbers/a2ext-vga-B_Mask.gbs": "4209a0385fa88badd248f4bcb5d85d45d2c3ad889cbf2274665e93d6d43e2b4d",
+  "gerbers/a2ext-vga-B_Paste.gbp": "4090ec828b8acda7911392aade7241e03a40b43304668ebab4fd488c3f657dd7",
+  "gerbers/a2ext-vga-B_Silkscreen.gbo": "d77850a8b8fc24e1d9f6b7be630d7c6193f82ef451bb96a66fc6f7456fd81768",
+  "gerbers/a2ext-vga-Edge_Cuts.gm1": "e04a50f73d519b9d4e18949c344507498824578082f12779acd177694e4b8839",
+  "gerbers/a2ext-vga-F_Cu.gtl": "74c86bcaaf52db6f932284966147921c63e5a7be7a469c8d28a5b6658ecfda52",
+  "gerbers/a2ext-vga-F_Mask.gts": "92ec4c4b5ebb46438aa25cff78ab6171922138973f421922cb2fe0ae2fee806b",
+  "gerbers/a2ext-vga-F_Paste.gtp": "ffffd707c90383c1ce2c3659e1a45adfe1694d7219a1befe5569e0f137e18efd",
+  "gerbers/a2ext-vga-F_Silkscreen.gto": "a6648f8b25e38b7dd87d0c0703c6ed95a059bebaec5ed178ef798086dca76263",
+  "gerbers/a2ext-vga-NPTH.drl": "2de3f700afc764a82be14d902f8ce55131990ee4fff3d87bf24e26a9c47eef65",
+  "gerbers/a2ext-vga-PTH.drl": "84d5907d0f961440b6ce66b63382af5d3e3abcc22231e8963e3a7e9160391d40",
+  "gerbers/a2ext-vga-job.gbrjob": "74616b02d869a438a393e1dad06dcb5ffd475f29c1b2132fc473c178294cec30"
+}

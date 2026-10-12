@@ -374,3 +374,26 @@ automated, and physical validation.
   races and setup/hold timing, target capture/render load, UART/interrupt/SYNC,
   VGA levels and DVI stability. The measurement worksheet records all as NOT_RUN.
   Completion of documentation does not close these physical gates.
+
+### PCB follow-up — two-layer carrier, VGA and DVI (2026-10-12)
+
+- User expanded scope to routed PCBs/Gerbers for all three schematics, with
+  the compact Tebl prototyping card as the carrier size reference. Carrier is
+  99.695 x 78.74 mm; daughterboards are 45 x 45 mm.
+- Added project-local physical footprints, schematic/BOM assignments retained
+  by the generator, module sockets, card-edge geometry, bottom daughterboard
+  sockets, aligned spacer holes, power routing and ground pours. DVI selects
+  Molex 208658-1001; VGA uses the documented right-angle DE-15HD pattern.
+- Added placement/DSN/SES tooling, PCB verification/export tooling, editable
+  boards, layer/assembly previews, individual Gerber/drill ZIPs, manufacturing
+  instructions, licenses and SHA256 manifests.
+- Validation: KiCad 10.0.7 reports zero ERC, DRC (including warnings/exclusions),
+  unrouted connections and schematic parity findings on all three boards.
+  All 93 contract nets, 20 direct-mating contacts, mounting-hole alignment and
+  DVI output pair routing checks pass. Gerber ZIPs each contain 12 files and
+  match their exported hashes. Gerbv renders of both exported sides were
+  reviewed; no design-rule exclusions were used.
+- Remaining physical acceptance: actual connector/socket stack and host fit,
+  module power transitions, loading/thermals, bus timing and live video tests.
+  DVI output pairs are within 0.083 mm, but complete paths are not impedance
+  controlled or length tuned. No physical measurements are claimed.

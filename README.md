@@ -9,7 +9,8 @@ backends, and provides UART and an optional active slot-ROM demo.
 open.** Software tests and all three schematic ERC checks pass. Power sequencing,
 bus timing, live capture throughput and monitor operation have not been measured.
 DVI and the active demo use experimental 252 MHz clocking, above the RP2350
-rating. PCB layout and fabrication files are outside this release.
+rating. Two-layer prototype PCB layouts and Gerber/drill packages are available;
+assembled-board qualification remains open.
 
 ## Deliverables
 
@@ -20,6 +21,15 @@ rating. PCB layout and fabrication files are outside this release.
 | DVI over HDMI connector | [KiCad project, PDF, BOM and wiring](hw/a2ext-dvi/) |
 | Common capture, API and shadow library | [a2ext-lib](fw/a2ext-lib/README.md) |
 | Passive/active demonstration | [a2ext-demo](fw/a2ext-demo/README.md) |
+
+The carrier uses the **99.695 x 78.74 mm compact prototyping-card envelope**;
+both daughterboards are 45 x 45 mm. Download the
+[carrier Gerbers](hw/a2ext-carrier/a2ext-carrier-gerbers.zip),
+[VGA Gerbers](hw/a2ext-vga/a2ext-vga-gerbers.zip), and
+[DVI Gerbers](hw/a2ext-dvi/a2ext-dvi-gerbers.zip). Editable boards, layer previews,
+and validation reports are alongside each schematic. Read the
+[fabrication and assembly notes](hw/PCB-FABRICATION.md) for finishes, connector
+selection, socket orientation, and remaining physical tests.
 | AppleII-VGA renderer port | [a2ext-vga](fw/a2ext-vga/README.md) |
 | A2DVI renderer/libdvi port | [a2ext-dvi](fw/a2ext-dvi/README.md) |
 

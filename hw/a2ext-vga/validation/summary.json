@@ -1,0 +1,30 @@
+{
+  "board": "a2ext-vga",
+  "copper_layers": 2,
+  "thickness_mm": 1.6,
+  "drc_violations": 0,
+  "unconnected_items": 0,
+  "schematic_parity_issues": 0,
+  "contract_nets_checked": 17,
+  "tracks": 101,
+  "vias": 5,
+  "routing_lengths_mm": {
+    "R0": 12.1396,
+    "R2": 12.7413,
+    "G1": 19.0754,
+    "B0": 21.2959,
+    "B2": 19.5314,
+    "VSYNC": 18.6988,
+    "R1": 8.9037,
+    "G0": 10.6683,
+    "G2": 22.8141,
+    "B1": 17.3476,
+    "HSYNC": 15.583,
+    "GND": 69.3404,
+    "VGA_R": 27.9723,
+    "VGA_G": 35.1041,
+    "VGA_B": 23.8955,
+    "VGA_HSYNC": 19.0693,
+    "VGA_VSYNC": 18.6095
+  }
+}

@@ -1,8 +1,8 @@
 # a2ext-carrier schematic prototype
 
 Open `a2ext-carrier.kicad_pro` in KiCad 10. Symbols are project-local and embedded
-in the schematic. `BOM.csv` lists component values; footprints not yet specified
-are deliberate because PCB layout is out of scope. `connections.json` is the
+in the schematic. `BOM.csv` lists component values and assigned physical
+footprints, retained during schematic regeneration. `connections.json` is the
 generated connectivity contract, checked against KiCad's exported netlist.
 
 Revision 0.5 uses A4 landscape with 1.524 mm pin names, wire labels, and values;
@@ -11,6 +11,15 @@ are rearranged for printing at actual size; electrical connections are unchanged
 
 **Status: schematic draft, not electrically qualified.** ERC checks connectivity,
 not bus timing, power sequencing, module thermals, or Apple II compatibility.
+
+The two-layer prototype board uses the Tebl compact envelope: 99.695 x 78.74 mm
+including the insertion tab. The 60-pad module footprint follows the vendor top
+view; use two 2x15 female sockets. J2 is a top-mounted shrouded male IDC20 header.
+H1/H2 are 2.7 mm daughterboard spacer holes; their references differ from module
+headers. See [Gerbers and drills](a2ext-carrier-gerbers.zip),
+[top](previews/top.svg), [bottom](previews/bottom.svg),
+[assembly](previews/assembly-top.svg), and [fabrication notes](../PCB-FABRICATION.md).
+DRC, ERC, and schematic parity reports in `validation/` have zero findings.
 
 ## Module and connections
 

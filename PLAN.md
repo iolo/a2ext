@@ -7,6 +7,12 @@ partial or blocked work honestly; a commit does not imply completion.
 
 ## Summary and agreed scope
 
+2026-10-12 follow-up: the user expanded the original scope to two-layer PCB
+layouts and Gerber/drill files for all three boards, using the compact Tebl
+Apple II prototyping card as the carrier mechanical reference. See
+`hw/PCB-FABRICATION.md` and the PCB progress entry. The original steps below
+describe the schematic/firmware release.
+
 Build a WeAct Studio RP2350B Core Board carrier, VGA and DVI daughterboard
 schematics, a shared firmware library, and demo/VGA/DVI firmware.
 

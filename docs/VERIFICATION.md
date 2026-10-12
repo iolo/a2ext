@@ -77,3 +77,22 @@ On 2026-09-18, all three schematics were reflowed to A4 landscape with larger
 text (carrier 0.5, VGA/DVI 0.2). All named nets and endpoint sets match the
 pre-layout versions, all three ERC/connectivity checks pass, and exported PDF
 dimensions and rendered layouts were checked. This is a presentation change.
+
+## PCB prototype verification, 2026-10-12
+
+Two-layer routed PCBs are now available for carrier, VGA and DVI. KiCad 10.0.7
+ERC, DRC including warnings/exclusions, and schematic parity return zero
+findings on all three. The PCB checker additionally verifies 58/17/18 named
+net contracts, two copper layers, 1.6 mm thickness, edge-contact sides and
+opposing numbering, module pad count, socket mounting side, and exact direct
+mating of all 20 IDC contacts and both spacer holes. DVI resistor-to-HDMI pairs
+have no vias and below 0.083 mm length difference. Exported Gerber/drill hashes
+and ZIP integrity were checked; results reside in each board's `validation/`.
+Gerbv 2.10 rendered both sides of the exported copper/mask/silk and drills;
+X2 metadata was omitted only from temporary viewer inputs. All six views were
+inspected, with no geometry parser warnings on those viewer inputs.
+
+Run `/usr/bin/python3 tools/check_pcbs.py --export` to reproduce the checks and
+fabrication packages. [Fabrication notes](../hw/PCB-FABRICATION.md) record
+mechanical assumptions and assembly. These checks do not close the physical
+power, loading, timing, thermal, enclosure-fit or video acceptance gates below.

@@ -56,6 +56,17 @@ class Board:
         self.symbols[name] = (data, pins, height)
 
     def part(self, ref, symbol, value, x, y, connections, footprint="", note=""):
+        assignments = ROOT / "hw" / self.name / "footprints.json"
+        if not footprint and assignments.exists():
+            selected = json.loads(assignments.read_text()).get(ref)
+            if selected:
+                footprint = "A2Ext:" + selected
+                if selected == "HDMI_Molex":
+                    note = "PCB uses Molex 208658-1001; all four shell contacts are SH/GND"
+                elif selected == "VGA_DE15":
+                    note = "Right-angle female DE-15HD: 2.29x1.90 mm pins, 25 mm shell holes, 3.03 mm edge offset"
+                elif selected == "Socket20":
+                    note = "Mount female socket on bottom; align pin 1 with carrier J2"
         data, pins, height = self.symbols[symbol]
         assert set(connections) == set(pins), (ref, set(connections) ^ set(pins))
         ident = uid(self.name + ref)

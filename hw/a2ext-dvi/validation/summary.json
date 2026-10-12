@@ -1,0 +1,57 @@
+{
+  "board": "a2ext-dvi",
+  "copper_layers": 2,
+  "thickness_mm": 1.6,
+  "drc_violations": 0,
+  "unconnected_items": 0,
+  "schematic_parity_issues": 0,
+  "contract_nets_checked": 18,
+  "tracks": 99,
+  "vias": 2,
+  "routing_lengths_mm": {
+    "D0_N": 25.6436,
+    "D1_N": 21.2853,
+    "D2_N": 29.0391,
+    "CLK_N": 21.3184,
+    "+5V_DB": 36.8501,
+    "D0_P": 20.1782,
+    "D1_P": 18.1902,
+    "D2_P": 20.9836,
+    "CLK_P": 18.2234,
+    "GND": 72.7433,
+    "TMDS_D2_P": 8.3871,
+    "TMDS_D2_N": 8.3043,
+    "TMDS_D1_P": 8.3871,
+    "TMDS_D1_N": 8.4699,
+    "TMDS_D0_P": 8.8013,
+    "TMDS_D0_N": 8.8842,
+    "TMDS_CLK_P": 9.2155,
+    "TMDS_CLK_N": 9.2984
+  },
+  "tmds_output_pairs": {
+    "D0": {
+      "positive_mm": 8.8013,
+      "negative_mm": 8.8842,
+      "skew_mm": 0.0829,
+      "vias": 0
+    },
+    "D1": {
+      "positive_mm": 8.3871,
+      "negative_mm": 8.4699,
+      "skew_mm": 0.0828,
+      "vias": 0
+    },
+    "D2": {
+      "positive_mm": 8.3871,
+      "negative_mm": 8.3043,
+      "skew_mm": 0.0828,
+      "vias": 0
+    },
+    "CLK": {
+      "positive_mm": 9.2155,
+      "negative_mm": 9.2984,
+      "skew_mm": 0.0829,
+      "vias": 0
+    }
+  }
+}

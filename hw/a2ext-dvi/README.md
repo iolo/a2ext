@@ -6,8 +6,21 @@ The revised layout preserves all electrical connections.
 
 Passive DVI video daughterboard using an HDMI Type A connector and the PRD's
 270 ohm series resistor network. Open the KiCad 10 project; symbols are local.
-The abstract SH pin represents all connector shell contacts. Confirm the exact
-HDMI-SWM-19 mechanical drawing and pad numbering before any PCB work.
+The SH pin represents all four plated shell contacts. The physical PCB selects
+**Molex 208658-1001**, as in the bundled reference hardware, for the schematic's
+generic Type A connector. HDMI-SWM-19 is not a footprint-compatible purchasing
+specification for this board.
+
+The 45 x 45 mm two-layer board uses 0402 270 ohm resistors, an 0805 capacitor,
+and a bottom-mounted 2x10 female socket at J1. H1/H2 are 2.7 mm spacer holes
+aligned with the carrier. Resistor-to-HDMI pairs use the top layer without vias,
+with under 0.083 mm intra-pair length difference. Full routed lengths are in
+`validation/summary.json`; the carrier and IDC-to-resistor segments are not
+pair-length tuned. Controlled impedance and physical signal quality are unqualified.
+See [fabrication notes](../PCB-FABRICATION.md), [Gerbers and drills](a2ext-dvi-gerbers.zip),
+[top](previews/top.svg), [bottom](previews/bottom.svg), and
+[assembly](previews/assembly-top.svg) plots. DRC, ERC, and schematic parity
+reports in `validation/` have zero findings.
 
 | Lane | Positive GPIO / IDC | Negative GPIO / IDC | HDMI contacts |
 |---|---|---|---|

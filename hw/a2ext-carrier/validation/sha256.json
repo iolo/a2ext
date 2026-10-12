@@ -1,0 +1,16 @@
+{
+  "a2ext-carrier.kicad_pcb": "d2494c379787edb115079cd14954199264e16b7d147810b8ad778f496b0f692a",
+  "a2ext-carrier.kicad_sch": "584799aa28ac7c1ea19b6e6197f509727e02ad8a25b26e61b6bbc35eec0fff12",
+  "gerbers/a2ext-carrier-B_Cu.gbl": "d526a1114e1a9ef517959fa8f9cd5db492a136e650631cbf21eab830933b547a",
+  "gerbers/a2ext-carrier-B_Mask.gbs": "a3bdfaf7d0c1a2b27902295faadf23b34eff6fc4dc0b08549bbc1044f13b8165",
+  "gerbers/a2ext-carrier-B_Paste.gbp": "01d84e57b8f1d3d6277fc238568013ecdf000c00ee536ac5b050367c904c4fb6",
+  "gerbers/a2ext-carrier-B_Silkscreen.gbo": "d12f9f81a59521fb95df5bfb02e60ab1ccd54c226c5618d9f17e936b64dfbe3c",
+  "gerbers/a2ext-carrier-Edge_Cuts.gm1": "ccfe839c536ac4e5cb4d4bff5d69b8eceacf37fd61e9b08b157e0eb59ccfaaf8",
+  "gerbers/a2ext-carrier-F_Cu.gtl": "5fccfa458677d70ec037607243efa90c1eca00d77ae205a09029b9b9261748ad",
+  "gerbers/a2ext-carrier-F_Mask.gts": "896c2a63826e16e63063ad17e803e28f6a2360cff58117583883548b4dc3be4f",
+  "gerbers/a2ext-carrier-F_Paste.gtp": "d6c0367c188b0442b29c63df59cc05ae0b0c43f6636e6233ca86e313005a9d86",
+  "gerbers/a2ext-carrier-F_Silkscreen.gto": "bd0fa447517cd3f294ad8c9e285d417b1371d363201f59d641581649dff559d8",
+  "gerbers/a2ext-carrier-NPTH.drl": "ef68294388d8c5c3f4332c10dd64b5b68177fcfd9c33bfc518ba1d1e61640591",
+  "gerbers/a2ext-carrier-PTH.drl": "ce5a62f385e81d3965dfb5323449a77fc8fb1081b9d107073fa27fb82b6f67c8",
+  "gerbers/a2ext-carrier-job.gbrjob": "1157cb15ffd038254e56b7e44adabd505d85eb0ad44458c3323bdd07a9f13e62"
+}
